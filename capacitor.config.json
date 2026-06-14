@@ -1,0 +1,8 @@
+{
+  "appId": "com.propbillion.attendance",
+  "appName": "PropBillion Attendance",
+  "webDir": "www",
+  "android": {
+    "allowMixedContent": false
+  }
+}

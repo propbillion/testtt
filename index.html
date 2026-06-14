@@ -1,0 +1,856 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+<title>PropBillion Attendance</title>
+<style>
+  /* ============================================================
+     PROPBILLION ATTENDANCE — design tokens
+     Pure white bg (standing rule). Status colors carry the data.
+     ============================================================ */
+  :root{
+    --bg:#FFFFFF;
+    --ink:#0A0A0A;
+    --ink-2:#3A3A3C;
+    --muted:#86868B;
+    --hair:#E6E6E9;
+    --hair-2:#F0F0F2;
+    --card:#FFFFFF;
+    --field:#F5F5F7;
+
+    --ontime:#067647;     --ontime-bg:#E7F4EE;
+    --late:#B45309;       --late-bg:#FBF1E3;
+    --half:#C2261B;       --half-bg:#FBEBE9;
+    --active:#0A7CFF;     --active-bg:#E8F1FF;
+
+    --shadow:0 1px 2px rgba(0,0,0,.04), 0 12px 32px rgba(0,0,0,.06);
+    --shadow-sm:0 1px 2px rgba(0,0,0,.05);
+    --radius:22px;
+    --radius-sm:14px;
+    --tap:#fafafa;
+    font-synthesis:none;
+  }
+  *{box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
+  html,body{margin:0;padding:0;background:var(--bg);color:var(--ink);
+    font-family:-apple-system,BlinkMacSystemFont,"SF Pro Text","Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    -webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;}
+  body{min-height:100dvh;}
+  .num{font-variant-numeric:tabular-nums;font-feature-settings:"tnum" 1;}
+  button{font-family:inherit;cursor:pointer;border:none;background:none;color:inherit;}
+  input,select{font-family:inherit;font-size:16px;}
+  .hide{display:none !important;}
+
+  /* layout shell */
+  .wrap{max-width:520px;margin:0 auto;padding:0 18px 120px;}
+  .topbar{position:sticky;top:0;z-index:30;background:rgba(255,255,255,.82);
+    backdrop-filter:saturate(180%) blur(20px);-webkit-backdrop-filter:saturate(180%) blur(20px);
+    border-bottom:1px solid var(--hair);}
+  .topbar .inner{max-width:520px;margin:0 auto;padding:14px 18px;display:flex;align-items:center;justify-content:space-between;}
+  .brand{display:flex;align-items:center;gap:9px;font-weight:600;letter-spacing:-.02em;font-size:16px;}
+  .brand .dot{width:9px;height:9px;border-radius:50%;background:var(--ink);}
+  .brand small{font-weight:500;color:var(--muted);letter-spacing:.06em;font-size:10px;text-transform:uppercase;margin-left:2px;}
+  .topbar .who{font-size:13px;color:var(--muted);font-weight:500;}
+  .topbar .who b{color:var(--ink);font-weight:600;}
+
+  h1{font-size:30px;line-height:1.05;letter-spacing:-.03em;font-weight:680;margin:26px 0 4px;}
+  .sub{color:var(--muted);font-size:15px;margin:0 0 22px;letter-spacing:-.01em;}
+
+  /* cards */
+  .card{background:var(--card);border:1px solid var(--hair);border-radius:var(--radius);
+    box-shadow:var(--shadow);padding:24px;margin-bottom:16px;}
+  .card.flat{box-shadow:none;}
+
+  /* the signature: live clock + status ring */
+  .clockcard{text-align:center;padding-top:30px;padding-bottom:30px;}
+  .ring-wrap{position:relative;width:208px;height:208px;margin:6px auto 18px;}
+  .ring-wrap svg{transform:rotate(-90deg);}
+  .ring-bg{fill:none;stroke:var(--hair-2);stroke-width:14;}
+  .ring-fg{fill:none;stroke:var(--ink);stroke-width:14;stroke-linecap:round;
+    transition:stroke-dashoffset .8s cubic-bezier(.2,.7,.2,1), stroke .4s;}
+  .ring-center{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;}
+  .clock{font-size:42px;font-weight:640;letter-spacing:-.03em;line-height:1;}
+  .clock .ss{font-size:20px;color:var(--muted);font-weight:560;}
+  .clock-date{font-size:13px;color:var(--muted);margin-top:7px;font-weight:500;}
+  .statepill{display:inline-flex;align-items:center;gap:7px;margin-top:14px;padding:7px 15px;border-radius:100px;
+    font-size:13.5px;font-weight:600;letter-spacing:-.01em;}
+  .statepill .led{width:8px;height:8px;border-radius:50%;background:currentColor;}
+  .pill-off{background:var(--field);color:var(--muted);}
+  .pill-in{background:var(--ontime-bg);color:var(--ontime);}
+  .pill-late{background:var(--late-bg);color:var(--late);}
+  .pill-break{background:var(--active-bg);color:var(--active);}
+  .pill-out{background:var(--hair-2);color:var(--ink-2);}
+
+  /* big action button */
+  .bigbtn{width:100%;padding:18px;border-radius:18px;font-size:17px;font-weight:640;letter-spacing:-.01em;
+    background:var(--ink);color:#fff;box-shadow:var(--shadow-sm);transition:transform .12s, opacity .2s, background .2s;}
+  .bigbtn:active{transform:scale(.985);}
+  .bigbtn:disabled{opacity:.4;background:var(--muted);box-shadow:none;}
+  .bigbtn.danger{background:var(--half);}
+  .bigbtn.ghost{background:var(--field);color:var(--ink);}
+
+  /* break/lunch row */
+  .seg{display:grid;grid-template-columns:1fr 1fr 1fr;gap:9px;margin-top:6px;}
+  .segbtn{padding:15px 8px;border-radius:14px;background:var(--field);text-align:center;font-weight:600;
+    font-size:13.5px;letter-spacing:-.01em;color:var(--ink);transition:transform .1s, background .2s;border:1px solid transparent;}
+  .segbtn:active{transform:scale(.97);}
+  .segbtn:disabled{opacity:.42;}
+  .segbtn small{display:block;color:var(--muted);font-weight:500;font-size:11px;margin-top:3px;}
+  .segbtn.live{background:var(--active-bg);border-color:#cfe2ff;color:var(--active);}
+  .segbtn.live small{color:var(--active);}
+  .segbtn.used{background:var(--hair-2);}
+
+  /* meta rows */
+  .rows{margin-top:4px;}
+  .row{display:flex;align-items:center;justify-content:space-between;padding:13px 2px;border-top:1px solid var(--hair-2);font-size:14.5px;}
+  .row:first-child{border-top:none;}
+  .row .k{color:var(--muted);font-weight:500;}
+  .row .v{font-weight:600;letter-spacing:-.01em;}
+  .v.ontime{color:var(--ontime);} .v.late{color:var(--late);} .v.half{color:var(--half);}
+
+  .label{font-size:12px;font-weight:680;letter-spacing:.04em;text-transform:uppercase;color:var(--muted);margin:0 0 12px;}
+
+  /* camera modal */
+  .sheet{position:fixed;inset:0;z-index:80;background:rgba(0,0,0,.42);
+    backdrop-filter:blur(4px);display:flex;align-items:flex-end;justify-content:center;}
+  .sheet .panel{background:#fff;width:100%;max-width:520px;border-radius:26px 26px 0 0;padding:22px 20px calc(22px + env(safe-area-inset-bottom));
+    animation:rise .32s cubic-bezier(.2,.8,.2,1);}
+  @keyframes rise{from{transform:translateY(100%);}to{transform:translateY(0);}}
+  .sheet h3{margin:0 0 4px;font-size:20px;letter-spacing:-.02em;font-weight:660;}
+  .sheet p{margin:0 0 16px;color:var(--muted);font-size:14px;}
+  .cam{width:100%;aspect-ratio:1/1;border-radius:18px;background:#000;object-fit:cover;display:block;}
+  .geoline{display:flex;align-items:center;gap:8px;margin:14px 0;font-size:13px;color:var(--muted);font-weight:500;}
+  .geoline .led{width:7px;height:7px;border-radius:50%;background:var(--late);}
+  .geoline.ok .led{background:var(--ontime);}
+  .geoline.warn .led{background:var(--half);}
+  .sheet .acts{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:6px;}
+
+  /* login */
+  .login{max-width:420px;margin:0 auto;padding:48px 22px;}
+  .login .mark{width:46px;height:46px;border-radius:13px;background:var(--ink);display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700;font-size:20px;letter-spacing:-.04em;margin:0 auto 22px;}
+  .field{width:100%;padding:15px 16px;border-radius:14px;border:1px solid var(--hair);background:var(--field);
+    margin-bottom:11px;outline:none;transition:border .2s, background .2s;}
+  .field:focus{border-color:var(--ink);background:#fff;}
+  select.field{appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%2386868B' stroke-width='1.6' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 16px center;padding-right:40px;}
+  .seg2{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:18px;background:var(--field);padding:4px;border-radius:13px;}
+  .seg2 button{padding:11px;border-radius:10px;font-weight:600;font-size:14px;color:var(--muted);transition:all .2s;}
+  .seg2 button.on{background:#fff;color:var(--ink);box-shadow:var(--shadow-sm);}
+
+  /* admin */
+  .stat-grid{display:grid;grid-template-columns:1fr 1fr;gap:11px;margin-bottom:16px;}
+  .stat{background:var(--card);border:1px solid var(--hair);border-radius:var(--radius-sm);padding:16px 18px;}
+  .stat .n{font-size:28px;font-weight:680;letter-spacing:-.03em;line-height:1;}
+  .stat .l{font-size:12px;color:var(--muted);font-weight:500;margin-top:6px;}
+  .emp{display:flex;align-items:center;gap:13px;padding:14px 0;border-top:1px solid var(--hair-2);}
+  .emp:first-child{border-top:none;}
+  .emp .pic{width:46px;height:46px;border-radius:13px;object-fit:cover;background:var(--field);flex:none;
+    display:flex;align-items:center;justify-content:center;font-weight:680;color:var(--muted);font-size:16px;}
+  .emp .body{flex:1;min-width:0;}
+  .emp .nm{font-weight:620;letter-spacing:-.01em;font-size:15px;}
+  .emp .meta{font-size:12.5px;color:var(--muted);margin-top:2px;display:flex;gap:6px;flex-wrap:wrap;align-items:center;}
+  .tag{font-size:11px;font-weight:680;padding:3px 8px;border-radius:7px;letter-spacing:-.01em;}
+  .t-ontime{background:var(--ontime-bg);color:var(--ontime);}
+  .t-late{background:var(--late-bg);color:var(--late);}
+  .t-half{background:var(--half-bg);color:var(--half);}
+  .t-active{background:var(--active-bg);color:var(--active);}
+  .t-off{background:var(--field);color:var(--muted);}
+  .emp a.map{font-size:12px;font-weight:600;color:var(--active);text-decoration:none;}
+
+  .banner{display:flex;gap:10px;align-items:flex-start;background:var(--late-bg);border:1px solid #f0dcc0;
+    border-radius:14px;padding:13px 15px;margin-bottom:16px;font-size:12.5px;color:#7a4a12;line-height:1.45;}
+  .banner b{color:#5e3a0e;}
+  .banner .x{margin-left:auto;color:#b07a3a;font-weight:700;flex:none;padding:0 4px;}
+
+  .empty{text-align:center;color:var(--muted);padding:40px 20px;font-size:14px;}
+  .toast{position:fixed;left:50%;bottom:32px;transform:translateX(-50%) translateY(20px);z-index:90;
+    background:var(--ink);color:#fff;padding:13px 20px;border-radius:14px;font-size:14px;font-weight:540;
+    box-shadow:var(--shadow);opacity:0;transition:all .35s cubic-bezier(.2,.8,.2,1);pointer-events:none;max-width:90%;}
+  .toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
+  .footer{text-align:center;color:var(--muted);font-size:11px;letter-spacing:.04em;padding:28px 0 4px;}
+  .ghoststrip{text-align:center;font-size:9px;letter-spacing:.34em;color:#000;opacity:.05;font-weight:700;padding:6px 0 18px;}
+  .linkbtn{background:none;color:var(--active);font-weight:600;font-size:13.5px;padding:8px 0;}
+  @media (prefers-reduced-motion:reduce){*{animation:none !important;transition:none !important;}}
+</style>
+</head>
+<body>
+
+<!-- ====================== LOGIN ====================== -->
+<div id="login" class="login">
+  <div class="mark">P</div>
+  <h1 style="text-align:center;font-size:24px;margin:0 0 6px;">PropBillion Attendance</h1>
+  <p class="sub" style="text-align:center;margin-bottom:26px;">Punch in, stay tracked, get marked right.</p>
+
+  <div class="seg2">
+    <button id="tabEmp" class="on" onclick="setRole('emp')">Employee</button>
+    <button id="tabAdm" onclick="setRole('admin')">Admin</button>
+  </div>
+
+  <div id="empLogin">
+    <select id="empSelect" class="field"></select>
+    <input id="empNew" class="field" placeholder="Or type your full name (new)" />
+    <input id="empId" class="field" placeholder="Employee ID (e.g. PB-014)" />
+    <button class="bigbtn" onclick="empLogin()">Continue</button>
+  </div>
+
+  <div id="admLogin" class="hide">
+    <input id="admPass" class="field" type="password" placeholder="Admin passcode" />
+    <button class="bigbtn" onclick="admLogin()">Open dashboard</button>
+    <p class="sub" style="text-align:center;font-size:12px;margin-top:14px;">Default passcode <b>2580</b> — change it in CONFIG.</p>
+  </div>
+</div>
+
+<!-- ====================== EMPLOYEE APP ====================== -->
+<div id="empApp" class="hide">
+  <div class="topbar"><div class="inner">
+    <div class="brand"><span class="dot"></span>PropBillion<small>ATT</small></div>
+    <div class="who">Hi, <b id="meName">—</b></div>
+  </div></div>
+
+  <div class="wrap">
+    <div class="card clockcard">
+      <div class="ring-wrap">
+        <svg width="208" height="208" viewBox="0 0 208 208">
+          <circle class="ring-bg" cx="104" cy="104" r="92"></circle>
+          <circle id="ring" class="ring-fg" cx="104" cy="104" r="92"
+                  stroke-dasharray="578" stroke-dashoffset="578"></circle>
+        </svg>
+        <div class="ring-center">
+          <div class="clock num"><span id="clkHM">--:--</span><span class="ss" id="clkSS">:00</span></div>
+          <div class="clock-date" id="clkDate">—</div>
+        </div>
+      </div>
+      <div id="statePill" class="statepill pill-off"><span class="led"></span><span id="stateTxt">Not punched in</span></div>
+    </div>
+
+    <button id="primaryBtn" class="bigbtn" onclick="onPrimary()">Punch in</button>
+
+    <div id="breakCard" class="card hide" style="margin-top:16px;">
+      <p class="label">Lunch &amp; breaks</p>
+      <div class="seg">
+        <button id="bLunch" class="segbtn" onclick="toggleBreak('lunch')">Lunch<small id="bLunchS">30 min</small></button>
+        <button id="bBreak1" class="segbtn" onclick="toggleBreak('break1')">Break 1<small id="bBreak1S">15 min</small></button>
+        <button id="bBreak2" class="segbtn" onclick="toggleBreak('break2')">Break 2<small id="bBreak2S">15 min</small></button>
+      </div>
+      <p class="sub" style="font-size:12px;margin:14px 0 0;">No breaks after 5:00 PM. Over-limit time is flagged to admin.</p>
+    </div>
+
+    <div class="card" style="margin-top:16px;">
+      <p class="label">Today</p>
+      <div class="rows">
+        <div class="row"><span class="k">Punch in</span><span class="v" id="rIn">—</span></div>
+        <div class="row"><span class="k">Status</span><span class="v" id="rStatus">—</span></div>
+        <div class="row"><span class="k">Punch out</span><span class="v" id="rOut">—</span></div>
+        <div class="row"><span class="k">This month — lates</span><span class="v" id="rLate">0</span></div>
+        <div class="row"><span class="k">This month — week-offs</span><span class="v" id="rOff">0 / 4</span></div>
+      </div>
+    </div>
+
+    <button class="linkbtn" style="display:block;margin:4px auto 0;" onclick="markWeekOff()">Mark today as week-off</button>
+    <button class="linkbtn" style="display:block;margin:0 auto;color:var(--muted)" onclick="logout()">Sign out</button>
+    <div class="ghoststrip">P R O P B I L L I O N</div>
+  </div>
+</div>
+
+<!-- ====================== ADMIN ====================== -->
+<div id="admApp" class="hide">
+  <div class="topbar"><div class="inner">
+    <div class="brand"><span class="dot"></span>PropBillion<small>ADMIN</small></div>
+    <div class="who" id="admDate">—</div>
+  </div></div>
+  <div class="wrap">
+    <h1>Team today</h1>
+    <p class="sub" id="admSub">Live status &amp; location</p>
+
+    <div id="cloudBanner" class="banner">
+      <span>⚠️</span>
+      <div><b>Single-device mode.</b> Firebase config nahi mila — abhi data sirf is device pe hai, baaki employees yahan nahi dikhenge. Cloud + cross-device admin ke liye file ke top pe FIREBASE config bhar do.</div>
+      <span class="x" onclick="this.parentElement.remove()">✕</span>
+    </div>
+
+    <div class="stat-grid">
+      <div class="stat"><div class="n num" id="sPresent">0</div><div class="l">Present today</div></div>
+      <div class="stat"><div class="n num" id="sLate">0</div><div class="l">Late / half-day</div></div>
+    </div>
+
+    <div class="card">
+      <p class="label">Roster — live</p>
+      <div id="roster"></div>
+    </div>
+    <button class="linkbtn" style="display:block;margin:0 auto;" onclick="loadRoster()">Refresh</button>
+    <button class="linkbtn" style="display:block;margin:0 auto;color:var(--muted)" onclick="logout()">Sign out</button>
+    <div class="ghoststrip">P R O P B I L L I O N</div>
+  </div>
+</div>
+
+<!-- ====================== CAMERA SHEET ====================== -->
+<div id="camSheet" class="sheet hide">
+  <div class="panel">
+    <h3 id="camTitle">Punch in</h3>
+    <p>Selfie + live location dono mandatory hain. Camera ke saamne face rakho.</p>
+    <video id="cam" class="cam" autoplay playsinline muted></video>
+    <canvas id="canvas" class="hide"></canvas>
+    <div id="geoLine" class="geoline"><span class="led"></span><span id="geoTxt">Getting your location…</span></div>
+    <div class="acts">
+      <button class="bigbtn ghost" onclick="closeCam()">Cancel</button>
+      <button id="capBtn" class="bigbtn" onclick="capture()" disabled>Capture &amp; submit</button>
+    </div>
+  </div>
+</div>
+
+<div id="toast" class="toast"></div>
+
+<script>
+/* ============================================================
+   PROPBILLION ATTENDANCE  —  CONFIG  (edit this block only)
+   ============================================================ */
+const CONFIG = {
+  ADMIN_PASS: "2580",                 // <- apna admin passcode
+
+  LATE_BENCHMARK:   "10:10",          // is time ke baad = late
+  LATES_BEFORE_HALFDAY: 3,            // 3rd late of the month = half day
+  PUNCHOUT_BENCHMARK: "19:00",        // is se pehle out = half day (7:00 PM)
+  LUNCH_LIMIT_MIN: 30,
+  BREAK_LIMIT_MIN: 15,
+  BREAKS_ALLOWED: 2,
+  NO_BREAK_AFTER: "17:00",            // 5:00 PM ke baad break nahi
+  WEEKOFF_PER_MONTH: 4,
+
+  // Geofence (optional). Office ka lat/lng aur allowed radius (meters).
+  // Khali "" rakho to location capture hoga par geofence enforce nahi.
+  OFFICE_LAT: "",                     // e.g. 18.6298
+  OFFICE_LNG: "",                     // e.g. 73.7997
+  OFFICE_RADIUS_M: 200,
+
+  // ---- FIREBASE (cross-device + admin live view ke liye) ----
+  // Firebase console se web app config paste karo. Khali = single-device mode.
+  FIREBASE: {
+    apiKey: "",
+    authDomain: "",
+    projectId: "",
+    storageBucket: "",
+    messagingSenderId: "",
+    appId: ""
+  }
+};
+
+/* ============================================================
+   STATE + DATA LAYER  (localStorage always; Firebase if config)
+   ============================================================ */
+const FB_ON = !!CONFIG.FIREBASE.apiKey;
+let db=null, storage=null;
+const LS = {
+  get k(){ return "pb_att_v1"; },
+  all(){ try{ return JSON.parse(localStorage.getItem(this.k)||"[]"); }catch{ return []; } },
+  save(a){ localStorage.setItem(this.k, JSON.stringify(a)); },
+  roster(){ try{ return JSON.parse(localStorage.getItem("pb_emps")||"[]"); }catch{ return []; } },
+  saveRoster(r){ localStorage.setItem("pb_emps", JSON.stringify(r)); }
+};
+
+let me = null;     // {name,id}
+let today = null;  // today's record object
+
+function todayKey(d=new Date()){ return d.toISOString().slice(0,10); }
+function monthKey(d=new Date()){ return d.toISOString().slice(0,7); }
+function recId(empId, dk){ return empId + "__" + dk; }
+
+/* Firebase init (compat SDK, loaded only if config present) */
+async function initFirebase(){
+  if(!FB_ON) return;
+  await loadScript("https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js");
+  await loadScript("https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js");
+  await loadScript("https://www.gstatic.com/firebasejs/10.12.0/firebase-storage-compat.js");
+  firebase.initializeApp(CONFIG.FIREBASE);
+  db = firebase.firestore();
+  storage = firebase.storage();
+}
+function loadScript(src){ return new Promise((res,rej)=>{ const s=document.createElement("script"); s.src=src; s.onload=res; s.onerror=rej; document.head.appendChild(s); }); }
+
+/* ---- read/write a day record ---- */
+async function getRecord(empId, dk=todayKey()){
+  if(FB_ON && db){
+    const snap = await db.collection("attendance").doc(recId(empId,dk)).get();
+    return snap.exists ? snap.data() : null;
+  }
+  return LS.all().find(r=>r.empId===empId && r.date===dk) || null;
+}
+async function putRecord(rec){
+  rec.updatedAt = Date.now();
+  if(FB_ON && db){
+    await db.collection("attendance").doc(recId(rec.empId,rec.date)).set(rec,{merge:true});
+  } else {
+    const a=LS.all(); const i=a.findIndex(r=>r.empId===rec.empId && r.date===rec.date);
+    if(i>=0) a[i]=rec; else a.push(rec); LS.save(a);
+  }
+}
+async function monthRecords(empId, mk=monthKey()){
+  if(FB_ON && db){
+    const snap = await db.collection("attendance").where("empId","==",empId).get();
+    return snap.docs.map(d=>d.data()).filter(r=>r.date.startsWith(mk));
+  }
+  return LS.all().filter(r=>r.empId===empId && r.date.startsWith(mk));
+}
+async function dayRoster(dk=todayKey()){
+  if(FB_ON && db){
+    const snap = await db.collection("attendance").where("date","==",dk).get();
+    return snap.docs.map(d=>d.data());
+  }
+  return LS.all().filter(r=>r.date===dk);
+}
+async function uploadSelfie(dataUrl, empId){
+  if(FB_ON && storage){
+    const ref = storage.ref("selfies/"+empId+"/"+Date.now()+".jpg");
+    await ref.putString(dataUrl,"data_url");
+    return await ref.getDownloadURL();
+  }
+  return dataUrl; // local mode: store dataURL inline
+}
+
+/* ============================================================
+   TIME HELPERS + RULES ENGINE  (pure logic)
+   ============================================================ */
+function hm(str){ const [h,m]=str.split(":").map(Number); return h*60+m; }
+function nowMin(d=new Date()){ return d.getHours()*60+d.getMinutes(); }
+function fmt12(d){ let h=d.getHours(),m=d.getMinutes(); const ap=h>=12?"PM":"AM"; h=h%12||12;
+  return h+":"+String(m).padStart(2,"0")+" "+ap; }
+function fmtFromTs(ts){ return ts? fmt12(new Date(ts)) : "—"; }
+
+/* classify punch-in: ontime | late  (relative to benchmark) */
+function classifyIn(ts){
+  return nowMin(new Date(ts)) > hm(CONFIG.LATE_BENCHMARK) ? "late" : "ontime";
+}
+/* is this punch-in the Nth late of the month -> half day? */
+function isHalfDayFromLates(lateCountIncludingToday){
+  return lateCountIncludingToday >= CONFIG.LATES_BEFORE_HALFDAY
+      && (lateCountIncludingToday % CONFIG.LATES_BEFORE_HALFDAY === 0);
+}
+/* punch-out before benchmark -> early out (half day) */
+function isEarlyOut(ts){ return nowMin(new Date(ts)) < hm(CONFIG.PUNCHOUT_BENCHMARK); }
+
+/* final day verdict from a record */
+function dayVerdict(rec){
+  if(!rec || !rec.inTs) return {tag:"off", label:"Absent"};
+  let half = false, reasons=[];
+  if(rec.halfFromLate){ half=true; reasons.push("3rd late"); }
+  if(rec.outTs && isEarlyOut(rec.outTs)){ half=true; reasons.push("left before 7 PM"); }
+  if(rec.inStatus==="late" && !half) return {tag:"late", label:"Late", reasons};
+  if(half) return {tag:"half", label:"Half day", reasons};
+  return {tag:"ontime", label:"On time", reasons};
+}
+
+/* ============================================================
+   GEOLOCATION
+   NATIVE (Capacitor Android app):
+     - real mock/fake-GPS detection via location.simulated
+     - background tracking during shift via foreground service
+   WEB (browser): fallback, no mock-proofing, no background.
+   ============================================================ */
+const IS_NATIVE = !!(window.Capacitor && window.Capacitor.isNativePlatform && window.Capacitor.isNativePlatform());
+let BgGeo = null;
+if(IS_NATIVE && window.Capacitor.registerPlugin){
+  try{ BgGeo = window.Capacitor.registerPlugin("BackgroundGeolocation"); }catch(e){}
+}
+let lastGeo=null, watcherId=null, lastLiveWrite=0;
+
+function distM(a,b,c,d){ const R=6371000,t=x=>x*Math.PI/180;
+  const dLa=t(c-a),dLo=t(d-b); const s=Math.sin(dLa/2)**2+Math.cos(t(a))*Math.cos(t(c))*Math.sin(dLo/2)**2;
+  return 2*R*Math.asin(Math.sqrt(s)); }
+
+function applyFence(g){
+  if(CONFIG.OFFICE_LAT && CONFIG.OFFICE_LNG){
+    g.dist=Math.round(distM(+CONFIG.OFFICE_LAT,+CONFIG.OFFICE_LNG,g.lat,g.lng));
+    g.outsideFence = g.dist > CONFIG.OFFICE_RADIUS_M;
+  }
+  return g;
+}
+
+/* one-shot, high-integrity fix for the punch moment */
+function getGeo(){
+  if(IS_NATIVE && BgGeo) return getGeoNative();
+  return getGeoWeb();
+}
+function getGeoWeb(){
+  return new Promise((res)=>{
+    if(!navigator.geolocation){ res({error:"Location not supported"}); return; }
+    navigator.geolocation.getCurrentPosition(
+      p=>{
+        const g={lat:p.coords.latitude,lng:p.coords.longitude,acc:Math.round(p.coords.accuracy||0),
+                 mock:null /* unknown on web */, native:false, t:Date.now(), flags:[]};
+        if(g.acc>0 && g.acc<1) g.flags.push("suspicious-accuracy");
+        res(applyFence(g));
+      },
+      e=>res({error:e.message||"Location denied"}),
+      {enableHighAccuracy:true,timeout:12000,maximumAge:0}
+    );
+  });
+}
+/* native one-shot: add a watcher, grab first fix, read simulated flag, remove it */
+function getGeoNative(){
+  return new Promise((res)=>{
+    let id=null, done=false;
+    BgGeo.addWatcher(
+      { backgroundMessage:"Checking your location.", backgroundTitle:"PropBillion", requestPermissions:true, stale:false },
+      (loc, err)=>{
+        if(err){ if(!done){done=true; cleanup(); res({error:err.message||err.code||"location error"});} return; }
+        if(done) return; done=true;
+        const g={lat:loc.latitude,lng:loc.longitude,acc:Math.round(loc.accuracy||0),
+                 mock: loc.simulated===true, native:true, t:Date.now(), flags:[]};
+        if(g.mock) g.flags.push("MOCK-GPS");
+        cleanup(); res(applyFence(g));
+      }
+    ).then(wid=>{ id=wid; });
+    function cleanup(){ try{ if(id) BgGeo.removeWatcher({id}); }catch(e){} }
+    setTimeout(()=>{ if(!done){done=true; res({error:"Location timed out"}); } },15000);
+  });
+}
+
+/* continuous shift tracking (native only): runs punch-in -> punch-out */
+async function startShiftTracking(){
+  if(!(IS_NATIVE && BgGeo)) return;
+  if(watcherId) return;
+  watcherId = await BgGeo.addWatcher(
+    { backgroundMessage:"On shift — PropBillion is recording your work location.",
+      backgroundTitle:"PropBillion — on shift", requestPermissions:true, stale:false, distanceFilter:30 },
+    async (loc, err)=>{
+      if(err || !loc || !today || !today.inTs || today.outTs) return;
+      const now=Date.now();
+      if(now - lastLiveWrite < 60000) return;  // throttle: 1 write / min
+      lastLiveWrite = now;
+      today.live={lat:loc.latitude,lng:loc.longitude,acc:Math.round(loc.accuracy||0),mock:loc.simulated===true,t:now};
+      await putRecord(today).catch(()=>{});
+    }
+  );
+}
+async function stopShiftTracking(){
+  if(IS_NATIVE && BgGeo && watcherId){ try{ await BgGeo.removeWatcher({id:watcherId}); }catch(e){} }
+  watcherId=null;
+}
+
+/* ============================================================
+   UI — clock + ring
+   ============================================================ */
+function tick(){
+  const d=new Date();
+  document.getElementById("clkHM").textContent=fmt12(d).replace(/ (AM|PM)/,"");
+  document.getElementById("clkSS").textContent=":"+String(d.getSeconds()).padStart(2,"0");
+  document.getElementById("clkDate").textContent=d.toLocaleDateString("en-IN",{weekday:"long",day:"numeric",month:"long"});
+  // ring = fraction of the 10:10 -> 19:00 workday filled, colored by state
+  if(today && today.inTs){
+    const start=hm(CONFIG.LATE_BENCHMARK), end=hm(CONFIG.PUNCHOUT_BENCHMARK);
+    const f=Math.max(0,Math.min(1,(nowMin(d)-start)/(end-start)));
+    setRing(f);
+  }
+}
+function setRing(frac, color){
+  const C=578, off=C*(1-frac);
+  const r=document.getElementById("ring");
+  r.style.strokeDashoffset=off;
+  if(color) r.style.stroke=color;
+}
+
+/* ============================================================
+   EMPLOYEE FLOW
+   ============================================================ */
+let pendingAction=null; // 'in' | 'out'
+
+async function refreshEmpUI(){
+  today = await getRecord(me.id);
+  const v = dayVerdict(today);
+  const pill=document.getElementById("statePill"), txt=document.getElementById("stateTxt");
+  const primary=document.getElementById("primaryBtn"), breakCard=document.getElementById("breakCard");
+
+  // top "Today" rows
+  document.getElementById("rIn").textContent = today?.inTs ? fmtFromTs(today.inTs) : "—";
+  document.getElementById("rOut").textContent = today?.outTs ? fmtFromTs(today.outTs) : "—";
+  const sEl=document.getElementById("rStatus");
+  sEl.textContent=v.label; sEl.className="v "+(v.tag==="ontime"?"ontime":v.tag==="late"?"late":v.tag==="half"?"half":"");
+
+  // month stats
+  const mr = await monthRecords(me.id);
+  const lates = mr.filter(r=>r.inStatus==="late").length;
+  const offs  = mr.filter(r=>r.weekOff).length;
+  document.getElementById("rLate").textContent = lates;
+  document.getElementById("rOff").textContent  = offs+" / "+CONFIG.WEEKOFF_PER_MONTH;
+
+  pill.className="statepill"; breakCard.classList.add("hide");
+
+  if(!today || !today.inTs){
+    pill.classList.add("pill-off"); txt.textContent="Not punched in";
+    primary.textContent="Punch in"; primary.className="bigbtn"; primary.disabled=false;
+    setRing(0,"var(--ink)");
+  } else if(today.outTs){
+    pill.classList.add("pill-out"); txt.textContent="Day closed — "+v.label;
+    primary.textContent="Day complete"; primary.className="bigbtn"; primary.disabled=true;
+    setRing(1, v.tag==="half"?"var(--half)":v.tag==="late"?"var(--late)":"var(--ontime)");
+  } else if(today.onBreak){
+    pill.classList.add("pill-break"); txt.textContent="On "+today.onBreak;
+    primary.textContent="Punch out"; primary.className="bigbtn"; primary.disabled=false;
+    breakCard.classList.remove("hide"); renderBreaks();
+  } else {
+    const cls = today.inStatus==="late"?"pill-late":"pill-in";
+    pill.classList.add(cls);
+    txt.textContent = today.inStatus==="late" ? "In — late" : "In — on time";
+    primary.textContent="Punch out"; primary.className="bigbtn"; primary.disabled=false;
+    breakCard.classList.remove("hide"); renderBreaks();
+    setRing(undefined, today.inStatus==="late"?"var(--late)":"var(--ontime)");
+  }
+}
+
+function onPrimary(){
+  if(!today || !today.inTs){ pendingAction="in"; openCam("Punch in"); }
+  else { confirmPunchOut(); }
+}
+
+function confirmPunchOut(){
+  const early = isEarlyOut(Date.now());
+  if(early){
+    const ok = confirm("Abhi 7:00 PM se pehle hai. Punch out karoge to aaj HALF DAY mark hoga (emergency ka bhi exception nahi). Continue?");
+    if(!ok) return;
+  }
+  pendingAction="out"; openCam("Punch out");
+}
+
+/* ---- camera ---- */
+let stream=null;
+async function openCam(title){
+  document.getElementById("camTitle").textContent=title;
+  document.getElementById("camSheet").classList.remove("hide");
+  document.getElementById("capBtn").disabled=true;
+  const gl=document.getElementById("geoLine"); gl.className="geoline"; document.getElementById("geoTxt").textContent="Getting your location…";
+  // camera
+  try{
+    stream=await navigator.mediaDevices.getUserMedia({video:{facingMode:"user"},audio:false});
+    document.getElementById("cam").srcObject=stream;
+  }catch(e){ toast("Camera blocked — allow camera permission."); }
+  // geo
+  lastGeo=await getGeo();
+  const cap=document.getElementById("capBtn");
+  if(lastGeo.error){ gl.classList.add("warn"); cap.disabled=true;
+    document.getElementById("geoTxt").textContent="Location failed: "+lastGeo.error; }
+  else if(lastGeo.mock===true){            // HARD BLOCK — fake/mock GPS detected (native only)
+    gl.classList.add("warn"); cap.disabled=true;
+    document.getElementById("geoTxt").textContent="Fake GPS detected. Mock location band karo, phir punch karo."; }
+  else if(lastGeo.outsideFence){ gl.classList.add("warn");
+    document.getElementById("geoTxt").textContent="Outside office ("+lastGeo.dist+"m away) — will be flagged"; cap.disabled=false; }
+  else { gl.classList.add("ok"); cap.disabled=false;
+    const tag = lastGeo.native ? " • verified" : " • web (unverified)";
+    document.getElementById("geoTxt").textContent="Location locked"+(lastGeo.dist!=null?" • "+lastGeo.dist+"m":"")+" • ±"+lastGeo.acc+"m"+tag; }
+}
+function closeCam(){
+  document.getElementById("camSheet").classList.add("hide");
+  if(stream){ stream.getTracks().forEach(t=>t.stop()); stream=null; }
+}
+async function capture(){
+  const v=document.getElementById("cam"), c=document.getElementById("canvas");
+  c.width=v.videoWidth||480; c.height=v.videoHeight||480;
+  c.getContext("2d").drawImage(v,0,0,c.width,c.height);
+  const dataUrl=c.toDataURL("image/jpeg",0.55);
+  document.getElementById("capBtn").disabled=true;
+  toast("Submitting…");
+  const selfieUrl = await uploadSelfie(dataUrl, me.id);
+  if(pendingAction==="in") await doPunchIn(selfieUrl);
+  else await doPunchOut(selfieUrl);
+  closeCam();
+}
+
+async function doPunchIn(selfie){
+  const ts=Date.now();
+  const status=classifyIn(ts);
+  // count lates this month incl today to decide half-day
+  const mr=await monthRecords(me.id);
+  const latesSoFar = mr.filter(r=>r.inStatus==="late").length + (status==="late"?1:0);
+  const halfFromLate = status==="late" && isHalfDayFromLates(latesSoFar);
+  const rec={
+    empId:me.id, empName:me.name, date:todayKey(),
+    inTs:ts, inStatus:status, halfFromLate,
+    inGeo:lastGeo, inSelfie:selfie, live:lastGeo,
+    breaks:{}, weekOff:false
+  };
+  await putRecord(rec);
+  ensureRoster();
+  today=rec;
+  startShiftTracking();   // native: live location runs until punch-out
+  toast(status==="late" ? (halfFromLate?"Punched in — 3rd late, HALF DAY":"Punched in — LATE") : "Punched in — on time ✓");
+  refreshEmpUI();
+}
+async function doPunchOut(selfie){
+  if(!today) return;
+  await stopShiftTracking();   // stop live tracking
+  today.outTs=Date.now(); today.outGeo=lastGeo; today.outSelfie=selfie; today.onBreak=null;
+  await putRecord(today);
+  const v=dayVerdict(today);
+  toast("Punched out — "+v.label);
+  refreshEmpUI();
+}
+
+/* ---- lunch / breaks ---- */
+const BREAK_LIMIT={lunch:CONFIG.LUNCH_LIMIT_MIN, break1:CONFIG.BREAK_LIMIT_MIN, break2:CONFIG.BREAK_LIMIT_MIN};
+let breakTimer=null;
+async function toggleBreak(kind){
+  if(!today||!today.inTs||today.outTs) return;
+  today.breaks=today.breaks||{};
+  const b=today.breaks[kind]||{};
+  if(b.start && !b.end){
+    // end it
+    b.end=Date.now(); b.mins=Math.round((b.end-b.start)/60000);
+    b.over = b.mins>BREAK_LIMIT[kind];
+    today.onBreak=null;
+    await putRecord(today);
+    toast(b.over? (kind+" over limit by "+(b.mins-BREAK_LIMIT[kind])+" min — flagged") : (kind+" done • "+b.mins+" min"));
+  } else if(!b.start){
+    if(nowMin()>=hm(CONFIG.NO_BREAK_AFTER)){ toast("No breaks after 5:00 PM"); return; }
+    if(today.onBreak){ toast("Already on "+today.onBreak); return; }
+    b.start=Date.now(); today.onBreak=kind; today.breaks[kind]=b;
+    await putRecord(today);
+    toast(kind+" started");
+  }
+  today.breaks[kind]=b;
+  refreshEmpUI();
+}
+function renderBreaks(){
+  const after5 = nowMin()>=hm(CONFIG.NO_BREAK_AFTER);
+  [["lunch","bLunch","bLunchS"],["break1","bBreak1","bBreak1S"],["break2","bBreak2","bBreak2S"]].forEach(([k,id,sid])=>{
+    const el=document.getElementById(id), s=document.getElementById(sid);
+    const b=(today.breaks||{})[k]||{};
+    el.classList.remove("live","used"); el.disabled=false;
+    if(b.start && !b.end){ el.classList.add("live"); const m=Math.floor((Date.now()-b.start)/60000), sec=Math.floor((Date.now()-b.start)/1000)%60;
+      s.textContent=m+":"+String(sec).padStart(2,"0"); }
+    else if(b.end){ el.classList.add("used"); s.textContent=b.mins+" min"+(b.over?" ⚠":" ✓"); el.disabled=true; }
+    else { s.textContent=(BREAK_LIMIT[k])+" min"; if(after5||today.onBreak) el.disabled=true; }
+  });
+}
+
+async function markWeekOff(){
+  if(today && today.inTs){ toast("Aaj to punch-in ho chuka — week-off nahi"); return; }
+  const mr=await monthRecords(me.id);
+  const used=mr.filter(r=>r.weekOff).length;
+  if(used>=CONFIG.WEEKOFF_PER_MONTH){
+    if(!confirm("Is mahine ke 4 week-off khatam. Ye din UNPAID LEAVE count hoga (paisa katega). Phir bhi mark karein?")) return;
+  }
+  const rec=(await getRecord(me.id))||{empId:me.id,empName:me.name,date:todayKey()};
+  rec.weekOff=true; rec.weekOffUnpaid = used>=CONFIG.WEEKOFF_PER_MONTH;
+  await putRecord(rec);
+  toast(rec.weekOffUnpaid?"Marked — UNPAID leave":"Week-off marked ✓");
+  refreshEmpUI();
+}
+
+/* keep roster of employees for admin dropdown / display */
+function ensureRoster(){
+  const r=LS.roster(); if(!r.find(e=>e.id===me.id)){ r.push({id:me.id,name:me.name}); LS.saveRoster(r); }
+}
+
+/* ============================================================
+   ADMIN
+   ============================================================ */
+async function loadRoster(){
+  document.getElementById("admDate").textContent=new Date().toLocaleDateString("en-IN",{day:"numeric",month:"short"});
+  const banner=document.getElementById("cloudBanner");
+  if(banner){
+    if(FB_ON && IS_NATIVE){ banner.remove(); }
+    else {
+      const parts=[];
+      if(!FB_ON) parts.push("<b>Single-device:</b> Firebase config bharo warna baaki devices yahan nahi dikhenge.");
+      if(!IS_NATIVE) parts.push("<b>Web mode:</b> anti-spoof + live tracking sirf installed Android app mein ON hota hai.");
+      banner.querySelector("div").innerHTML = parts.join(" ");
+    }
+  }
+  const recs=await dayRoster();
+  const box=document.getElementById("roster");
+  document.getElementById("sPresent").textContent = recs.filter(r=>r.inTs).length;
+  document.getElementById("sLate").textContent = recs.filter(r=>{const v=dayVerdict(r);return v.tag==="late"||v.tag==="half";}).length;
+
+  if(!recs.length){ box.innerHTML='<div class="empty">Aaj abhi tak koi punch-in nahi.</div>'; return; }
+  recs.sort((a,b)=>(a.inTs||0)-(b.inTs||0));
+  box.innerHTML = recs.map(r=>{
+    const v=dayVerdict(r);
+    let tagCls="t-off", tagTxt=v.label;
+    if(r.onBreak){ tagCls="t-active"; tagTxt="On "+r.onBreak; }
+    else if(v.tag==="ontime"){ tagCls="t-ontime"; }
+    else if(v.tag==="late"){ tagCls="t-late"; }
+    else if(v.tag==="half"){ tagCls="t-half"; }
+    // prefer live (during shift) > outGeo > inGeo
+    const active = r.inTs && !r.outTs;
+    const g = active ? (r.live||r.inGeo) : (r.outGeo||r.live||r.inGeo);
+    const liveAgo = (active && r.live&&r.live.t) ? Math.round((Date.now()-r.live.t)/60000) : null;
+    const liveLbl = active ? (liveAgo!=null? `📍 Live • ${liveAgo}m ago` : "📍 Live") : "📍 Map";
+    const mapLink = g&&g.lat? `<a class="map" target="_blank" href="https://maps.google.com/?q=${g.lat},${g.lng}">${liveLbl}</a>`:"";
+    const fence = g&&g.outsideFence? ' <span class="tag t-half">Outside</span>':"";
+    const isMock = (g&&g.mock===true) || (g&&g.flags&&g.flags.includes("MOCK-GPS"));
+    const mock  = isMock ? ' <span class="tag t-half">⚑ FAKE GPS</span>'
+                  : (g&&g.flags&&g.flags.length? ' <span class="tag t-late">⚑ check</span>':"");
+    const pic = r.inSelfie? `<img class="pic" src="${r.inSelfie}">` : `<div class="pic">${(r.empName||"?")[0]}</div>`;
+    return `<div class="emp">${pic}
+      <div class="body">
+        <div class="nm">${r.empName||r.empId} <span class="tag ${tagCls}">${tagTxt}</span></div>
+        <div class="meta"><span>In ${fmtFromTs(r.inTs)}</span><span>Out ${r.outTs?fmtFromTs(r.outTs):"—"}</span>${mapLink}${fence}${mock}</div>
+      </div></div>`;
+  }).join("");
+}
+
+/* ============================================================
+   AUTH / ROUTING
+   ============================================================ */
+let role="emp";
+function setRole(r){
+  role=r;
+  document.getElementById("tabEmp").classList.toggle("on",r==="emp");
+  document.getElementById("tabAdm").classList.toggle("on",r==="admin");
+  document.getElementById("empLogin").classList.toggle("hide",r!=="emp");
+  document.getElementById("admLogin").classList.toggle("hide",r!=="admin");
+}
+function fillRosterDropdown(){
+  const sel=document.getElementById("empSelect"); const r=LS.roster();
+  sel.innerHTML='<option value="">— Select your name —</option>'+r.map(e=>`<option value="${e.id}">${e.name} (${e.id})</option>`).join("");
+}
+function empLogin(){
+  const sel=document.getElementById("empSelect").value;
+  const newName=document.getElementById("empNew").value.trim();
+  const id=document.getElementById("empId").value.trim();
+  if(sel){ const e=LS.roster().find(x=>x.id===sel); me={id:e.id,name:e.name}; }
+  else if(newName && id){ me={id, name:newName}; LS.saveRoster([...LS.roster().filter(x=>x.id!==id),{id,name:newName}]); }
+  else { toast("Naam aur Employee ID daalo (ya list se select karo)"); return; }
+  sessionStorage.setItem("pb_me",JSON.stringify(me));
+  enterEmp();
+}
+function admLogin(){
+  if(document.getElementById("admPass").value!==CONFIG.ADMIN_PASS){ toast("Galat passcode"); return; }
+  document.getElementById("login").classList.add("hide");
+  document.getElementById("admApp").classList.remove("hide");
+  loadRoster();
+}
+function enterEmp(){
+  document.getElementById("login").classList.add("hide");
+  document.getElementById("empApp").classList.remove("hide");
+  document.getElementById("meName").textContent=me.name.split(" ")[0];
+  // running-mode chip (honest about what's enforced)
+  if(!document.getElementById("modeChip")){
+    const wrap=document.querySelector("#empApp .wrap");
+    const chip=document.createElement("div"); chip.id="modeChip";
+    chip.style.cssText="text-align:center;font-size:11.5px;font-weight:600;letter-spacing:.01em;margin:18px 0 -6px;padding:8px 12px;border-radius:100px;";
+    if(IS_NATIVE){ chip.style.background="var(--ontime-bg)"; chip.style.color="var(--ontime)"; chip.textContent="🛡 Verified mode — anti-spoof + live tracking ON"; }
+    else { chip.style.background="var(--late-bg)"; chip.style.color="var(--late)"; chip.textContent="🌐 Web mode — install the app for anti-spoof tracking"; }
+    wrap.insertBefore(chip, wrap.firstChild);
+  }
+  ensureRoster(); refreshEmpUI();
+}
+function logout(){ sessionStorage.removeItem("pb_me"); location.reload(); }
+
+/* ============================================================
+   BOOT
+   ============================================================ */
+(async function boot(){
+  await initFirebase().catch(()=>toast("Firebase init failed — running local mode"));
+  fillRosterDropdown();
+  const saved=sessionStorage.getItem("pb_me");
+  if(saved){ me=JSON.parse(saved); enterEmp(); }
+  tick(); setInterval(()=>{ tick(); if(me && !document.getElementById("empApp").classList.contains("hide")) renderBreaksSafe(); },1000);
+  // admin live refresh every 30s
+  setInterval(()=>{ if(!document.getElementById("admApp").classList.contains("hide")) loadRoster(); },30000);
+})();
+function renderBreaksSafe(){ try{ if(today&&today.inTs&&!today.outTs) renderBreaks(); }catch{} }
+
+/* toast */
+let tT=null;
+function toast(m){ const t=document.getElementById("toast"); t.textContent=m; t.classList.add("show"); clearTimeout(tT); tT=setTimeout(()=>t.classList.remove("show"),2600); }
+</script>
+</body>
+</html>
