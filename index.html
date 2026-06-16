@@ -232,14 +232,51 @@
   @keyframes pop{0%{transform:scale(.4);opacity:0;}100%{transform:scale(1);opacity:1;}}
   .bye h2{font-size:24px;font-weight:680;letter-spacing:-.02em;margin:0 0 8px;}
   .bye p{color:var(--muted);font-size:15px;max-width:300px;line-height:1.5;margin:0 0 26px;}
+
+  /* admin tabs + setup forms */
+  .atabs{display:grid;grid-template-columns:1fr 1fr 1fr;gap:6px;background:var(--field);padding:4px;border-radius:13px;margin:18px 0 16px;position:sticky;top:62px;z-index:20;}
+  .atabs button{padding:10px;border-radius:10px;font-weight:600;font-size:14px;color:var(--muted);transition:all .2s;}
+  .atabs button.on{background:#fff;color:var(--ink);box-shadow:var(--shadow-sm);}
+  .field2{width:100%;padding:12px 13px;border-radius:11px;border:1px solid var(--hair);background:var(--field);outline:none;font-size:15px;}
+  .field2:focus{border-color:var(--ink);background:#fff;}
+  .field2.sm{max-width:92px;}
+  .addrow{display:flex;gap:7px;margin-top:12px;flex-wrap:wrap;}
+  .addrow .field2{flex:1;min-width:0;}
+  .addbtn{padding:0 18px;border-radius:11px;background:var(--ink);color:#fff;font-weight:640;font-size:14px;}
+  .ruler{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:10px 0;border-top:1px solid var(--hair-2);font-size:14px;color:var(--ink-2);}
+  .ruler:first-of-type{border-top:none;}
+  .erow{display:flex;align-items:center;gap:10px;padding:12px 0;border-top:1px solid var(--hair-2);}
+  .erow:first-child{border-top:none;}
+  .erow .en{flex:1;min-width:0;} .erow .en b{font-weight:620;font-size:14.5px;letter-spacing:-.01em;display:block;}
+  .erow .en span{font-size:12px;color:var(--muted);}
+  .erow input{width:108px;padding:9px 11px;border-radius:10px;border:1px solid var(--hair);background:var(--field);text-align:right;font-size:14px;outline:none;}
+  .erow .del{color:var(--half);font-size:18px;font-weight:700;padding:4px 6px;flex:none;}
+  .srow{display:flex;align-items:center;gap:10px;padding:11px 0;border-top:1px solid var(--hair-2);font-size:14px;}
+  .srow:first-child{border-top:none;} .srow b{font-weight:620;flex:1;}
+  .srow span{font-size:11.5px;color:var(--muted);}
+  .salr{display:flex;align-items:center;gap:12px;padding:14px 0;border-top:1px solid var(--hair-2);}
+  .salr:first-child{border-top:none;}
+  .salr .sn{flex:1;min-width:0;} .salr .sn b{font-weight:620;font-size:15px;letter-spacing:-.01em;display:block;}
+  .salr .sn span{font-size:12px;color:var(--muted);}
+  .salr .amt{text-align:right;flex:none;} .salr .amt b{font-size:17px;font-weight:680;letter-spacing:-.02em;}
+  .salr .amt span{display:block;font-size:11px;color:var(--muted);}
+  /* Pulse logo */
+  .logo{display:inline-flex;align-items:center;gap:7px;}
+  .logo svg{display:block;}
+  .logo .wm{font-weight:600;letter-spacing:-.03em;font-size:19px;color:var(--ink);}
 </style>
 </head>
 <body>
 
 <!-- ====================== LOGIN ====================== -->
 <div id="login" class="login">
-  <div class="mark">P</div>
-  <h1 style="text-align:center;font-size:24px;margin:0 0 6px;">PropBillion Pulse</h1>
+  <div class="logo" style="display:flex;justify-content:center;margin:0 auto 20px;">
+    <svg width="42" height="42" viewBox="0 0 42 42" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="Pulse">
+      <rect width="42" height="42" rx="11" fill="#0A0A0A"/>
+      <path d="M8 21 H15 L18 13 L24 29 L27 21 H34" stroke="#34D399" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+  </div>
+  <h1 style="text-align:center;font-size:24px;margin:0 0 6px;letter-spacing:-.03em;">PropBillion <span style="font-weight:600;">Pulse</span></h1>
   <p class="sub" style="text-align:center;margin-bottom:26px;">Punch in. The system is watching the clock, the location, and the truth.</p>
 
   <div class="seg2">
@@ -257,14 +294,14 @@
   <div id="admLogin" class="hide">
     <input id="admPass" class="field" type="password" placeholder="Admin passcode" />
     <button class="bigbtn" onclick="admLogin()">Open dashboard</button>
-    <p class="sub" style="text-align:center;font-size:12px;margin-top:14px;">Default passcode <b>2580</b> — change it in CONFIG.</p>
+    <p class="sub" style="text-align:center;font-size:12px;margin-top:14px;">Admin <b>2580</b> (full) • Viewer <b>1111</b> (read-only). CONFIG mein change karo.</p>
   </div>
 </div>
 
 <!-- ====================== EMPLOYEE APP ====================== -->
 <div id="empApp" class="hide">
   <div class="topbar"><div class="inner">
-    <div class="brand"><span class="dot"></span>PropBillion<small>PULSE</small></div>
+    <div class="brand"><svg width="16" height="16" viewBox="0 0 42 42" style="margin-right:1px;"><rect width="42" height="42" rx="11" fill="#0A0A0A"/><path d="M8 21 H15 L18 13 L24 29 L27 21 H34" stroke="#34D399" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg>PropBillion<small>PULSE</small></div>
     <div class="who">Hi, <b id="meName">—</b></div>
   </div></div>
 
@@ -332,39 +369,93 @@
 <!-- ====================== ADMIN ====================== -->
 <div id="admApp" class="hide">
   <div class="topbar"><div class="inner">
-    <div class="brand"><span class="dot"></span>PropBillion<small>ADMIN</small></div>
+    <div class="brand"><svg width="16" height="16" viewBox="0 0 42 42" style="margin-right:1px;"><rect width="42" height="42" rx="11" fill="#0A0A0A"/><path d="M8 21 H15 L18 13 L24 29 L27 21 H34" stroke="#34D399" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg>PropBillion<small id="admRoleTag">ADMIN</small></div>
     <div class="who" id="admDate">—</div>
   </div></div>
   <div class="wrap">
-    <h1>Team today</h1>
-    <p class="sub" id="admSub">Live status &amp; location</p>
+
+    <div class="atabs">
+      <button id="atTab0" class="on" onclick="adminTab(0)">Today</button>
+      <button id="atTab1" onclick="adminTab(1)">Salary</button>
+      <button id="atTab2" onclick="adminTab(2)">Setup</button>
+    </div>
 
     <div id="cloudBanner" class="banner">
-      <span>⚠️</span>
-      <div><b>Single-device mode.</b> Firebase config nahi mila — abhi data sirf is device pe hai, baaki employees yahan nahi dikhenge. Cloud + cross-device admin ke liye file ke top pe FIREBASE config bhar do.</div>
+      <span>⚠️</span><div></div>
       <span class="x" onclick="this.parentElement.remove()">✕</span>
     </div>
 
-    <div class="stat-grid">
-      <div class="stat"><div class="n num" id="sPresent">0</div><div class="l">Present today</div></div>
-      <div class="stat"><div class="n num" id="sLate">0</div><div class="l">Late / half-day</div></div>
+    <!-- TAB 0: TODAY -->
+    <div id="adminPane0">
+      <div class="stat-grid">
+        <div class="stat"><div class="n num" id="sPresent">0</div><div class="l">Present today</div></div>
+        <div class="stat"><div class="n num" id="sLate">0</div><div class="l">Late / half-day</div></div>
+      </div>
+      <div class="card">
+        <p class="label">Roster — live</p>
+        <div id="roster"></div>
+      </div>
+      <button class="linkbtn" style="display:block;margin:0 auto;" onclick="loadRoster()">Refresh</button>
     </div>
 
-    <div class="card">
-      <p class="label">Roster — live</p>
-      <div id="roster"></div>
+    <!-- TAB 1: SALARY -->
+    <div id="adminPane1" class="hide">
+      <p class="sub" id="salMonthLbl">This month — payable so far</p>
+      <div class="card"><div id="salaryList"></div></div>
+      <p class="sub" style="font-size:12px;">Payable = full days + ½ half-days + paid week-offs (max 4). Absent days deducted. Calculation aaj tak ke complete dino ka hai.</p>
     </div>
-    <button class="linkbtn" style="display:block;margin:0 auto;" onclick="loadRoster()">Refresh</button>
-    <button class="linkbtn" style="display:block;margin:0 auto;color:var(--muted)" onclick="logout()">Sign out</button>
-    <div class="ghoststrip">P R O P B I L L I O N</div>
+
+    <!-- TAB 2: SETUP -->
+    <div id="adminPane2" class="hide">
+      <div class="card">
+        <p class="label">Employees &amp; salary</p>
+        <div id="empAdmin"></div>
+        <div class="addrow">
+          <input id="neName" class="field2" placeholder="Name">
+          <input id="neId" class="field2" placeholder="ID (PB-01)">
+          <input id="neSal" class="field2 num" inputmode="numeric" placeholder="Monthly ₹">
+          <button class="addbtn" onclick="addEmp()">Add</button>
+        </div>
+      </div>
+
+      <div class="card">
+        <p class="label">Rules</p>
+        <div class="ruler"><span>Late ke baad time</span><input id="rLateB" class="field2 sm" placeholder="10:10"></div>
+        <div class="ruler"><span>Itni late = half day</span><input id="rLates" class="field2 sm num" inputmode="numeric" placeholder="3"></div>
+        <div class="ruler"><span>Is time ke baad in = half</span><input id="rHalfAfter" class="field2 sm" placeholder="13:00"></div>
+        <div class="ruler"><span>Is se pehle out = half</span><input id="rOut" class="field2 sm" placeholder="19:00"></div>
+        <div class="ruler"><span>Paid week-offs / month</span><input id="rWoff" class="field2 sm num" inputmode="numeric" placeholder="4"></div>
+        <button class="bigbtn" style="margin-top:14px;" onclick="saveRules()">Save rules</button>
+      </div>
+
+      <div class="card">
+        <p class="label">Work-sites (selfie location match)</p>
+        <p class="sub" style="font-size:12px;margin:-4px 0 12px;">Har site pe khade hokar "Use my location" dabao — lat/lng bhar jaayega.</p>
+        <div id="siteAdmin"></div>
+        <div class="addrow">
+          <input id="nsName" class="field2" placeholder="Site name (Runwal site)">
+          <input id="nsLat" class="field2 sm num" inputmode="decimal" placeholder="lat">
+          <input id="nsLng" class="field2 sm num" inputmode="decimal" placeholder="lng">
+          <input id="nsRad" class="field2 sm num" inputmode="numeric" placeholder="200m">
+        </div>
+        <div style="display:flex;gap:8px;margin-top:8px;">
+          <button class="bigbtn ghost" style="flex:1;" onclick="useMyLoc()">Use my location</button>
+          <button class="bigbtn" style="flex:1;" onclick="addSite()">Add site</button>
+        </div>
+      </div>
+    </div>
+
+    <button class="linkbtn" style="display:block;margin:6px auto 0;color:var(--muted)" onclick="logout()">Sign out</button>
+    <div class="ghoststrip">P R O P B I L L I O N&nbsp;&nbsp;P U L S E</div>
   </div>
 </div>
+
 
 <!-- ====================== CAMERA SHEET ====================== -->
 <div id="camSheet" class="sheet hide">
   <div class="panel">
     <h3 id="camTitle">Punch in</h3>
-    <p>Selfie + live location dono mandatory hain. Camera ke saamne face rakho.</p>
+    <p>Selfie + live location dono mandatory. Apne <b>peeche apna work-site / landmark</b> dikhe — sirf chehra nahi, taaki location confirm ho.</p>
     <video id="cam" class="cam" autoplay playsinline muted></video>
     <canvas id="canvas" class="hide"></canvas>
     <div id="geoLine" class="geoline"><span class="led"></span><span id="geoTxt">Getting your location…</span></div>
@@ -398,32 +489,33 @@
    PROPBILLION ATTENDANCE  —  CONFIG  (edit this block only)
    ============================================================ */
 const CONFIG = {
-  ADMIN_PASS: "2580",                 // <- apna admin passcode
+  ADMIN_PASS:  "2580",                // full admin (sees + edits salary)
+  VIEWER_PASS: "1111",                // read-only access for a helper (no salary)
 
+  // --- DEFAULT RULES (admin in-app inhe badal sakta hai) ---
   LATE_BENCHMARK:   "10:10",          // is time ke baad = late
   LATES_BEFORE_HALFDAY: 3,            // 3rd late of the month = half day
+  HALFDAY_AFTER:   "13:00",           // 1:00 PM ke baad punch-in = direct half day
   PUNCHOUT_BENCHMARK: "19:00",        // is se pehle out = half day (7:00 PM)
+  WEEKOFF_PER_MONTH: 4,               // mahine mein itni paid off
   LUNCH_LIMIT_MIN: 30,
   BREAK_LIMIT_MIN: 15,
   BREAKS_ALLOWED: 2,
-  NO_BREAK_AFTER: "17:00",            // 5:00 PM ke baad break nahi
-  WEEKOFF_PER_MONTH: 4,
+  NO_BREAK_AFTER: "17:00",
 
-  // Geofence (optional). Office ka lat/lng aur allowed radius (meters).
-  // Khali "" rakho to location capture hoga par geofence enforce nahi.
-  OFFICE_LAT: "",                     // e.g. 18.6298
-  OFFICE_LNG: "",                     // e.g. 73.7997
-  OFFICE_RADIUS_M: 200,
+  SELFIE_RETENTION_DAYS: 60,          // 0 = hamesha rakho
+
+  // Default work-sites (admin in-app add/edit karega). lat,lng,radius(m).
+  SITES: [],                          // e.g. [{name:"Runwal site", lat:18.55, lng:73.95, radius:200}]
 
   // ---- FIREBASE (cross-device + admin live view ke liye) ----
-  // Firebase console se web app config paste karo. Khali = single-device mode.
   FIREBASE: {
-    apiKey: "",
-    authDomain: "",
-    projectId: "",
-    storageBucket: "",
-    messagingSenderId: "",
-    appId: ""
+    apiKey: "AIzaSyDEbdMoXUSrnqqi827FIchEOAUm7Mb6DvE",
+    authDomain: "propbillion-pulse.firebaseapp.com",
+    projectId: "propbillion-pulse",
+    storageBucket: "propbillion-pulse.firebasestorage.app",
+    messagingSenderId: "874496124611",
+    appId: "1:874496124611:web:d18bf529f677503815e476"
   }
 };
 
@@ -431,7 +523,7 @@ const CONFIG = {
    STATE + DATA LAYER  (localStorage always; Firebase if config)
    ============================================================ */
 const FB_ON = !!CONFIG.FIREBASE.apiKey;
-let db=null, storage=null;
+let db=null;
 const LS = {
   get k(){ return "pb_att_v1"; },
   all(){ try{ return JSON.parse(localStorage.getItem(this.k)||"[]"); }catch{ return []; } },
@@ -452,10 +544,8 @@ async function initFirebase(){
   if(!FB_ON) return;
   await loadScript("https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js");
   await loadScript("https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js");
-  await loadScript("https://www.gstatic.com/firebasejs/10.12.0/firebase-storage-compat.js");
   firebase.initializeApp(CONFIG.FIREBASE);
   db = firebase.firestore();
-  storage = firebase.storage();
 }
 function loadScript(src){ return new Promise((res,rej)=>{ const s=document.createElement("script"); s.src=src; s.onload=res; s.onerror=rej; document.head.appendChild(s); }); }
 
@@ -491,12 +581,114 @@ async function dayRoster(dk=todayKey()){
   return LS.all().filter(r=>r.date===dk);
 }
 async function uploadSelfie(dataUrl, empId){
-  if(FB_ON && storage){
-    const ref = storage.ref("selfies/"+empId+"/"+Date.now()+".jpg");
-    await ref.putString(dataUrl,"data_url");
-    return await ref.getDownloadURL();
+  // No Firebase Storage (that needs a paid Blaze plan). The selfie is already
+  // small + compressed, so we store it inline in the Firestore document. Free.
+  return dataUrl;
+}
+
+/* ============================================================
+   RUNTIME CONFIG (admin-editable) — RULES + SITES + EMPLOYEES
+   ============================================================ */
+let RULES = {
+  lateBenchmark: CONFIG.LATE_BENCHMARK,
+  latesBeforeHalf: CONFIG.LATES_BEFORE_HALFDAY,
+  halfdayAfter: CONFIG.HALFDAY_AFTER,
+  punchoutBenchmark: CONFIG.PUNCHOUT_BENCHMARK,
+  weekoffPerMonth: CONFIG.WEEKOFF_PER_MONTH
+};
+let SITES = (CONFIG.SITES||[]).slice();
+
+async function loadConfig(){
+  if(FB_ON && db){
+    try{ const s=await db.collection("meta").doc("config").get();
+      if(s.exists){ const d=s.data(); if(d.rules) RULES={...RULES,...d.rules}; if(d.sites) SITES=d.sites; } }catch(e){}
+  } else {
+    try{ const d=JSON.parse(localStorage.getItem("pb_config")||"null");
+      if(d){ if(d.rules) RULES={...RULES,...d.rules}; if(d.sites) SITES=d.sites; } }catch(e){}
   }
-  return dataUrl; // local mode: store dataURL inline
+}
+async function saveConfig(){
+  const payload={rules:RULES, sites:SITES};
+  if(FB_ON && db){ try{ await db.collection("meta").doc("config").set(payload,{merge:true}); }catch(e){} }
+  else localStorage.setItem("pb_config", JSON.stringify(payload));
+}
+
+/* employees: {id,name,salary} */
+async function getEmployees(){
+  if(FB_ON && db){
+    try{ const s=await db.collection("employees").get(); return s.docs.map(d=>d.data()); }catch(e){ return []; }
+  }
+  return LS.roster();
+}
+async function saveEmployee(emp){               // emp={id,name,salary}
+  if(FB_ON && db){ try{ await db.collection("employees").doc(emp.id).set(emp,{merge:true}); }catch(e){} }
+  const r=LS.roster().filter(x=>x.id!==emp.id); r.push(emp); LS.saveRoster(r);  // keep local mirror too
+}
+async function getEmployee(id){ return (await getEmployees()).find(e=>e.id===id) || null; }
+
+/* match a captured geo to a named work-site */
+function matchSite(geo){
+  if(!geo || geo.lat==null || !SITES.length) return null;
+  let best=null;
+  for(const s of SITES){
+    const d=Math.round(distM(s.lat,s.lng,geo.lat,geo.lng));
+    if(d<=(s.radius||200) && (!best || d<best.dist)) best={name:s.name, dist:d};
+  }
+  return best;  // null => off-site
+}
+
+/* ============================================================
+   SALARY ENGINE
+   dayPay: full=1, half=0.5, paid week-off=1, absent=0
+   dailyRate = monthlySalary / daysInMonth
+   ============================================================ */
+function daysInMonth(mk){ const [y,m]=mk.split("-").map(Number); return new Date(y,m,0).getDate(); }
+function minsOfTs(ts){ const d=new Date(ts); return d.getHours()*60+d.getMinutes(); }
+
+/* is a completed day a half-day? (uses running late count for the 3rd-late rule) */
+function dayIsHalf(r, runningLate){
+  if(!r || !r.inTs) return false;
+  if(r.halfFromLatePunch) return true;                                  // punched in after 1 PM
+  if(r.outTs && minsOfTs(r.outTs) < hm(RULES.punchoutBenchmark)) return true; // left before 7 PM
+  if(r.inStatus==="late" && runningLate>0 && runningLate % RULES.latesBeforeHalf===0) return true; // 3rd late
+  return false;
+}
+
+async function computeMonth(emp, mk=monthKey()){
+  const recs=await monthRecords(emp.id, mk);
+  const byDate={}; recs.forEach(r=>byDate[r.date]=r);
+  const dim=daysInMonth(mk), salary=+emp.salary||0, dailyRate= dim? salary/dim : 0;
+  const [y,m]=mk.split("-").map(Number); const tk=todayKey();
+  let full=0, half=0, noPunch=0, lateCount=0; const perDay=[];
+  for(let d=1; d<=dim; d++){
+    const ds=`${y}-${String(m).padStart(2,"0")}-${String(d).padStart(2,"0")}`;
+    if(ds>tk) break;                              // future days skip
+    const r=byDate[ds];
+    if(r && r.inTs){
+      if(r.inStatus==="late") lateCount++;
+      if(dayIsHalf(r,lateCount)){ half++; perDay.push({date:ds,label:"Half day",pay:0.5}); }
+      else { full++; perDay.push({date:ds,label:(r.inStatus==="late"?"Full (late)":"Full"),pay:1}); }
+    } else {
+      noPunch++; perDay.push({date:ds,label:"No punch",pay:null});  // resolved below
+    }
+  }
+  const paidOffs=Math.min(RULES.weekoffPerMonth, noPunch);
+  const absents=noPunch-paidOffs;
+  let used=0;
+  perDay.forEach(p=>{ if(p.pay===null){ if(used<paidOffs){p.pay=1;p.label="Week-off (paid)";} else {p.pay=0;p.label="Absent (deducted)";} used++; } });
+  const earned=(full + 0.5*half + paidOffs)*dailyRate;
+  const deducted=absents*dailyRate;
+  return {salary, dailyRate, dim, full, half, paidOffs, absents, lateCount, earned, deducted, perDay};
+}
+
+/* selfie retention — purane records se selfie hata do (attendance rehne do) */
+async function pruneSelfies(){
+  const days=CONFIG.SELFIE_RETENTION_DAYS|0; if(!days) return;
+  const cutoff=todayKey(new Date(Date.now()-days*864e5));
+  if(FB_ON && db) return;  // Firebase: storage lifecycle alag se (guide mein), skip
+  const a=LS.all(); let changed=false;
+  a.forEach(r=>{ if(r.date<cutoff && (r.inSelfie||r.outSelfie)){ delete r.inSelfie; delete r.outSelfie; changed=true; } });
+  if(changed) LS.save(a);
 }
 
 /* ============================================================
@@ -510,20 +702,23 @@ function fmtFromTs(ts){ return ts? fmt12(new Date(ts)) : "—"; }
 
 /* classify punch-in: ontime | late  (relative to benchmark) */
 function classifyIn(ts){
-  return nowMin(new Date(ts)) > hm(CONFIG.LATE_BENCHMARK) ? "late" : "ontime";
+  return nowMin(new Date(ts)) > hm(RULES.lateBenchmark) ? "late" : "ontime";
 }
+/* punched in after 1 PM -> direct half day */
+function isAfterHalfdayCutoff(ts){ return nowMin(new Date(ts)) >= hm(RULES.halfdayAfter); }
 /* is this punch-in the Nth late of the month -> half day? */
 function isHalfDayFromLates(lateCountIncludingToday){
-  return lateCountIncludingToday >= CONFIG.LATES_BEFORE_HALFDAY
-      && (lateCountIncludingToday % CONFIG.LATES_BEFORE_HALFDAY === 0);
+  return lateCountIncludingToday >= RULES.latesBeforeHalf
+      && (lateCountIncludingToday % RULES.latesBeforeHalf === 0);
 }
 /* punch-out before benchmark -> early out (half day) */
-function isEarlyOut(ts){ return nowMin(new Date(ts)) < hm(CONFIG.PUNCHOUT_BENCHMARK); }
+function isEarlyOut(ts){ return nowMin(new Date(ts)) < hm(RULES.punchoutBenchmark); }
 
 /* final day verdict from a record */
 function dayVerdict(rec){
   if(!rec || !rec.inTs) return {tag:"off", label:"Absent"};
   let half = false, reasons=[];
+  if(rec.halfFromLatePunch){ half=true; reasons.push("in after 1 PM"); }
   if(rec.halfFromLate){ half=true; reasons.push("3rd late"); }
   if(rec.outTs && isEarlyOut(rec.outTs)){ half=true; reasons.push("left before 7 PM"); }
   if(rec.inStatus==="late" && !half) return {tag:"late", label:"Late", reasons};
@@ -550,10 +745,9 @@ function distM(a,b,c,d){ const R=6371000,t=x=>x*Math.PI/180;
   return 2*R*Math.asin(Math.sqrt(s)); }
 
 function applyFence(g){
-  if(CONFIG.OFFICE_LAT && CONFIG.OFFICE_LNG){
-    g.dist=Math.round(distM(+CONFIG.OFFICE_LAT,+CONFIG.OFFICE_LNG,g.lat,g.lng));
-    g.outsideFence = g.dist > CONFIG.OFFICE_RADIUS_M;
-  }
+  const site=matchSite(g);
+  if(site){ g.site=site.name; g.dist=site.dist; g.outsideFence=false; }
+  else if(SITES.length){ g.site=null; g.outsideFence=true; }   // sites defined but none matched
   return g;
 }
 
@@ -629,7 +823,7 @@ function tick(){
   document.getElementById("clkDate").textContent=d.toLocaleDateString("en-IN",{weekday:"long",day:"numeric",month:"long"});
   // ring = fraction of the 10:10 -> 19:00 workday filled, colored by state
   if(today && today.inTs){
-    const start=hm(CONFIG.LATE_BENCHMARK), end=hm(CONFIG.PUNCHOUT_BENCHMARK);
+    const start=hm(RULES.lateBenchmark), end=hm(RULES.punchoutBenchmark);
     const f=Math.max(0,Math.min(1,(nowMin(d)-start)/(end-start)));
     setRing(f);
   }
@@ -663,7 +857,7 @@ async function refreshEmpUI(){
   const lates = mr.filter(r=>r.inStatus==="late").length;
   const offs  = mr.filter(r=>r.weekOff).length;
   document.getElementById("rLate").textContent = lates;
-  document.getElementById("rOff").textContent  = offs+" / "+CONFIG.WEEKOFF_PER_MONTH;
+  document.getElementById("rOff").textContent  = offs+" / "+RULES.weekoffPerMonth;
 
   pill.className="statepill"; breakCard.classList.add("hide");
 
@@ -736,10 +930,11 @@ async function openCam(title){
     gl.classList.add("warn"); cap.disabled=true;
     document.getElementById("geoTxt").textContent="Fake GPS detected. Mock location band karo, phir punch karo."; }
   else if(lastGeo.outsideFence){ gl.classList.add("warn");
-    document.getElementById("geoTxt").textContent="Outside office ("+lastGeo.dist+"m away) — will be flagged"; cap.disabled=false; }
+    document.getElementById("geoTxt").textContent="Off-site — koi work-site match nahi hua. Flag hoga."; cap.disabled=false; }
   else { gl.classList.add("ok"); cap.disabled=false;
-    const tag = lastGeo.native ? " • verified" : " • web (unverified)";
-    document.getElementById("geoTxt").textContent="Location locked"+(lastGeo.dist!=null?" • "+lastGeo.dist+"m":"")+" • ±"+lastGeo.acc+"m"+tag; }
+    const where = lastGeo.site ? "📍 "+lastGeo.site : "Location locked";
+    const tag = lastGeo.native ? " • verified" : "";
+    document.getElementById("geoTxt").textContent=where+(lastGeo.dist!=null?" • "+lastGeo.dist+"m":"")+" • ±"+lastGeo.acc+"m"+tag; }
 }
 function closeCam(){
   document.getElementById("camSheet").classList.add("hide");
@@ -787,9 +982,11 @@ async function runScan(isIn, geo){
 
 async function capture(){
   const v=document.getElementById("cam"), c=document.getElementById("canvas");
-  c.width=v.videoWidth||480; c.height=v.videoHeight||480;
+  const vw=v.videoWidth||480, vh=v.videoHeight||480;
+  const MAX=360, scale=Math.min(1, MAX/Math.max(vw,vh));   // shrink so it stores cheaply
+  c.width=Math.round(vw*scale); c.height=Math.round(vh*scale);
   c.getContext("2d").drawImage(v,0,0,c.width,c.height);
-  const dataUrl=c.toDataURL("image/jpeg",0.55);
+  const dataUrl=c.toDataURL("image/jpeg",0.5);
   document.getElementById("capBtn").disabled=true;
   const isIn = pendingAction==="in";
   closeCam();
@@ -807,17 +1004,21 @@ async function doPunchIn(selfie){
   const mr=await monthRecords(me.id);
   const latesSoFar = mr.filter(r=>r.inStatus==="late").length + (status==="late"?1:0);
   const halfFromLate = status==="late" && isHalfDayFromLates(latesSoFar);
+  const halfFromLatePunch = isAfterHalfdayCutoff(ts);   // in after 1 PM
   const rec={
     empId:me.id, empName:me.name, date:todayKey(),
-    inTs:ts, inStatus:status, halfFromLate,
-    inGeo:lastGeo, inSelfie:selfie, live:lastGeo,
+    inTs:ts, inStatus:status, halfFromLate, halfFromLatePunch,
+    inGeo:lastGeo, inSelfie:selfie, live:lastGeo, site:(lastGeo&&lastGeo.site)||null,
     breaks:{}, weekOff:false
   };
   await putRecord(rec);
   ensureRoster();
   today=rec;
   startShiftTracking();   // native: live location runs until punch-out
-  toast(status==="late" ? (halfFromLate?"Punched in — 3rd late, HALF DAY":"Punched in — LATE") : "Punched in — on time ✓");
+  const m = halfFromLatePunch ? "Punched in — after 1 PM, HALF DAY"
+          : status==="late" ? (halfFromLate?"Punched in — 3rd late, HALF DAY":"Punched in — LATE")
+          : "Punched in — on time ✓";
+  toast(m);
   refreshEmpUI();
 }
 async function doPunchOut(selfie){
@@ -873,11 +1074,11 @@ async function markWeekOff(){
   if(today && today.inTs){ toast("Aaj to punch-in ho chuka — week-off nahi"); return; }
   const mr=await monthRecords(me.id);
   const used=mr.filter(r=>r.weekOff).length;
-  if(used>=CONFIG.WEEKOFF_PER_MONTH){
+  if(used>=RULES.weekoffPerMonth){
     if(!confirm("Is mahine ke 4 week-off khatam. Ye din UNPAID LEAVE count hoga (paisa katega). Phir bhi mark karein?")) return;
   }
   const rec=(await getRecord(me.id))||{empId:me.id,empName:me.name,date:todayKey()};
-  rec.weekOff=true; rec.weekOffUnpaid = used>=CONFIG.WEEKOFF_PER_MONTH;
+  rec.weekOff=true; rec.weekOffUnpaid = used>=RULES.weekoffPerMonth;
   await putRecord(rec);
   toast(rec.weekOffUnpaid?"Marked — UNPAID leave":"Week-off marked ✓");
   refreshEmpUI();
@@ -885,7 +1086,8 @@ async function markWeekOff(){
 
 /* keep roster of employees for admin dropdown / display */
 function ensureRoster(){
-  const r=LS.roster(); if(!r.find(e=>e.id===me.id)){ r.push({id:me.id,name:me.name}); LS.saveRoster(r); }
+  const r=LS.roster(); const ex=r.find(e=>e.id===me.id);
+  if(!ex){ r.push({id:me.id,name:me.name,salary:0}); LS.saveRoster(r); }
 }
 
 /* ============================================================
@@ -936,10 +1138,111 @@ async function loadRoster(){
   }).join("");
 }
 
-/* ============================================================
-   AUTH / ROUTING
-   ============================================================ */
-let role="emp";
+/* ----- admin tabs ----- */
+let isViewer=false;
+function adminTab(i){
+  [0,1,2].forEach(n=>{
+    document.getElementById("atTab"+n).classList.toggle("on",n===i);
+    document.getElementById("adminPane"+n).classList.toggle("hide",n!==i);
+  });
+  if(i===1) loadSalary();
+  if(i===2) loadSetup();
+}
+
+/* ----- TAB 1: salary ----- */
+async function loadSalary(){
+  document.getElementById("salMonthLbl").textContent =
+    new Date().toLocaleDateString("en-IN",{month:"long",year:"numeric"})+" — payable so far";
+  const emps=await getEmployees();
+  const box=document.getElementById("salaryList");
+  if(!emps.length){ box.innerHTML='<div class="empty">Pehle Setup tab mein employees + salary add karo.</div>'; return; }
+  const rows=[];
+  for(const e of emps){
+    const c=await computeMonth(e);
+    rows.push(`<div class="salr">
+      <div class="sn"><b>${e.name}</b><span>${c.full} full • ${c.half} half • ${c.paidOffs} off • ${c.absents} absent</span></div>
+      <div class="amt"><b>₹${Math.round(c.earned).toLocaleString("en-IN")}</b><span>of ₹${(+e.salary||0).toLocaleString("en-IN")}</span></div>
+    </div>`);
+  }
+  box.innerHTML=rows.join("");
+}
+
+/* ----- TAB 2: setup ----- */
+async function loadSetup(){
+  const emps=await getEmployees();
+  document.getElementById("empAdmin").innerHTML = emps.length ? emps.map(e=>`
+    <div class="erow">
+      <div class="en"><b>${e.name}</b><span>${e.id}</span></div>
+      <input type="number" inputmode="numeric" value="${+e.salary||0}" onchange="setSal('${e.id}',this.value)">
+      <button class="del" onclick="delEmp('${e.id}')">×</button>
+    </div>`).join("") : '<div class="empty" style="padding:18px;">Koi employee nahi. Niche add karo.</div>';
+  // rules
+  document.getElementById("rLateB").value=RULES.lateBenchmark;
+  document.getElementById("rLates").value=RULES.latesBeforeHalf;
+  document.getElementById("rHalfAfter").value=RULES.halfdayAfter;
+  document.getElementById("rOut").value=RULES.punchoutBenchmark;
+  document.getElementById("rWoff").value=RULES.weekoffPerMonth;
+  // sites
+  document.getElementById("siteAdmin").innerHTML = SITES.length ? SITES.map((s,i)=>`
+    <div class="srow"><b>${s.name}</b><span>${(+s.lat).toFixed(4)}, ${(+s.lng).toFixed(4)} • ${s.radius||200}m</span>
+    <button class="del" onclick="delSite(${i})">×</button></div>`).join("") : '<div class="empty" style="padding:14px;">Koi site nahi.</div>';
+}
+async function addEmp(){
+  const name=document.getElementById("neName").value.trim();
+  const id=document.getElementById("neId").value.trim();
+  const sal=+document.getElementById("neSal").value||0;
+  if(!name||!id){ toast("Name aur ID dono daalo"); return; }
+  await saveEmployee({id,name,salary:sal});
+  document.getElementById("neName").value=""; document.getElementById("neId").value=""; document.getElementById("neSal").value="";
+  toast("Added ✓"); loadSetup();
+}
+async function setSal(id,val){
+  const e=await getEmployee(id); if(!e) return;
+  e.salary=+val||0; await saveEmployee(e); toast("Salary updated");
+}
+async function delEmp(id){
+  if(!confirm("Is employee ko hatana hai? (attendance records rahenge)")) return;
+  if(FB_ON && db){ try{ await db.collection("employees").doc(id).delete(); }catch(e){} }
+  LS.saveRoster(LS.roster().filter(x=>x.id!==id));
+  loadSetup();
+}
+async function saveRules(){
+  RULES.lateBenchmark=document.getElementById("rLateB").value.trim()||RULES.lateBenchmark;
+  RULES.latesBeforeHalf=+document.getElementById("rLates").value||RULES.latesBeforeHalf;
+  RULES.halfdayAfter=document.getElementById("rHalfAfter").value.trim()||RULES.halfdayAfter;
+  RULES.punchoutBenchmark=document.getElementById("rOut").value.trim()||RULES.punchoutBenchmark;
+  RULES.weekoffPerMonth=+document.getElementById("rWoff").value||RULES.weekoffPerMonth;
+  await saveConfig(); toast("Rules saved ✓");
+}
+let pickedLoc=null;
+async function useMyLoc(){
+  toast("Location le raha hoon…");
+  const g=await getGeoWeb();
+  if(g.error){ toast(g.error); return; }
+  document.getElementById("nsLat").value=g.lat.toFixed(6);
+  document.getElementById("nsLng").value=g.lng.toFixed(6);
+  if(!document.getElementById("nsRad").value) document.getElementById("nsRad").value=200;
+  toast("Location bhar di — Add site dabao");
+}
+async function addSite(){
+  const name=document.getElementById("nsName").value.trim();
+  const lat=parseFloat(document.getElementById("nsLat").value);
+  const lng=parseFloat(document.getElementById("nsLng").value);
+  const radius=+document.getElementById("nsRad").value||200;
+  if(!name||isNaN(lat)||isNaN(lng)){ toast("Name + lat + lng chahiye (Use my location dabao)"); return; }
+  SITES.push({name,lat,lng,radius}); await saveConfig();
+  ["nsName","nsLat","nsLng","nsRad"].forEach(id=>document.getElementById(id).value="");
+  toast("Site added ✓"); loadSetup();
+}
+async function delSite(i){ SITES.splice(i,1); await saveConfig(); loadSetup(); }
+
+/* realtime admin refresh when on cloud */
+function adminRealtime(){
+  if(!(FB_ON && db)) return;
+  try{ db.collection("attendance").where("date","==",todayKey())
+       .onSnapshot(()=>{ if(!document.getElementById("admApp").classList.contains("hide")) loadRoster(); }); }catch(e){}
+}
+
 function setRole(r){
   role=r;
   document.getElementById("tabEmp").classList.toggle("on",r==="emp");
@@ -947,25 +1250,34 @@ function setRole(r){
   document.getElementById("empLogin").classList.toggle("hide",r!=="emp");
   document.getElementById("admLogin").classList.toggle("hide",r!=="admin");
 }
-function fillRosterDropdown(){
-  const sel=document.getElementById("empSelect"); const r=LS.roster();
+async function fillRosterDropdown(){
+  const sel=document.getElementById("empSelect"); const r=await getEmployees();
   sel.innerHTML='<option value="">— Select your name —</option>'+r.map(e=>`<option value="${e.id}">${e.name} (${e.id})</option>`).join("");
 }
-function empLogin(){
+async function empLogin(){
   const sel=document.getElementById("empSelect").value;
   const newName=document.getElementById("empNew").value.trim();
   const id=document.getElementById("empId").value.trim();
-  if(sel){ const e=LS.roster().find(x=>x.id===sel); me={id:e.id,name:e.name}; }
-  else if(newName && id){ me={id, name:newName}; LS.saveRoster([...LS.roster().filter(x=>x.id!==id),{id,name:newName}]); }
+  if(sel){ const e=(await getEmployees()).find(x=>x.id===sel); if(e) me={id:e.id,name:e.name}; }
+  else if(newName && id){ me={id, name:newName}; await saveEmployee({id,name:newName,salary:0}); }
   else { toast("Naam aur Employee ID daalo (ya list se select karo)"); return; }
   sessionStorage.setItem("pb_me",JSON.stringify(me));
   enterEmp();
 }
 function admLogin(){
-  if(document.getElementById("admPass").value!==CONFIG.ADMIN_PASS){ toast("Galat passcode"); return; }
+  const p=document.getElementById("admPass").value;
+  if(p===CONFIG.ADMIN_PASS){ isViewer=false; }
+  else if(p===CONFIG.VIEWER_PASS){ isViewer=true; }
+  else { toast("Galat passcode"); return; }
+  document.getElementById("admRoleTag").textContent = isViewer ? "VIEWER" : "ADMIN";
+  // viewer: sirf Today dikhe, Salary + Setup nahi
+  document.getElementById("atTab1").classList.toggle("hide", isViewer);
+  document.getElementById("atTab2").classList.toggle("hide", isViewer);
   document.getElementById("login").classList.add("hide");
   document.getElementById("admApp").classList.remove("hide");
+  adminTab(0);
   loadRoster();
+  adminRealtime();
 }
 function enterEmp(){
   document.getElementById("login").classList.add("hide");
@@ -989,11 +1301,12 @@ function logout(){ sessionStorage.removeItem("pb_me"); location.reload(); }
    ============================================================ */
 (async function boot(){
   await initFirebase().catch(()=>toast("Firebase init failed — running local mode"));
-  fillRosterDropdown();
+  await loadConfig();
+  await pruneSelfies().catch(()=>{});
+  await fillRosterDropdown();
   const saved=sessionStorage.getItem("pb_me");
   if(saved){ me=JSON.parse(saved); enterEmp(); }
   tick(); setInterval(()=>{ tick(); if(me && !document.getElementById("empApp").classList.contains("hide")) renderBreaksSafe(); },1000);
-  // admin live refresh every 30s
   setInterval(()=>{ if(!document.getElementById("admApp").classList.contains("hide")) loadRoster(); },30000);
 })();
 function renderBreaksSafe(){ try{ if(today&&today.inTs&&!today.outTs) renderBreaks(); }catch{} }
