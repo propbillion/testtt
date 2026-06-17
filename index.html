@@ -11,7 +11,7 @@
 :root{
   --bg:#F7F8FC; --card:#FFFFFF; --ink:#0B1437; --sub:#6B7280; --line:#ECEEF4;
   --field:#F1F3F9; --field2:#F8F9FC;
-  --brand:#1456FF; --brand2:#0B3DD6; --brand-bg:#EAF0FF;
+  --brand:#0071E3; --brand2:#0A5FC4; --brand-bg:#E8F2FE;
   --accent:#10B981; --accent-bg:#E7FBF2; --accent2:#059669;
   --late:#D97706; --late-bg:#FEF4E6;
   --half:#E11D48; --half-bg:#FEECEF;
@@ -41,7 +41,7 @@ input,select,textarea{font-family:inherit;font-size:16px;}
   backdrop-filter:saturate(180%) blur(20px);-webkit-backdrop-filter:saturate(180%) blur(20px);
   border-bottom:1px solid var(--line);padding:calc(var(--safe-top) + 10px) 16px 10px;
   display:flex;align-items:center;gap:10px;}
-.topbar .logo{width:32px;height:32px;border-radius:9px;background:linear-gradient(135deg,#1456FF,#0B3DD6);display:grid;place-items:center;flex:none;box-shadow:0 4px 12px rgba(20,86,255,.3);}
+.topbar .logo{width:32px;height:32px;border-radius:9px;background:linear-gradient(135deg,#0071E3,#0A5FC4);display:grid;place-items:center;flex:none;box-shadow:0 4px 12px rgba(0,113,227,.3);}
 .topbar .logo svg{width:21px;height:21px;}
 .topbar .brand{font-weight:750;font-size:16px;letter-spacing:-.02em;}
 .topbar .brand small{font-weight:700;color:var(--brand);font-size:9.5px;letter-spacing:.14em;margin-left:5px;}
@@ -67,8 +67,8 @@ input,select,textarea{font-family:inherit;font-size:16px;}
 select.field{appearance:none;-webkit-appearance:none;
   background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 24 24' fill='none' stroke='%236B7280' stroke-width='2.2'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
   background-repeat:no-repeat;background-position:right 14px center;padding-right:42px;}
-.bigbtn{width:100%;padding:17px;border-radius:15px;background:linear-gradient(135deg,#1456FF,#0B3DD6);color:#fff;font-size:16px;font-weight:680;
-  letter-spacing:-.01em;transition:transform .08s,opacity .15s,box-shadow .15s;box-shadow:0 6px 18px rgba(20,86,255,.28);}
+.bigbtn{width:100%;padding:17px;border-radius:15px;background:linear-gradient(135deg,#0071E3,#0A5FC4);color:#fff;font-size:16px;font-weight:680;
+  letter-spacing:-.01em;transition:transform .08s,opacity .15s,box-shadow .15s;box-shadow:0 6px 18px rgba(0,113,227,.28);}
 .bigbtn:active{transform:scale(.985);}
 .bigbtn.green{background:linear-gradient(135deg,#10B981,#059669);box-shadow:0 6px 18px rgba(16,185,129,.28);}
 .bigbtn.danger{background:linear-gradient(135deg,#F43F5E,#E11D48);box-shadow:0 6px 18px rgba(225,29,72,.26);}
@@ -90,14 +90,14 @@ select.field{appearance:none;-webkit-appearance:none;
 
 /* ---------- login ---------- */
 .login-hero{text-align:center;padding:38px 0 8px;}
-.login-hero .logo{width:68px;height:68px;border-radius:20px;background:linear-gradient(135deg,#1456FF,#0B3DD6);display:grid;place-items:center;margin:0 auto 18px;box-shadow:0 14px 36px rgba(20,86,255,.36);}
+.login-hero .logo{width:68px;height:68px;border-radius:20px;background:linear-gradient(135deg,#0071E3,#0A5FC4);display:grid;place-items:center;margin:0 auto 18px;box-shadow:0 14px 36px rgba(0,113,227,.36);}
 .login-hero .logo svg{width:42px;height:42px;}
 .login-hero h1{font-size:25px;font-weight:780;letter-spacing:-.03em;margin:0 0 6px;}
 .login-hero p{color:var(--sub);font-size:14px;margin:0;padding:0 24px;line-height:1.5;}
 
 /* ---------- daily motivation card ---------- */
 .motiv{border-radius:var(--r);padding:18px 18px 16px;margin-bottom:14px;color:#fff;position:relative;overflow:hidden;
-  background:linear-gradient(135deg,#1456FF 0%,#7C3AED 100%);box-shadow:0 10px 30px rgba(20,86,255,.28);}
+  background:linear-gradient(135deg,#0071E3 0%,#7C3AED 100%);box-shadow:0 10px 30px rgba(0,113,227,.28);}
 .motiv::after{content:"";position:absolute;right:-30px;top:-30px;width:120px;height:120px;border-radius:99px;background:rgba(255,255,255,.10);}
 .motiv .ql{font-size:10.5px;font-weight:700;letter-spacing:.14em;opacity:.85;text-transform:uppercase;margin-bottom:7px;}
 .motiv .qt{font-size:16px;font-weight:650;line-height:1.45;letter-spacing:-.01em;position:relative;z-index:1;}
@@ -117,10 +117,12 @@ select.field{appearance:none;-webkit-appearance:none;
 .clockcard{padding:28px 20px 24px;text-align:center;position:relative;overflow:hidden;}
 .ring{width:188px;height:188px;margin:4px auto 16px;position:relative;}
 .ring svg{transform:rotate(-90deg);}
-.ring .time{position:absolute;inset:0;display:grid;place-items:center;}
-.ring .time .hm{font-size:42px;font-weight:780;letter-spacing:-.03em;line-height:1;}
-.ring .time .hm small{font-size:20px;color:var(--sub);font-weight:680;}
-.ring .time .dt{font-size:13px;color:var(--sub);margin-top:5px;font-weight:550;}
+.ring .time{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  width:128px;text-align:center;pointer-events:none;}
+.ring .time .hm{font-size:38px;font-weight:780;letter-spacing:-.03em;line-height:1;white-space:nowrap;}
+.ring .time .hm small{font-size:17px;color:var(--sub);font-weight:680;letter-spacing:0;}
+.ring .time .dt{font-size:12px;color:var(--sub);margin-top:6px;font-weight:550;line-height:1.25;white-space:nowrap;}
 .statuschip{margin:2px auto 0;}
 .tbl{padding:6px 18px 14px;}
 .row{display:flex;justify-content:space-between;align-items:center;padding:13px 0;border-top:1px solid var(--line);}
@@ -167,7 +169,7 @@ select.field{appearance:none;-webkit-appearance:none;
   transform:translateX(-104%);transition:transform .28s cubic-bezier(.3,.7,.3,1);
   display:flex;flex-direction:column;box-shadow:0 0 50px rgba(11,20,55,.25);}
 .drawer.show{transform:none;}
-.drawer .dh{padding:calc(var(--safe-top) + 22px) 22px 20px;background:linear-gradient(135deg,#1456FF,#0B3DD6);color:#fff;}
+.drawer .dh{padding:calc(var(--safe-top) + 22px) 22px 20px;background:linear-gradient(135deg,#0071E3,#0A5FC4);color:#fff;}
 .drawer .dh .logo{width:50px;height:50px;border-radius:14px;background:rgba(255,255,255,.18);display:grid;place-items:center;margin-bottom:12px;}
 .drawer .dh .logo svg{width:31px;height:31px;}
 .drawer .dh h2{margin:0;font-size:19px;font-weight:760;letter-spacing:-.02em;}
@@ -253,6 +255,13 @@ select.field{appearance:none;-webkit-appearance:none;
 .sb-pending{background:var(--late-bg);color:var(--late);}
 .sb-ok{background:var(--accent-bg);color:var(--accent2);}
 .sb-no{background:var(--half-bg);color:var(--half);}
+.bkdetail{border:1px solid var(--line);border-radius:12px;padding:4px 12px;margin:2px 0 12px;background:var(--field2);}
+.bkrow{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:8px 0;border-bottom:1px solid var(--line);font-size:13px;}
+.bkrow:last-child{border-bottom:none;}
+.bkrow span{color:var(--sub);font-weight:550;}
+.bkrow b{font-weight:680;text-align:right;}
+.bkrow.amt b{color:var(--accent2);font-size:15px;}
+.flabel{display:block;font-size:12px;color:var(--sub);font-weight:600;margin:2px 2px 4px;}
 
 /* ---------- modal ---------- */
 .modal{position:fixed;inset:0;z-index:95;display:none;align-items:flex-end;justify-content:center;}
@@ -412,7 +421,7 @@ select.field{appearance:none;-webkit-appearance:none;
       <div class="ring">
         <svg width="188" height="188" viewBox="0 0 188 188">
           <circle cx="94" cy="94" r="86" stroke="#EDEFF6" stroke-width="9" fill="none"/>
-          <circle id="ringFill" cx="94" cy="94" r="86" stroke="#1456FF" stroke-width="9" fill="none"
+          <circle id="ringFill" cx="94" cy="94" r="86" stroke="#0071E3" stroke-width="9" fill="none"
             stroke-linecap="round" stroke-dasharray="540" stroke-dashoffset="540"/>
         </svg>
         <div class="time">
@@ -563,6 +572,14 @@ select.field{appearance:none;-webkit-appearance:none;
         <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M9 11l3 3L22 4M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
         Raise an approval request <span class="chev">›</span>
       </div>
+      <div class="ditem" onclick="openBooking()">
+        <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 2l2.4 7.4H22l-6 4.6 2.3 7.4L12 17l-6.3 4.4L8 14 2 9.4h7.6z"/></svg>
+        Submit a booking <span class="chev">›</span>
+      </div>
+      <div class="ditem" onclick="openSheet('mybookings')">
+        <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M9 11l3 3L22 4M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+        My bookings <span class="chev">›</span>
+      </div>
       <div class="ditem" onclick="openSheet('myreqs')">
         <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
         My request status <span class="chev">›</span>
@@ -622,7 +639,7 @@ select.field{appearance:none;-webkit-appearance:none;
 </div>
 
 <div id="scan" class="scan">
-  <div class="radar"><div class="core"><svg viewBox="0 0 48 48" fill="none"><path d="M4 24h7l4-13 6 26 5-17 3 8h15" stroke="#1456FF" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"/></svg></div></div>
+  <div class="radar"><div class="core"><svg viewBox="0 0 48 48" fill="none"><path d="M4 24h7l4-13 6 26 5-17 3 8h15" stroke="#0071E3" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"/></svg></div></div>
   <h3 id="scanTitle">Verifying…</h3>
   <div class="steps">
     <div class="st" id="sc1"><span class="ck">✓</span> Selfie captured</div>
@@ -1151,11 +1168,49 @@ function startLivePing(){
   clearInterval(liveT);
   const ping=async()=>{
     if(!me) return;
+    await autoPunchoutCheck();
     if(today && today.inTs && !today.outTs){
       const g=await getGeo(); if(g) pingLive(me.id, me.name, g);
     }
   };
   ping(); liveT=setInterval(ping, 60000);
+}
+
+/* ============================================================
+   AUTO PUNCH-OUT (11 PM rule)
+   - Agar punched-in hai aur 11PM tak punch-out nahi kiya:
+     system khud out kar deta hai, half-day mark + autoOut flag.
+   - Boot pe purane open records bhi close karta hai.
+   ============================================================ */
+const AUTO_OUT_MIN = 23*60; // 11:00 PM
+function autoOutTsFor(dk){ const[Y,M,D]=dk.split("-").map(Number); return new Date(Y,M-1,D,23,0,0,0).getTime(); }
+async function autoPunchoutCheck(){
+  if(!me) return;
+  // aaj ka record
+  if(today && today.inTs && !today.outTs){
+    if(Date.now() >= autoOutTsFor(today.date)){
+      today.outTs = autoOutTsFor(today.date);
+      today.autoOut = true;
+      today.adminForceHalf = true;          // punch-out na karna = half day
+      if(today.breakStart && !today.breakEnd) today.breakEnd = today.outTs;
+      await putRecord(today);
+      const live=LS.live(); delete live[me.id]; LS.saveLive(live);
+      try{ await renderEmp(); }catch(e){}
+      toast("Auto punch-out (11PM) — half day log hua. Punch-out karna zaroori hai.");
+    }
+    return;
+  }
+  // purane open records (kal/parso ka, agar app band tha)
+  try{
+    const recs=await monthRecords(me.id);
+    for(const r of recs){
+      if(r.inTs && !r.outTs && r.date!==todayKey() && Date.now()>=autoOutTsFor(r.date)){
+        r.outTs=autoOutTsFor(r.date); r.autoOut=true; r.adminForceHalf=true;
+        if(r.breakStart && !r.breakEnd) r.breakEnd=r.outTs;
+        await putRecord(r);
+      }
+    }
+  }catch(e){}
 }
 
 /* ============================================================
@@ -1168,7 +1223,7 @@ function startClock(){
     const d=new Date();
     let h=d.getHours(),m=d.getMinutes(),s=d.getSeconds(); let hh=h%12||12;
     $("liveClock").innerHTML=hh+":"+String(m).padStart(2,"0")+'<small>:'+String(s).padStart(2,"0")+'</small>';
-    $("liveDate").textContent=d.toLocaleDateString("en-IN",{weekday:"long",day:"numeric",month:"long"});
+    $("liveDate").textContent=d.toLocaleDateString("en-IN",{weekday:"short",day:"numeric",month:"short"});
     const cur=nowMin(d), a=hm(RULES.lateBenchmark), b=hm(RULES.punchoutBenchmark);
     let frac=Math.max(0,Math.min(1,(cur-a)/(b-a)));
     setRing(frac, getRingColor());
@@ -1366,7 +1421,8 @@ async function onBreak(){
 const KIND_LABEL={
   weekoff_declare:"Week-off (declare)", missed_in:"Missed punch-in", missed_out:"Missed punch-out",
   late_excuse:"Late waiver", convert_full:"Half → Full", early_excuse:"Early-out waiver",
-  break_excuse:"Break exceed", preapprove:"Pre-approval", pass_reset:"Password reset", other:"Other"
+  break_excuse:"Break exceed", preapprove:"Pre-approval", pass_reset:"Password reset",
+  booking:"🏆 Booking", other:"Other"
 };
 function openRequest(){
   closeDrawer();
@@ -1392,6 +1448,69 @@ function openRequest(){
     <button class="bigbtn" onclick="submitRequest()">Send for approval</button>
   `);
 }
+/* ============================================================
+   BOOKING / INCENTIVES (employee submit -> admin approve)
+   Abhi sirf booking log + approval. Incentive % baad mein.
+   ============================================================ */
+function openBooking(){
+  closeDrawer();
+  openModal(`
+    <div class="grab"></div>
+    <h3>🏆 Submit a booking</h3>
+    <p class="msub">Deal close ki? Details daalo - admin verify karke approve karega. Approved bookings aapki performance record mein judti hain.</p>
+    <input id="bkCust" class="field" type="text" placeholder="Customer ka naam">
+    <input id="bkMobile" class="field" type="tel" inputmode="numeric" maxlength="10" placeholder="Customer mobile (10 digit)">
+    <input id="bkProject" class="field" type="text" placeholder="Project / building (e.g. Tayal Envogue)">
+    <input id="bkUnit" class="field" type="text" placeholder="Unit no (e.g. B3-1204)">
+    <label class="flabel">Tentative agreement date</label>
+    <input id="bkAgrDate" class="field" type="date" value="${todayKey()}">
+    <input id="bkAmount" class="field" type="number" inputmode="numeric" placeholder="Initial transaction amount (₹)">
+    <textarea id="bkNote" class="field" rows="2" placeholder="Extra note (optional)"></textarea>
+    <button class="bigbtn" onclick="submitBooking()">Send for approval</button>
+  `);
+}
+async function submitBooking(){
+  const cust=$("bkCust").value.trim();
+  const mobile=$("bkMobile").value.trim();
+  const project=$("bkProject").value.trim();
+  const unit=$("bkUnit").value.trim();
+  const agrDate=$("bkAgrDate").value;
+  const amount=+($("bkAmount").value||0);
+  const note=$("bkNote").value.trim();
+
+  if(!cust){ toast("Customer ka naam likho"); return; }
+  if(!/^\d{10}$/.test(mobile)){ toast("Sahi 10-digit mobile daalo"); return; }
+  if(!unit){ toast("Unit no daalo"); return; }
+  if(!amount || amount<=0){ toast("Transaction amount daalo"); return; }
+
+  const req={
+    id:"req_"+Date.now()+"_"+Math.random().toString(36).slice(2,6),
+    empId:me.id, empName:me.name, kind:"booking", date:todayKey(), time:null,
+    booking:{ cust, mobile, project, unit, agrDate, amount, note },
+    incentivePct:null, incentiveAmt:null,   // future: admin sets %
+    msg:`${cust} · ${unit} · ₹${amount.toLocaleString("en-IN")}`,
+    status:"pending", createdAt:Date.now()
+  };
+  await putRequest(req);
+  closeModal(); toast("Booking bhej di ✓ — admin approve karega");
+}
+async function renderMyBookingsSheet(){
+  const reqs=(await myRequests(me.id)).filter(r=>r.kind==="booking");
+  if(!reqs.length) return '<p class="sub">Abhi koi booking nahi. Deal close karo aur yahan submit karo.</p>';
+  return reqs.slice(0,30).map(r=>{
+    const b=r.booking||{};
+    const badge=r.status==="pending"?'<span class="statusbadge sb-pending">⏳ Pending</span>'
+      :r.status==="approved"?'<span class="statusbadge sb-ok">✓ Approved</span>'
+      :'<span class="statusbadge sb-no">✕ Declined</span>';
+    return `<div class="areq">
+      <div class="top"><span class="kind">🏆 ${escapeHtml(b.cust||"")}</span><span class="when">${new Date(r.createdAt).toLocaleDateString("en-IN",{day:"numeric",month:"short"})}</span></div>
+      <p class="msg">${escapeHtml(b.project||"")} · Unit ${escapeHtml(b.unit||"")}${b.agrDate?" · Agr: "+new Date(b.agrDate).toLocaleDateString("en-IN",{day:"numeric",month:"short"}):""}</p>
+      ${badge}
+      ${r.decisionNote?`<p class="msg" style="margin-top:8px;color:#6B7280;">Admin: ${escapeHtml(r.decisionNote)}</p>`:""}
+    </div>`;
+  }).join("");
+}
+
 async function submitRequest(){
   const kind=$("reqKind").value, date=$("reqDate").value, time=$("reqTime").value, msg=$("reqMsg").value.trim();
   if(!kind){ toast("Request type choose karein"); return; }
@@ -1580,6 +1699,38 @@ async function renderApprovals(){
 function apprCard(r, hist){
   const when=new Date(r.createdAt).toLocaleString("en-IN",{day:"numeric",month:"short",hour:"numeric",minute:"2-digit"});
   const dateStr=r.date?new Date(r.date).toLocaleDateString("en-IN",{day:"numeric",month:"short"}):"";
+
+  // ---- BOOKING (admin sees full deal incl. amount) ----
+  if(r.kind==="booking"){
+    const b=r.booking||{};
+    const detail=`<div class="bkdetail">
+      <div class="bkrow"><span>Customer</span><b>${escapeHtml(b.cust||"-")}</b></div>
+      <div class="bkrow"><span>Mobile</span><b>${escapeHtml(b.mobile||"-")}</b></div>
+      <div class="bkrow"><span>Project</span><b>${escapeHtml(b.project||"-")}</b></div>
+      <div class="bkrow"><span>Unit</span><b>${escapeHtml(b.unit||"-")}</b></div>
+      <div class="bkrow"><span>Agreement</span><b>${b.agrDate?new Date(b.agrDate).toLocaleDateString("en-IN",{day:"numeric",month:"short",year:"numeric"}):"-"}</b></div>
+      <div class="bkrow amt"><span>Amount</span><b>₹${(+b.amount||0).toLocaleString("en-IN")}</b></div>
+      ${b.note?`<div class="bkrow"><span>Note</span><b style="font-weight:550;">${escapeHtml(b.note)}</b></div>`:""}
+    </div>`;
+    if(hist || r.status!=="pending"){
+      const badge=r.status==="approved"?'<span class="statusbadge sb-ok">✓ Approved</span>':'<span class="statusbadge sb-no">✕ Declined</span>';
+      return `<div class="areq"><div class="top"><div class="av" style="width:30px;height:30px;font-size:12px;">${initials(r.empName)}</div><b>${r.empName}</b><span class="when">${when}</span></div>
+        <span class="kind">🏆 Booking</span>${detail}${badge}
+        ${r.decisionNote?`<p class="msg" style="margin-top:6px;color:#6B7280;">${escapeHtml(r.decisionNote)}</p>`:""}</div>`;
+    }
+    return `<div class="areq">
+      <div class="top"><div class="av" style="width:30px;height:30px;font-size:12px;">${initials(r.empName)}</div><b>${r.empName}</b><span class="when">${when}</span></div>
+      <span class="kind">🏆 Booking</span>${detail}
+      <div class="acts">
+        <select id="dec_${r.id}">
+          <option value="approve_nodeduct">✓ Approve booking</option>
+          <option value="decline">✕ Decline booking</option>
+        </select>
+        <div class="br"><button class="no" onclick="decideFromSelect('${r.id}')">Apply decision</button></div>
+      </div>
+    </div>`;
+  }
+
   if(hist || r.status!=="pending"){
     const badge=r.status==="approved"?'<span class="statusbadge sb-ok">✓ Approved</span>':'<span class="statusbadge sb-no">✕ Declined</span>';
     return `<div class="areq"><div class="top"><div class="av" style="width:30px;height:30px;font-size:12px;">${initials(r.empName)}</div><b>${r.empName}</b><span class="when">${when}</span></div>
@@ -1624,6 +1775,10 @@ async function decide(reqId, choice){
 }
 
 async function applyApproval(r, mode){
+  // booking -> no attendance mutation, just confirm (incentive % future)
+  if(r.kind==="booking"){
+    return "Booking approved & recorded ✓";
+  }
   // password reset -> generate temp pass, show to admin + employee
   if(r.kind==="pass_reset"){
     const temp=genTempPass(); const h=await hashPass(temp);
@@ -1885,7 +2040,7 @@ async function openSheet(which){
   closeDrawer();
   const t=$("sheetTitle"), b=$("sheetBody");
   const S=SHEETS[which];
-  if(typeof S==="function"){ t.textContent=({myreqs:"My request status",salaryPreview:"My salary preview",locations:"Approved punch locations"})[which]||""; b.innerHTML='<p class="sub">Loading…</p>'; b.innerHTML=await S(); }
+  if(typeof S==="function"){ t.textContent=({myreqs:"My request status",salaryPreview:"My salary preview",locations:"Approved punch locations",mybookings:"My bookings"})[which]||""; b.innerHTML='<p class="sub">Loading…</p>'; b.innerHTML=await S(); }
   else if(S){ t.textContent=S.title; b.innerHTML=S.html; }
   $("sheet").classList.add("show");
 }
@@ -1971,7 +2126,8 @@ const SHEETS={
       <p class="sub" style="margin-top:12px;font-size:12px;">Ye estimate hai - final salary admin confirm karega. Score circle upar tabhi bharega jab sheet khulega.</p>
       <script>setTimeout(()=>{try{drawDonut("spAtt",${c.score.attendance});drawDonut("spDisc",${c.score.discipline});}catch(e){}},60);<\/script>`;
   },
-  myreqs: async function(){ return await renderMyReqsSheet(); }
+  myreqs: async function(){ return await renderMyReqsSheet(); },
+  mybookings: async function(){ return await renderMyBookingsSheet(); }
 };
 
 /* ============================================================
