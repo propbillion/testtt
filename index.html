@@ -36,6 +36,28 @@ html[data-theme="dark"]{
   --shadow:0 1px 2px rgba(0,0,0,.4),0 8px 28px rgba(0,0,0,.5);
   --shadow2:0 12px 40px rgba(0,0,0,.6);
 }
+html[data-theme="grey"]{
+  --bg:#E3E4E8; --bg2:#F2F3F6; --card:#FBFBFD; --ink:#1D1D1F; --ink2:#3A3A3E; --sub:#6E6E76;
+  --line:#D2D4DA; --line2:#BFC2CA; --field:#E7E8ED; --field2:#F0F1F4;
+  --brand:#5E5CE6; --brand2:#3634A3; --brand-bg:#E6E5FB;
+  --green:#248A3D; --green2:#1B6E30; --green-bg:#E0F2E5;
+  --amber:#B26B00; --amber2:#8A5200; --amber-bg:#F7EAD4;
+  --red:#C72A20; --red2:#A01F17; --red-bg:#F8E4E2;
+  --violet:#7D4FD6; --violet-bg:#ECE4F9; --gold:#9C7115; --gold-bg:#F3EAD6;
+  --shadow:0 1px 2px rgba(40,40,55,.07),0 8px 28px rgba(40,40,55,.12);
+  --shadow2:0 12px 40px rgba(40,40,55,.2);
+}
+html[data-theme="graphite"]{
+  --bg:#16181D; --bg2:#1E2127; --card:#23262E; --ink:#ECEDF1; --ink2:#C4C6CE; --sub:#8A8D97;
+  --line:#31343D; --line2:#3E4250; --field:#23262E; --field2:#1C1F25;
+  --brand:#64D2FF; --brand2:#0A84FF; --brand-bg:#13303F;
+  --green:#30D158; --green2:#30D158; --green-bg:#10301A;
+  --amber:#FFD60A; --amber2:#FFD60A; --amber-bg:#2E2A0B;
+  --red:#FF6961; --red2:#FF6961; --red-bg:#321411;
+  --violet:#BF5AF2; --violet-bg:#251238; --gold:#E5B53A; --gold-bg:#2E2609;
+  --shadow:0 1px 2px rgba(0,0,0,.45),0 10px 30px rgba(0,0,0,.5);
+  --shadow2:0 14px 44px rgba(0,0,0,.6);
+}
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
 html,body{margin:0;padding:0;background:var(--bg);color:var(--ink);
   font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","SF Pro Text","Segoe UI",Roboto,Inter,system-ui,sans-serif;
@@ -270,6 +292,7 @@ html[data-theme="dark"] .mon{background:linear-gradient(160deg,#10182E 0%,#1B2A5
 .areq .acts .br{display:flex;gap:8px;}
 .areq .acts .br button{flex:1;padding:12px;border-radius:11px;font-weight:600;font-size:13.5px;}
 .areq .acts .ok{background:linear-gradient(135deg,var(--green),var(--green2));color:#fff;}
+.areq .acts .no{background:var(--red-bg);color:var(--red2);}
 .statusbadge{display:inline-flex;align-items:center;gap:6px;padding:7px 13px;border-radius:99px;font-size:12.5px;font-weight:600;letter-spacing:-.01em;}
 .sb-pending{background:var(--amber-bg);color:var(--amber2);}
 .sb-ok{background:var(--green-bg);color:var(--green2);}
@@ -327,6 +350,61 @@ html[data-theme="dark"] .mon{background:linear-gradient(160deg,#10182E 0%,#1B2A5
 .scan .st .ck{width:23px;height:23px;border-radius:99px;border:2px solid var(--line2);display:grid;place-items:center;flex:none;font-size:12px;transition:var(--t);}
 .scan .st.done .ck{background:var(--green);border-color:var(--green);color:#fff;}
 
+/* ========== v5 components ========== */
+/* premium clock + score circles */
+.ring svg{filter:drop-shadow(0 6px 18px color-mix(in srgb,var(--brand) 26%,transparent));}
+.clockcard .time .hm{font-size:46px;font-weight:680;letter-spacing:-.03em;background:linear-gradient(180deg,var(--ink),color-mix(in srgb,var(--ink) 60%,var(--sub)));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;}
+.clockcard .time .dt{letter-spacing:.04em;text-transform:uppercase;font-size:10.5px;font-weight:600;color:var(--sub);}
+.donut{position:relative;filter:drop-shadow(0 4px 12px rgba(0,0,0,.08));}
+.donut .pct{font-weight:680;letter-spacing:-.02em;}
+.youcontrol{margin-top:7px;text-align:center;font-size:11.5px;font-weight:600;letter-spacing:.02em;color:var(--green2);}
+/* visit counters */
+.visitrow{display:flex;gap:10px;margin-bottom:14px;}
+.visitc{flex:1;background:var(--card);border:.5px solid var(--line);border-radius:var(--r2);padding:13px 14px;box-shadow:var(--shadow);}
+.visitc .vn{font-size:25px;font-weight:700;letter-spacing:-.02em;}
+.visitc .vl{font-size:11px;color:var(--sub);font-weight:560;margin-top:2px;}
+.visitc.hot .vn{color:var(--red);} .visitc.warm .vn{color:var(--amber);} .visitc.cold .vn{color:var(--brand);}
+/* temperature dots */
+.tdot{display:inline-block;width:9px;height:9px;border-radius:50%;vertical-align:middle;margin-right:5px;box-shadow:0 0 0 2px color-mix(in srgb,var(--bg2) 60%,transparent);}
+.tdot.hot{background:var(--red);box-shadow:0 0 8px var(--red);} .tdot.warm{background:var(--amber);box-shadow:0 0 8px var(--amber);} .tdot.cold{background:var(--green);box-shadow:0 0 8px var(--green);}
+/* vacation widgets */
+.vacw{background:linear-gradient(140deg,color-mix(in srgb,var(--brand) 12%,var(--card)),var(--card));border:.5px solid var(--line);border-radius:var(--r);padding:17px 18px;margin-bottom:12px;box-shadow:var(--shadow);position:relative;overflow:hidden;}
+.vacw.intl{background:linear-gradient(140deg,color-mix(in srgb,var(--gold) 16%,var(--card)),var(--card));}
+.vacw .vh{font-size:11px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:var(--sub);display:flex;align-items:center;gap:6px;}
+.vacw .vname{font-size:17px;font-weight:660;letter-spacing:-.02em;margin:7px 0 12px;}
+.vbar{height:11px;border-radius:7px;background:var(--field);overflow:hidden;position:relative;}
+.vbar>i{display:block;height:100%;border-radius:7px;background:linear-gradient(90deg,var(--brand),var(--brand2));transition:width 1s cubic-bezier(.4,0,.2,1);box-shadow:0 0 10px color-mix(in srgb,var(--brand) 50%,transparent);}
+.vacw.intl .vbar>i{background:linear-gradient(90deg,var(--gold),#E5B53A);box-shadow:0 0 10px color-mix(in srgb,var(--gold) 50%,transparent);}
+.vmeta{display:flex;justify-content:space-between;margin-top:11px;font-size:12px;}
+.vmeta b{font-weight:640;} .vmeta .vpct{font-weight:720;font-size:14px;}
+.vstrip{display:flex;justify-content:space-between;margin-top:8px;font-size:11px;color:var(--sub);}
+/* grooming widget */
+.groomw{display:flex;align-items:center;gap:13px;background:var(--card);border:.5px solid var(--line);border-radius:var(--r2);padding:13px 15px;margin-bottom:14px;box-shadow:var(--shadow);}
+.groomw .gi{width:38px;height:38px;border-radius:11px;background:var(--violet-bg);display:grid;place-items:center;font-size:19px;flex:none;}
+.groomw .gtxt{flex:1;} .groomw .gtxt b{font-size:13.5px;font-weight:620;} .groomw .gtxt span{display:block;font-size:11.5px;color:var(--sub);margin-top:1px;}
+.gcyc{font-size:11px;font-weight:600;padding:3px 9px;border-radius:20px;}
+.gcyc.ok{background:var(--green-bg);color:var(--green2);} .gcyc.pend{background:var(--amber-bg);color:var(--amber2);}
+/* incentive / booking cards */
+.incsum{display:flex;gap:10px;margin-bottom:14px;}
+.incsum>div{flex:1;background:var(--card);border:.5px solid var(--line);border-radius:var(--r2);padding:13px 14px;box-shadow:var(--shadow);}
+.incsum .in{font-size:19px;font-weight:700;letter-spacing:-.02em;} .incsum .il{font-size:10.5px;color:var(--sub);font-weight:560;margin-top:2px;}
+.incsum .got .in{color:var(--green2);} .incsum .due .in{color:var(--amber2);}
+.credit{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:640;padding:3px 10px;border-radius:20px;}
+.credit.yes{background:var(--green-bg);color:var(--green2);} .credit.no{background:var(--amber-bg);color:var(--amber2);}
+.tentnote{font-size:11px;color:var(--sub);font-style:italic;margin-top:6px;line-height:1.4;}
+.flabel{display:block;font-size:12px;font-weight:560;color:var(--sub);margin:10px 2px 5px;}
+/* watermark */
+#wmark{position:fixed;inset:0;z-index:9990;pointer-events:none;display:none;opacity:.06;overflow:hidden;}
+#wmark.on{display:block;}
+#wmark .wm{position:absolute;font-size:13px;font-weight:700;color:var(--ink);white-space:nowrap;transform:rotate(-30deg);}
+/* theme chooser */
+.themerow{display:flex;gap:8px;padding:4px 20px 10px;}
+.thchip{flex:1;text-align:center;padding:9px 0;border-radius:12px;border:1.5px solid var(--line);font-size:11px;font-weight:600;color:var(--sub);transition:var(--t);}
+.thchip.on{border-color:var(--brand);color:var(--brand);background:var(--brand-bg);}
+.thchip .sw{width:18px;height:18px;border-radius:50%;margin:0 auto 5px;border:1px solid var(--line2);}
+/* daily accent pill */
+.dailypill{display:inline-flex;align-items:center;gap:6px;font-size:11px;font-weight:640;padding:4px 11px;border-radius:20px;margin-bottom:10px;}
+/* goodbye */
 /* ---------- goodbye ---------- */
 .bye{position:fixed;inset:0;z-index:130;background:var(--bg);display:none;flex-direction:column;align-items:center;justify-content:center;padding:34px;text-align:center;}
 .bye.show{display:flex;}
@@ -428,6 +506,10 @@ html[data-theme="dark"] .mon{background:linear-gradient(160deg,#10182E 0%,#1B2A5
       <div class="scorec"><div class="donut" id="discDonut"></div><div class="sl">Discipline</div><div class="sv">this month</div></div>
     </div>
 
+    <div id="vacHost"></div>
+    <div class="visitrow" id="visitHost"></div>
+    <div id="groomHost"></div>
+
     <div class="card clockcard">
       <div class="ring">
         <svg width="200" height="200" viewBox="0 0 200 200">
@@ -460,6 +542,7 @@ html[data-theme="dark"] .mon{background:linear-gradient(160deg,#10182E 0%,#1B2A5
         <span class="lt">LIVE MONITORING ACTIVE</span>
         <span class="rec"><span class="rd"></span>REC</span>
       </h3>
+      <div class="youcontrol" id="youControl">You are in control</div>
       <div class="foot">Location is recorded during your shift. Read Rules &amp; Regulations for the full monitoring policy.</div>
     </div>
   </div>
@@ -491,6 +574,7 @@ html[data-theme="dark"] .mon{background:linear-gradient(160deg,#10182E 0%,#1B2A5
       </div>
       <div class="sectit">Live now &mdash; tap for location &amp; selfie</div>
       <div class="card" style="padding:6px 16px;"><div id="todayList"></div></div>
+      <button class="bigbtn ghost" style="margin-top:14px;" onclick="openActivity()">View app activity log</button>
     </div>
 
     <div id="paneAppr" class="hide">
@@ -532,6 +616,8 @@ html[data-theme="dark"] .mon{background:linear-gradient(160deg,#10182E 0%,#1B2A5
         <div class="ruler"><span>In after this = half (HH:MM)</span><input id="rkHalfAfter" class="field2 sm" placeholder="13:00"></div>
         <div class="ruler"><span>Out before this = half (HH:MM)</span><input id="rkOut" class="field2 sm" placeholder="18:59"></div>
         <div class="ruler"><span>Break limit (minutes)</span><input id="rkBreak" class="field2 sm num" inputmode="numeric" placeholder="60"></div>
+        <div class="ruler"><span>Break allowed from (HH:MM)</span><input id="rkBreakFrom" class="field2 sm" placeholder="11:00"></div>
+        <div class="ruler"><span>Break allowed to (HH:MM)</span><input id="rkBreakTo" class="field2 sm" placeholder="17:00"></div>
         <div class="ruler"><span>Approval window (minutes)</span><input id="rkApprWin" class="field2 sm num" inputmode="numeric" placeholder="30"></div>
         <div class="ruler"><span>Perfect-score bonus (&#8377;)</span><input id="rkBonus" class="field2 sm num" inputmode="numeric" placeholder="3000"></div>
         <div class="ruler"><span>Auto punch-out hour (0-23)</span><input id="rkAutoOut" class="field2 sm num" inputmode="numeric" placeholder="23"></div>
@@ -563,24 +649,42 @@ html[data-theme="dark"] .mon{background:linear-gradient(160deg,#10182E 0%,#1B2A5
   </div>
   <div class="dbody">
     <div id="drawerEmpItems">
-      <div class="dsec">Punch</div>
+      <div class="dsec">Sales</div>
+      <div class="ditem" onclick="openBooking()">
+        <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 2l2.4 7.4H22l-6 4.6 2.3 7.4L12 17l-6.3 4.4L8 14 2 9.4h7.6z"/></svg>
+        Booking / VDNB <span class="chev">&rsaquo;</span>
+      </div>
+      <div class="ditem" onclick="openSheet('mybookings')">
+        <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M9 11l3 3L22 4M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+        My Bookings / Incentives <span class="chev">&rsaquo;</span>
+      </div>
       <div class="ditem" onclick="openSheet('locations')">
         <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
         Approved punch locations <span class="chev">&rsaquo;</span>
       </div>
-      <div class="ditem" onclick="openBooking()">
-        <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 2l2.4 7.4H22l-6 4.6 2.3 7.4L12 17l-6.3 4.4L8 14 2 9.4h7.6z"/></svg>
-        Submit a booking <span class="chev">&rsaquo;</span>
+
+      <div class="dsec">Rewards</div>
+      <div class="ditem" onclick="openSheet('vacation')">
+        <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M2 22l10-10M12 12l8-8M14 4l6 6M4 14l6 6"/><circle cx="12" cy="12" r="2"/></svg>
+        Vacation rewards <span class="chev">&rsaquo;</span>
       </div>
-      <div class="ditem" onclick="openSheet('mybookings')">
-        <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M9 11l3 3L22 4M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
-        My bookings <span class="chev">&rsaquo;</span>
+      <div class="ditem" onclick="openSheet('grooming')">
+        <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="6" cy="6" r="3"/><circle cx="6" cy="18" r="3"/><path d="M20 4L8.12 15.88M14.47 14.48L20 20M8.12 8.12L12 12"/></svg>
+        Grooming reimbursement <span class="chev">&rsaquo;</span>
       </div>
 
       <div class="dsec">My account</div>
       <div class="ditem" onclick="openSheet('salaryPreview')">
         <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 1v22M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
         My salary preview <span class="chev">&rsaquo;</span>
+      </div>
+      <div class="ditem" onclick="openSlipRequest()">
+        <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6M9 15h6"/></svg>
+        Request salary slip <span class="chev">&rsaquo;</span>
+      </div>
+      <div class="ditem" onclick="openDataRequest()">
+        <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>
+        Request data export <span class="chev">&rsaquo;</span>
       </div>
       <div class="ditem" onclick="openRequest()">
         <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M9 11l3 3L22 4M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
@@ -611,10 +715,7 @@ html[data-theme="dark"] .mon{background:linear-gradient(160deg,#10182E 0%,#1B2A5
     </div>
 
     <div class="dsec">Appearance</div>
-    <div class="themetoggle" onclick="toggleTheme()">
-      <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
-      Dark mode <span class="tg" id="themeTg"></span>
-    </div>
+    <div class="themerow" id="themeChooser"></div>
 
     <div class="dsec">&nbsp;</div>
     <div class="ditem" onclick="logout()" style="color:var(--red);">
@@ -622,7 +723,7 @@ html[data-theme="dark"] .mon{background:linear-gradient(160deg,#10182E 0%,#1B2A5
       Sign out
     </div>
   </div>
-  <div class="df">P R O P B I L L I O N &nbsp;&middot;&nbsp; PULSE v4</div>
+  <div class="df">P R O P B I L L I O N &nbsp;&middot;&nbsp; PULSE v5</div>
 </div>
 
 <!-- ============ SHEET ============ -->
@@ -669,6 +770,7 @@ html[data-theme="dark"] .mon{background:linear-gradient(160deg,#10182E 0%,#1B2A5
 
 <canvas id="snapCanvas" class="hide"></canvas>
 <input id="proofInput" type="file" accept="image/*" class="hide">
+<div id="wmark"></div>
 <div id="toast" class="toast"></div>
 
 <script>
@@ -678,7 +780,8 @@ html[data-theme="dark"] .mon{background:linear-gradient(160deg,#10182E 0%,#1B2A5
 const CONFIG = {
   ADMIN_PASS_HASH: "b34d0f85af52a25a7b9444b193747f1efc8ae82a8456a52bfc2413fcf82be14b", // default "PBowner@2580"
   ADMIN_PHONE: "8857090799",
-  ADMIN_EMAIL: "propbillionpune@gmail.com",
+  ADMIN_EMAIL: "propbillion.support@gmail.com",
+  SUPPORT_EMAIL: "propbillion.support@gmail.com",
   LATE_BENCHMARK:"10:10", LATES_BEFORE_HALFDAY:3, HALFDAY_AFTER:"13:00",
   PUNCHOUT_BENCHMARK:"18:59", BREAK_LIMIT_MIN:60, APPROVAL_WINDOW_MIN:30,
   PERFECT_BONUS:3000, AUTO_OUT_HOUR:23, NO_WEEKOFF_DAYS:[5,6,0],
@@ -734,7 +837,8 @@ let RULES={
   lateBenchmark:CONFIG.LATE_BENCHMARK, latesBeforeHalf:CONFIG.LATES_BEFORE_HALFDAY,
   halfdayAfter:CONFIG.HALFDAY_AFTER, punchoutBenchmark:CONFIG.PUNCHOUT_BENCHMARK,
   breakLimit:CONFIG.BREAK_LIMIT_MIN, approvalWindow:CONFIG.APPROVAL_WINDOW_MIN,
-  perfectBonus:CONFIG.PERFECT_BONUS, autoOutHour:CONFIG.AUTO_OUT_HOUR
+  perfectBonus:CONFIG.PERFECT_BONUS, autoOutHour:CONFIG.AUTO_OUT_HOUR,
+  breakFrom:660, breakTo:1020
 };
 let SITES=(CONFIG.SITES||[]).slice();
 
@@ -820,8 +924,8 @@ async function getLive(){
 
 /* ---------- full reset ---------- */
 async function resetAllData(){
-  if(FB_ON&&db){try{for(const col of ["attendance","requests","live"]){const s=await db.collection(col).get();for(const d of s.docs)await d.ref.delete();}}catch(e){}}
-  LS.saveAtt([]);LS.saveReqs([]);LS.saveLive({});
+  if(FB_ON&&db){try{for(const col of ["attendance","requests","live","usage"]){const s=await db.collection(col).get();for(const d of s.docs)await d.ref.delete();}}catch(e){}}
+  LS.saveAtt([]);LS.saveReqs([]);LS.saveLive({});try{localStorage.removeItem("pb_usage_v5");}catch(e){}
 }
 
 /* ============================================================
@@ -921,8 +1025,18 @@ async function computeMonth(emp,mk=monthKey()){
   let bonus=0;
   if(sc.attendance===100&&sc.discipline===100&&lastDay>=20){bonus=RULES.perfectBonus;earned+=bonus;}
   const adj=+(emp.salaryAdj||0); earned+=adj;
+  // v5 reimbursements: approved grooming (Rs100 each, max 2/mo) + approved family dinner amounts this month
+  let groomReimb=0,dinnerReimb=0,reimbItems=[];
+  try{
+    const reqs=(await getRequests()).filter(r=>r.empId===emp.id&&r.status==="approved"&&(r.date||"").startsWith(mk));
+    const gCount=Math.min(2,reqs.filter(r=>r.kind==="grooming").length);
+    groomReimb=gCount*100; if(groomReimb)reimbItems.push({label:"Grooming reimbursement ("+gCount+")",amt:groomReimb});
+    for(const r of reqs.filter(r=>r.kind==="family_dinner")){const a=+(r.dinnerAmt||0);if(a){dinnerReimb+=a;}}
+    if(dinnerReimb)reimbItems.push({label:"Family dinner reward",amt:dinnerReimb});
+  }catch(e){}
+  earned+=groomReimb+dinnerReimb;
   const deducted=(absents+unpaidLeave)*dailyRate;
-  return {salary,dailyRate,dim,full,half,paidOffs:paidWeekoff,unpaidLeave,absents,lateCount,earned,deducted,perDay,bonus,adj,score:sc};
+  return {salary,dailyRate,dim,full,half,paidOffs:paidWeekoff,unpaidLeave,absents,lateCount,earned,deducted,perDay,bonus,adj,groomReimb,dinnerReimb,reimbItems,score:sc};
 }
 
 /* ============================================================
@@ -942,7 +1056,8 @@ function scoreColor(p){return p>=85?"#34C759":p>=60?"#FF9F0A":"#FF3B30";}
    ============================================================ */
 function applyTheme(t){
   document.documentElement.setAttribute("data-theme",t);
-  const mt=document.getElementById("metaTheme");if(mt)mt.setAttribute("content",t==="dark"?"#000000":"#0071E3");
+  const meta={light:"#0071E3",dark:"#000000",grey:"#E3E4E8",graphite:"#16181D"};
+  const mt=document.getElementById("metaTheme");if(mt)mt.setAttribute("content",meta[t]||"#0071E3");
   const tg=document.getElementById("themeTg");if(tg)tg.classList.toggle("on",t==="dark");
 }
 function toggleTheme(){const t=LS.theme()==="dark"?"light":"dark";LS.saveTheme(t);applyTheme(t);}
@@ -1159,6 +1274,7 @@ async function enterEmpApp(){
   await autoPunchoutCheck();
   await renderEmp();
   startLivePing();
+  startUsageSession();installGuards();setWatermark(true);renderThemeChooser();applyDailyAccent();trackScreen("employee_home");
   window.scrollTo(0,0);
 }
 async function enterAdminApp(){
@@ -1168,6 +1284,7 @@ async function enterAdminApp(){
   $("drawer").classList.add("admin-dh");
   hideEl("drawerEmpItems");show("ditemHelp");
   adminTab("today");refreshApprDot();
+  startUsageSession();installGuards();renderThemeChooser();setWatermark(false);
   window.scrollTo(0,0);
 }
 
@@ -1262,6 +1379,9 @@ async function renderEmp(){
   drawDonut("attDonut",c.score.attendance);
   drawDonut("discDonut",c.score.discipline);
   setRing(undefined,getRingColor());
+  // v5 widgets
+  const yc=$("youControl");if(yc&&me)yc.textContent=me.name.split(" ")[0]+", you are in control";
+  renderVisitRow();renderVacationWidgets();renderGroomWidget();applyDailyAccent();
 }
 
 /* ============================================================
@@ -1350,6 +1470,8 @@ async function doPunch(mode,selfie){
   }
 
   pingLive(me.id,me.name,geo);
+  const batt=await getBattery();
+  logUsage(mode==="in"?"punch_in":"punch_out",batt?("batt:"+batt.pct+"%"):"");
 
   if(mode==="in"){
     await runScan("in");
@@ -1365,6 +1487,7 @@ async function doPunch(mode,selfie){
       inSelfie:selfie,inGeo:geo,inSite:chk.site,
       outTs:null,outSelfie:null,outGeo:null,
       breakStart:null,breakEnd:null,
+      inBattery:batt?batt.pct:null,inCharging:batt?batt.charging:null,
       weekOff:false,cameForHalf:(halfFromLate||halfFromLatePunch)
     };
     await putRecord(today);await renderEmp();
@@ -1376,6 +1499,7 @@ async function doPunch(mode,selfie){
     await runScan("out");
     const ts=Date.now();
     today.outTs=ts;today.outSelfie=selfie;today.outGeo=geo;today.outSite=chk.site;
+    today.outBattery=batt?batt.pct:null;today.outCharging=batt?batt.charging:null;
     if(today.breakStart&&!today.breakEnd)today.breakEnd=ts;
     await putRecord(today);await renderEmp();
     const early=isEarlyOut(ts),bm=breakMinutes(today),overBreak=bm>RULES.breakLimit;
@@ -1407,17 +1531,23 @@ function runScan(mode){
    ============================================================ */
 async function onBreak(){
   if(!today||!today.inTs||today.outTs){toast("Punch in first");return;}
+  const now=new Date();const mins=now.getHours()*60+now.getMinutes();
+  const winStart=RULES.breakFrom||660, winEnd=RULES.breakTo||1020; // 11:00 - 17:00
+  if(!today.breakStart && (mins<winStart||mins>winEnd)){
+    toast("Breaks are allowed only between "+hm2str(winStart)+" and "+hm2str(winEnd));return;
+  }
   if(!today.breakStart){
     today.breakStart=Date.now();today.breakEnd=null;
-    await putRecord(today);await renderEmp();
-    toast("Break started - limit "+RULES.breakLimit+" min. Beyond that is your responsibility.");
+    await putRecord(today);await renderEmp();logUsage("break_start");
+    toast("Break started - total limit "+RULES.breakLimit+" min (15+15+30). Beyond that is your responsibility.");
   }else if(!today.breakEnd){
     today.breakEnd=Date.now();
-    await putRecord(today);await renderEmp();
+    await putRecord(today);await renderEmp();logUsage("break_end");
     const bm=breakMinutes(today);
     toast(bm>RULES.breakLimit?"Break "+bm+" min - over limit. Punch out that much later.":"Break ended - "+bm+" min");
   }else{toast("Break already taken today");}
 }
+function hm2str(m){const h=Math.floor(m/60),mm=m%60;return String(h).padStart(2,"0")+":"+String(mm).padStart(2,"0");}
 
 /* ============================================================
    PROOF IMAGE PICKER
@@ -1453,7 +1583,8 @@ const KIND_LABEL={
   weekoff_declare:"Week-off (declare)",missed_in:"Missed punch-in",missed_out:"Missed punch-out",
   late_excuse:"Late waiver",convert_full:"Half to Full",early_excuse:"Early-out waiver",
   break_excuse:"Break exceed",preapprove:"Pre-approval",pass_reset:"Password reset",
-  booking:"Booking",other:"Other"
+  booking:"Booking",grooming:"Grooming reimbursement",slip_request:"Salary slip request",
+  data_request:"Data export request",family_dinner:"Family dinner reward",other:"Other"
 };
 function openRequest(){
   closeDrawer();pendingProof=null;
@@ -1520,76 +1651,163 @@ async function renderMyReqsSheet(){
 /* ============================================================
    BOOKING / VDNB
    ============================================================ */
+let bkFelic=null,bkCost=null;
 function openBooking(){
-  closeDrawer();pendingProof=null;
-  openModal(`<div class="grab"></div><h3>Submit a booking</h3>
-    <p class="msub">Closed a deal or a serious VDNB lead? Add details - the admin verifies and approves. Notes need at least 4 lines for a real lead profile.</p>
+  closeDrawer();bkFelic=null;bkCost=null;
+  openModal(`<div class="grab"></div><h3>Booking / VDNB</h3>
+    <p class="msub">Tap, choose, submit - no typing-heavy work. The admin verifies and approves. A real lead profile needs at least 4 lines.</p>
+    <label class="flabel">Type of entry</label>
     <select id="bkType" class="field" onchange="bkTypeChange()">
       <option value="booked">Booked - deal closed</option>
       <option value="vdnb">VDNB - visit done, not booked</option>
     </select>
-    <input id="bkCust" class="field" type="text" placeholder="Customer name">
-    <input id="bkMobile" class="field" type="tel" inputmode="numeric" maxlength="10" placeholder="Customer mobile (10 digit)">
-    <input id="bkProject" class="field" type="text" placeholder="Project / building (e.g. Tayal Envogue)">
-    <input id="bkUnit" class="field" type="text" placeholder="Unit no (e.g. B3-1204)">
+    <label class="flabel">Lead temperature</label>
+    <select id="bkTemp" class="field">
+      <option value="hot">\uD83D\uDD34 Hot - ready to close</option>
+      <option value="warm">\uD83D\uDFE1 Warm - interested</option>
+      <option value="cold">\uD83D\uDFE2 Cold - early stage</option>
+    </select>
+    <input id="bkCust" class="field" type="text" placeholder="Client name">
+    <input id="bkMobile" class="field" type="tel" inputmode="numeric" maxlength="10" placeholder="Contact (10 digit)">
+    <label class="flabel">Configuration</label>
+    <select id="bkConfig" class="field">
+      <option value="">Select BHK</option><option>1 BHK</option><option>2 BHK</option><option>3 BHK</option><option>4 BHK</option><option>Shop / Commercial</option>
+    </select>
+    <input id="bkProject" class="field" type="text" placeholder="Tagged project(s) e.g. Tayal, Shubhveda">
+    <label class="flabel">Lead source</label>
+    <select id="bkSource" class="field">
+      <option value="">Select source</option><option>Google</option><option>Meta / Facebook</option><option>Reference</option><option>Walk-in</option><option>Channel partner</option><option>Old client</option><option>Other</option>
+    </select>
+    <label class="flabel">Booking stage</label>
+    <select id="bkStage" class="field">
+      <option value="">Select stage</option><option>First visit</option><option>Revisit</option><option>Negotiation</option><option>Final negotiation</option><option>Token done</option><option>Booked</option>
+    </select>
     <div id="bkBookedFields">
+      <input id="bkUnit" class="field" type="text" placeholder="Unit no (e.g. B3-1204)">
       <label class="flabel">Tentative agreement date</label>
       <input id="bkAgrDate" class="field" type="date" value="${todayKey()}">
       <input id="bkAmount" class="field" type="number" inputmode="numeric" placeholder="Initial transaction amount (\u20B9)">
     </div>
-    <label class="flabel">Customer profile notes (min 4 lines)</label>
-    <textarea id="bkNote" class="field" rows="5" placeholder="Line 1: Living location / area&#10;Line 2: Kids school&#10;Line 3: Husband working location&#10;Line 4: Wife working location&#10;Line 5: Budget, intent, next step"></textarea>
+    <label class="flabel">Customer profile (min 4 lines)</label>
+    <textarea id="bkNote" class="field" rows="5" placeholder="Line 1: Client home location&#10;Line 2: Kids school&#10;Line 3: Husband working location&#10;Line 4: Wife working location&#10;Line 5: Budget, intent, next step"></textarea>
+    <div id="bkBookedProof">
+      <div class="proofpick" id="bkFelicBtn" onclick="pickBookingImg('felic')"><span>Felicitation photo with client - required for a booking</span></div>
+      <img id="bkFelicPrev" class="proofprev" alt="">
+      <div class="proofpick" id="bkCostBtn" onclick="pickBookingImg('cost')"><span>Customer cost sheet - required for a booking</span></div>
+      <img id="bkCostPrev" class="proofprev" alt="">
+    </div>
     <button class="bigbtn" onclick="submitBooking()">Send for approval</button>`);
 }
 function bkTypeChange(){
-  const t=$("bkType").value;
-  $("bkBookedFields").style.display=t==="booked"?"block":"none";
+  const t=$("bkType").value,booked=t==="booked";
+  $("bkBookedFields").style.display=booked?"block":"none";
+  $("bkBookedProof").style.display=booked?"block":"none";
+}
+function pickBookingImg(which){
+  const inp=$("proofInput");inp.value="";
+  inp.onchange=()=>{const f=inp.files&&inp.files[0];if(!f||!f.type.startsWith("image/")){toast("Image only");return;}
+    const rd=new FileReader();rd.onload=()=>{const img=new Image();img.onload=()=>{
+      const max=950,sc=Math.min(1,max/Math.max(img.width,img.height));const c=document.createElement("canvas");
+      c.width=img.width*sc;c.height=img.height*sc;c.getContext("2d").drawImage(img,0,0,c.width,c.height);
+      const data=c.toDataURL("image/jpeg",0.55);
+      if(which==="felic"){bkFelic=data;const b=$("bkFelicBtn");b.classList.add("has");b.innerHTML="<span>\u2713 Felicitation photo attached</span>";$("bkFelicPrev").src=data;$("bkFelicPrev").style.display="block";}
+      else{bkCost=data;const b=$("bkCostBtn");b.classList.add("has");b.innerHTML="<span>\u2713 Cost sheet attached</span>";$("bkCostPrev").src=data;$("bkCostPrev").style.display="block";}
+    };img.src=rd.result;};rd.readAsDataURL(f);};
+  inp.click();
 }
 async function submitBooking(){
   const type=$("bkType").value;
+  const temp=$("bkTemp").value;
   const cust=$("bkCust").value.trim();
   const mobile=$("bkMobile").value.trim();
+  const config=$("bkConfig").value;
   const project=$("bkProject").value.trim();
-  const unit=$("bkUnit").value.trim();
+  const source=$("bkSource").value;
+  const stage=$("bkStage").value;
+  const unit=type==="booked"?$("bkUnit").value.trim():"";
   const agrDate=type==="booked"?$("bkAgrDate").value:null;
   const amount=type==="booked"?(+($("bkAmount").value||0)):0;
   const note=$("bkNote").value.trim();
 
-  if(!cust){toast("Enter customer name");return;}
-  if(!/^\d{10}$/.test(mobile)){toast("Enter a valid 10-digit mobile");return;}
+  if(!cust){toast("Enter client name");return;}
+  if(!/^\d{10}$/.test(mobile)){toast("Enter a valid 10-digit contact");return;}
   const lines=note.split("\n").map(l=>l.trim()).filter(Boolean);
-  if(lines.length<4||note.length<60){toast("Notes need at least 4 lines (living location, kids school, spouse work, etc.)");return;}
+  if(lines.length<4||note.length<60){toast("Profile needs at least 4 lines (home, school, spouse work, budget)");return;}
   if(type==="booked"){
     if(!unit){toast("Enter unit no");return;}
     if(!amount||amount<=0){toast("Enter transaction amount");return;}
+    if(!bkFelic){toast("Felicitation photo with client is required for a booking");return;}
+    if(!bkCost){toast("Customer cost sheet is required for a booking");return;}
   }
   const req={
     id:"req_"+Date.now()+"_"+Math.random().toString(36).slice(2,6),
     empId:me.id,empName:me.name,kind:"booking",bkType:type,date:todayKey(),time:null,
-    booking:{cust,mobile,project,unit,agrDate,amount,note},
-    incentivePct:null,incentiveAmt:null,
+    booking:{cust,mobile,config,project,source,stage,unit,agrDate,amount,note,temp,felicImg:bkFelic,costImg:bkCost},
+    incentiveAmt:null,incentiveNote:null,credited:false,
     msg:`${cust} \u00b7 ${unit||"VDNB"}${amount?" \u00b7 "+inr(amount):""}`,
     status:"pending",createdAt:Date.now()
   };
-  await putRequest(req);
+  await putRequest(req);bkFelic=null;bkCost=null;
   closeModal();toast("Booking sent - admin will approve");
 }
 async function renderMyBookingsSheet(){
   const reqs=(await myRequests(me.id)).filter(r=>r.kind==="booking");
-  if(!reqs.length)return '<p class="sub">No bookings yet. Close a deal and submit it here.</p>';
-  return reqs.slice(0,30).map(r=>{
+  const t=await incentiveTotals(me.id);
+  const totals=`<div class="incsum"><div class="got"><div class="in num">${inr(t.got)}</div><div class="il">Incentive received</div></div>
+    <div class="due"><div class="in num">${inr(t.due)}</div><div class="il">Yet to receive</div></div></div>`;
+  if(!reqs.length)return totals+'<p class="sub">No bookings yet. Close a deal and submit it here.</p>';
+  const rows=reqs.slice(0,40).map(r=>{
     const b=r.booking||{};
     const badge=r.status==="pending"?'<span class="statusbadge sb-pending">Pending</span>'
       :r.status==="approved"?'<span class="statusbadge sb-ok">Approved</span>'
       :'<span class="statusbadge sb-no">Declined</span>';
+    const tdot=b.temp?`<span class="tdot ${b.temp}"></span>`:"";
     const typeTag=r.bkType==="vdnb"?'<span class="tag t-blue">VDNB</span> ':'<span class="tag t-on">Booked</span> ';
+    let inc="";
+    if(r.status==="approved"&&r.incentiveAmt){
+      const credit=r.credited?'<span class="credit yes">\u2713 Credited</span>':'<span class="credit no">\u2022 Not credited</span>';
+      inc=`<div style="margin-top:8px;"><b style="color:var(--green2);">Tentative incentive ${inr(r.incentiveAmt)}</b> ${credit}
+        ${r.incentiveNote?`<p class="tentnote">Admin note: ${escapeHtml(r.incentiveNote)}</p>`:""}
+        <p class="tentnote">Tentative - exact amount is confirmed when the company raises the bill.</p></div>`;
+    }
     return `<div class="areq">
-      <div class="top"><span class="kind">${escapeHtml(b.cust||"")}</span><span class="when">${new Date(r.createdAt).toLocaleDateString("en-IN",{day:"numeric",month:"short"})}</span></div>
+      <div class="top"><span class="kind">${tdot}${escapeHtml(b.cust||"")}</span><span class="when">${new Date(r.createdAt).toLocaleDateString("en-IN",{day:"numeric",month:"short"})}</span></div>
       <p class="msg">${typeTag}${escapeHtml(b.project||"")}${b.unit?" \u00b7 "+escapeHtml(b.unit):""}${b.amount?" \u00b7 "+inr(b.amount):""}</p>
-      ${badge}
+      ${badge}${inc}
+      ${r.status==="approved"&&r.bkType==="booked"?`<button class="bigbtn ghost" style="margin-top:10px;padding:11px;" onclick="openDinner('${r.id}')">Claim family dinner reward</button>`:""}
       ${r.decisionNote?`<p class="msg" style="margin-top:8px;color:var(--sub);">Admin: ${escapeHtml(r.decisionNote)}</p>`:""}
     </div>`;
   }).join("");
+  return totals+rows;
+}
+let dinnerBill=null;
+function openDinner(bookingId){
+  closeSheet();dinnerBill=null;
+  openModal(`<div class="grab"></div><h3>Family dinner reward</h3>
+    <p class="msub">After a booking, the company reimburses \u20B9500-\u20B91000 for a family dinner. Upload a proper food bill with a clear date - the owner approves the exact amount.</p>
+    <div class="proofpick" id="dinBillBtn" onclick="pickDinnerBill()"><span>Attach food bill - required</span></div>
+    <img id="dinBillPrev" class="proofprev" alt="">
+    <textarea id="dinNote" class="field" rows="2" placeholder="Restaurant / date / note (optional)"></textarea>
+    <button class="bigbtn" onclick="submitDinner('${bookingId}')">Send bill for approval</button>`);
+}
+function pickDinnerBill(){
+  const inp=$("proofInput");inp.value="";
+  inp.onchange=()=>{const f=inp.files&&inp.files[0];if(!f||!f.type.startsWith("image/")){toast("Image only");return;}
+    const rd=new FileReader();rd.onload=()=>{const img=new Image();img.onload=()=>{
+      const max=950,sc=Math.min(1,max/Math.max(img.width,img.height));const c=document.createElement("canvas");
+      c.width=img.width*sc;c.height=img.height*sc;c.getContext("2d").drawImage(img,0,0,c.width,c.height);
+      dinnerBill=c.toDataURL("image/jpeg",0.55);const b=$("dinBillBtn");b.classList.add("has");b.innerHTML="<span>\u2713 Bill attached</span>";$("dinBillPrev").src=dinnerBill;$("dinBillPrev").style.display="block";
+    };img.src=rd.result;};rd.readAsDataURL(f);};
+  inp.click();
+}
+async function submitDinner(bookingId){
+  if(!dinnerBill){toast("Attach the food bill");return;}
+  const note=$("dinNote").value.trim();
+  const req={id:"req_"+Date.now()+"_"+Math.random().toString(36).slice(2,6),
+    empId:me.id,empName:me.name,kind:"family_dinner",linkBooking:bookingId,date:todayKey(),
+    proofImg:dinnerBill,msg:note||"Family dinner bill",dinnerAmt:null,
+    status:"pending",createdAt:Date.now()};
+  await putRequest(req);dinnerBill=null;closeModal();toast("Dinner bill sent for approval");
 }
 
 /* ============================================================
@@ -1628,9 +1846,11 @@ async function renderToday(){
     const lv=live[e.id];
     const liveTag=lv&&(Date.now()-lv.at<5*60000)?' <span class="tag t-on">live</span>':(lv?' <span class="tag t-off">last seen</span>':"");
     const mock=r&&r.inGeo&&r.inGeo.simulated?' <span class="tag t-half">FAKE GPS</span>':"";
+    const bv=r&&(r.outBattery!=null?r.outBattery:r.inBattery);
+    const battTag=(bv!=null)?` <span class="tag ${bv<20?"t-late":bv<40?"t-half":"t-on"}">${bv}%\uD83D\uDD0B</span>`:"";
     html+=`<div class="erow" onclick="empDayDetail('${e.id}')">
       <div class="av">${initials(e.name)}</div>
-      <div class="nm"><b>${escapeHtml(e.name)}</b><span>${inT} \u2192 ${outT}${liveTag}${mock}</span></div>
+      <div class="nm"><b>${escapeHtml(e.name)}</b><span>${inT} \u2192 ${outT}${liveTag}${mock}${battTag}</span></div>
       <div class="amt"><span class="tag ${tagCls}">${v.label}</span></div>
     </div>`;
   }
@@ -1652,6 +1872,7 @@ async function empDayDetail(empId){
       <div class="row"><span class="k">Punch in</span><span class="v">${r&&r.inTs?fmtTime(r.inTs):"-"}</span></div>
       <div class="row"><span class="k">Break</span><span class="v">${r&&r.breakStart?breakMinutes(r)+" min":"-"}</span></div>
       <div class="row"><span class="k">Punch out</span><span class="v">${r&&r.outTs?fmtTime(r.outTs):"-"}</span></div>
+      <div class="row"><span class="k">Battery in / out</span><span class="v">${r&&r.inBattery!=null?r.inBattery+"%":"-"} / ${r&&r.outBattery!=null?r.outBattery+"%":"-"}</span></div>
       <div class="row"><span class="k">Status</span><span class="v">${v.label}</span></div>
       <div class="row"><span class="k">Punch site</span><span class="v" style="font-size:12px;">${escapeHtml(site)}</span></div>
       <div class="row"><span class="k">Live location</span><span class="v" style="font-size:12px;">${escapeHtml(liveLine)}</span></div>
@@ -1716,6 +1937,36 @@ function apprCard(r,hist){
   const when=new Date(r.createdAt).toLocaleString("en-IN",{day:"numeric",month:"short",hour:"numeric",minute:"2-digit"});
   const dateStr=r.date?new Date(r.date).toLocaleDateString("en-IN",{day:"numeric",month:"short"}):"";
   const proof=r.proofImg?`<img class="proofimg" src="${r.proofImg}" alt="proof">`:"";
+  const head=`<div class="top"><div class="av" style="width:30px;height:30px;font-size:12px;">${initials(r.empName)}</div><b>${escapeHtml(r.empName)}</b><span class="when">${when}</span></div>`;
+  // ---- v5 special cards ----
+  if(r.kind==="grooming"){
+    const imgs=`<div style="display:flex;gap:8px;margin:8px 0;"><div style="flex:1;"><div class="sub" style="font-size:11px;margin-bottom:3px;">Before</div><img class="proofimg" style="margin:0;" src="${r.beforeImg||""}"></div><div style="flex:1;"><div class="sub" style="font-size:11px;margin-bottom:3px;">After</div><img class="proofimg" style="margin:0;" src="${r.afterImg||""}"></div></div>`;
+    if(hist||r.status!=="pending"){const badge=r.status==="approved"?'<span class="statusbadge sb-ok">Approved \u00b7 +\u20B9100</span>':'<span class="statusbadge sb-no">Declined</span>';
+      return `<div class="areq">${head}<span class="kind">Grooming \u00b7 Cycle ${r.groomCycle}${dateStr?" \u00b7 "+dateStr:""}</span>${imgs}${badge}</div>`;}
+    return `<div class="areq">${head}<span class="kind">Grooming \u00b7 Cycle ${r.groomCycle}${dateStr?" \u00b7 "+dateStr:""}</span>${imgs}
+      <div class="acts"><input id="note_${r.id}" type="text" placeholder="Note (optional)">
+      <div class="br"><button class="ok" onclick="decide('${r.id}','approve_nodeduct',($('note_${r.id}')||{}).value)">Approve +\u20B9100</button>
+      <button class="no" onclick="decide('${r.id}','decline',($('note_${r.id}')||{}).value)">Decline</button></div></div></div>`;
+  }
+  if(r.kind==="slip_request"||r.kind==="data_request"){
+    const period=r.kind==="slip_request"?`${r.from||""} to ${r.to||""}`:`${r.from||""} to ${r.to||""}`;
+    if(hist||r.status!=="pending"){const badge=r.status==="approved"?'<span class="statusbadge sb-ok">Approved</span>':'<span class="statusbadge sb-no">Declined</span>';
+      return `<div class="areq">${head}<span class="kind">${KIND_LABEL[r.kind]} \u00b7 ${escapeHtml(period)}</span><p class="msg">${escapeHtml(r.msg)}</p>${badge}</div>`;}
+    return `<div class="areq">${head}<span class="kind">${KIND_LABEL[r.kind]} \u00b7 ${escapeHtml(period)}</span><p class="msg">${escapeHtml(r.msg)}</p>
+      <div class="acts"><input id="note_${r.id}" type="text" placeholder="Note (optional)">
+      <div class="br"><button class="ok" onclick="decide('${r.id}','approve_nodeduct',($('note_${r.id}')||{}).value)">Approve</button>
+      <button class="no" onclick="decide('${r.id}','decline',($('note_${r.id}')||{}).value)">Decline</button></div></div></div>`;
+  }
+  if(r.kind==="family_dinner"){
+    const bill=r.proofImg?`<img class="proofimg" src="${r.proofImg}">`:"";
+    if(hist||r.status!=="pending"){const badge=r.status==="approved"?`<span class="statusbadge sb-ok">Approved \u00b7 ${inr(r.dinnerAmt||0)}</span>`:'<span class="statusbadge sb-no">Declined</span>';
+      return `<div class="areq">${head}<span class="kind">Family dinner reward${dateStr?" \u00b7 "+dateStr:""}</span><p class="msg">${escapeHtml(r.msg||"")}</p>${bill}${badge}</div>`;}
+    return `<div class="areq">${head}<span class="kind">Family dinner reward${dateStr?" \u00b7 "+dateStr:""}</span><p class="msg">${escapeHtml(r.msg||"")}</p>${bill}
+      <div class="acts"><input id="din_${r.id}" type="number" inputmode="numeric" placeholder="Amount to reimburse (\u20B9500-1000)">
+      <input id="note_${r.id}" type="text" placeholder="Note (optional)">
+      <div class="br"><button class="ok" onclick="approveDinner('${r.id}')">Approve reward</button>
+      <button class="no" onclick="decide('${r.id}','decline',($('note_${r.id}')||{}).value)">Decline</button></div></div></div>`;
+  }
   if(hist||r.status!=="pending"){
     const badge=r.status==="approved"?'<span class="statusbadge sb-ok">Approved</span>':'<span class="statusbadge sb-no">Declined</span>';
     return `<div class="areq"><div class="top"><div class="av" style="width:30px;height:30px;font-size:12px;">${initials(r.empName)}</div><b>${escapeHtml(r.empName)}</b><span class="when">${when}</span></div>
@@ -1757,6 +2008,10 @@ async function decide(reqId,choice,extraNote){
 }
 async function applyApproval(r,mode){
   if(r.kind==="booking")return mode==="decline"?"Booking declined":"Booking approved and recorded";
+  if(r.kind==="grooming")return "Grooming approved - \u20B9100 added to this month's salary";
+  if(r.kind==="slip_request")return "Salary slip approved - employee can now download it";
+  if(r.kind==="data_request")return "Data export approved - employee can now download it";
+  if(r.kind==="family_dinner"){const a=+(r.dinnerAmt||0);return a?("Family dinner approved - "+inr(a)+" added to salary"):"Family dinner approved";}
   if(r.kind==="pass_reset"){
     const temp=genTempPass();const h=await hashPass(temp);
     await putEmployee({id:r.empId,passHash:h,sessionKill:Date.now()});
@@ -1783,33 +2038,92 @@ async function applyApproval(r,mode){
   rec.adminEdited=true;await putRecord(rec);return "Approved (no deduction)";
 }
 
+async function approveDinner(reqId){
+  const el=$("din_"+reqId);const amt=+(el?el.value:0);
+  if(!amt||amt<500||amt>1000){toast("Enter an amount between \u20B9500 and \u20B91000");return;}
+  const reqs=await getRequests();const r=reqs.find(x=>x.id===reqId);if(!r)return;
+  r.dinnerAmt=amt;await putRequest(r);
+  const noteEl=$("note_"+reqId);
+  await decide(reqId,"approve_nodeduct",noteEl?noteEl.value.trim():"");
+}
+
 /* ---- BOOKINGS ---- */
 async function renderBookings(){
-  const reqs=(await getRequests()).filter(r=>r.kind==="booking");
-  if(!reqs.length){$("bookList").innerHTML='<p class="sub" style="padding:12px 4px;">No bookings yet.</p>';return;}
-  $("bookList").innerHTML=reqs.map(r=>{
+  const all=(await getRequests()).filter(r=>r.kind==="booking");
+  // totals across all approved
+  let tGot=0,tDue=0;
+  for(const r of all)if(r.status==="approved"&&r.incentiveAmt){if(r.credited)tGot+=+r.incentiveAmt;else tDue+=+r.incentiveAmt;}
+  const totalsHtml=`<div class="incsum"><div class="got"><div class="in num">${inr(tGot)}</div><div class="il">Incentive credited</div></div>
+    <div class="due"><div class="in num">${inr(tDue)}</div><div class="il">Yet to credit</div></div></div>`;
+  if(!all.length){$("bookList").innerHTML=totalsHtml+'<p class="sub" style="padding:12px 4px;">No bookings yet.</p>';return;}
+  $("bookList").innerHTML=totalsHtml+all.map(r=>{
     const b=r.booking||{};
     const when=new Date(r.createdAt).toLocaleString("en-IN",{day:"numeric",month:"short",hour:"numeric",minute:"2-digit"});
+    const tdot=b.temp?`<span class="tdot ${b.temp}"></span>`:"";
     const typeTag=r.bkType==="vdnb"?'<span class="tag t-blue">VDNB</span>':'<span class="tag t-on">Booked</span>';
+    const felic=b.felicImg?`<div class="sub" style="font-size:11px;margin:6px 2px 3px;">Felicitation photo</div><img class="proofimg" src="${b.felicImg}">`:"";
+    const cost=b.costImg?`<div class="sub" style="font-size:11px;margin:6px 2px 3px;">Cost sheet</div><img class="proofimg" src="${b.costImg}">`:"";
     const detail=`<div class="bkdetail">
-      <div class="bkrow"><span>Type</span><b>${typeTag}</b></div>
+      <div class="bkrow"><span>Type</span><b>${tdot}${typeTag}</b></div>
       <div class="bkrow"><span>Customer</span><b>${escapeHtml(b.cust||"-")}</b></div>
       <div class="bkrow"><span>Mobile</span><b>${escapeHtml(b.mobile||"-")}</b></div>
       <div class="bkrow"><span>Project</span><b>${escapeHtml(b.project||"-")}</b></div>
+      ${b.source?`<div class="bkrow"><span>Source</span><b>${escapeHtml(b.source)}</b></div>`:""}
+      ${b.stage?`<div class="bkrow"><span>Stage</span><b>${escapeHtml(b.stage)}</b></div>`:""}
       <div class="bkrow"><span>Unit</span><b>${escapeHtml(b.unit||"-")}</b></div>
-      ${b.agrDate?`<div class="bkrow"><span>Agreement</span><b>${new Date(b.agrDate).toLocaleDateString("en-IN",{day:"numeric",month:"short",year:"numeric"})}</b></div>`:""}
       ${b.amount?`<div class="bkrow amt"><span>Amount</span><b>${inr(b.amount)}</b></div>`:""}
       ${b.note?`<div class="bkrow"><span>Profile</span><b style="font-weight:480;white-space:pre-line;text-align:left;max-width:60%;">${escapeHtml(b.note)}</b></div>`:""}
     </div>`;
-    if(r.status!=="pending"){
-      const badge=r.status==="approved"?'<span class="statusbadge sb-ok">Approved</span>':'<span class="statusbadge sb-no">Declined</span>';
-      return `<div class="areq"><div class="top"><div class="av" style="width:30px;height:30px;font-size:12px;">${initials(r.empName)}</div><b>${escapeHtml(r.empName)}</b><span class="when">${when}</span></div>${detail}${badge}${r.decisionNote?`<p class="msg" style="margin-top:6px;color:var(--sub);">${escapeHtml(r.decisionNote)}</p>`:""}</div>`;
+    const head=`<div class="top"><div class="av" style="width:30px;height:30px;font-size:12px;">${initials(r.empName)}</div><b>${escapeHtml(r.empName)}</b><span class="when">${when}</span></div>`;
+    if(r.status==="declined"){
+      return `<div class="areq">${head}${detail}<span class="statusbadge sb-no">Declined</span>${r.decisionNote?`<p class="msg" style="margin-top:6px;color:var(--sub);">${escapeHtml(r.decisionNote)}</p>`:""}</div>`;
     }
-    return `<div class="areq"><div class="top"><div class="av" style="width:30px;height:30px;font-size:12px;">${initials(r.empName)}</div><b>${escapeHtml(r.empName)}</b><span class="when">${when}</span></div>${detail}
+    if(r.status==="approved"){
+      const credit=r.credited?'<span class="credit yes">\u2713 Credited</span>':'<span class="credit no">\u2022 Not credited</span>';
+      const incBox=`<div class="acts" style="margin-top:10px;">
+        <input id="inc_${r.id}" type="number" inputmode="numeric" placeholder="Tentative incentive (\u20B9)" value="${r.incentiveAmt||""}">
+        <input id="incn_${r.id}" type="text" placeholder="Note (optional)" value="${escapeHtml(r.incentiveNote||"")}">
+        <div class="br"><button class="ok" onclick="setIncentive('${r.id}')">Save incentive</button>
+        <button class="${r.credited?"no":"ok"}" onclick="toggleCredited('${r.id}')">${r.credited?"Mark not credited":"Mark credited"}</button></div></div>`;
+      return `<div class="areq">${head}${detail}${felic}${cost}<div style="display:flex;gap:8px;align-items:center;margin:4px 0;"><span class="statusbadge sb-ok">Approved</span>${r.incentiveAmt?`<b style="color:var(--green2);">${inr(r.incentiveAmt)}</b>`+credit:""}</div>
+        <p class="tentnote">This is tentative. Exact amount is known only when the company raises the bill.</p>${incBox}</div>`;
+    }
+    return `<div class="areq">${head}${detail}${felic}${cost}
       <div class="acts"><select id="dec_${r.id}"><option value="approve_nodeduct">Approve booking</option><option value="decline">Decline booking</option></select>
       <input id="note_${r.id}" type="text" placeholder="Note (optional)">
       <div class="br"><button class="ok" onclick="decideFromSelect('${r.id}')">Apply decision</button></div></div></div>`;
   }).join("");
+}
+async function setIncentive(reqId){
+  const amt=+(($("inc_"+reqId)||{}).value||0);const note=(($("incn_"+reqId)||{}).value||"").trim();
+  const reqs=await getRequests();const r=reqs.find(x=>x.id===reqId);if(!r)return;
+  r.incentiveAmt=amt;r.incentiveNote=note;await putRequest(r);
+  toast("Incentive saved - employee can see it now");renderBookings();
+}
+async function toggleCredited(reqId){
+  const reqs=await getRequests();const r=reqs.find(x=>x.id===reqId);if(!r)return;
+  if(!r.incentiveAmt){toast("Set the incentive amount first");return;}
+  r.credited=!r.credited;r.creditedAt=r.credited?Date.now():null;await putRequest(r);
+  toast(r.credited?"Marked credited":"Marked not credited");renderBookings();
+}
+
+/* ============================================================
+   v5 - ADMIN ACTIVITY LOG
+   ============================================================ */
+async function openActivity(){
+  const ev=await getUsage();
+  const ACT={app_open:"Opened app",app_close:"Closed app",app_background:"Left app",app_foreground:"Back in app",
+    screen_view:"Viewed",screen_time:"Spent",punch_in:"Punched in",punch_out:"Punched out",
+    break_start:"Started break",break_end:"Ended break",copy_blocked:"Copy blocked",printscreen_key:"Screenshot key",theme:"Theme"};
+  const rows=ev.slice(0,120).map(e=>{
+    const t=new Date(e.at).toLocaleString("en-IN",{day:"numeric",month:"short",hour:"numeric",minute:"2-digit"});
+    const warn=(e.action==="copy_blocked"||e.action==="printscreen_key");
+    return `<div class="bkrow"><span style="${warn?"color:var(--red);":""}">${escapeHtml(e.name||"?")} \u00b7 ${ACT[e.action]||e.action}${e.extra?" "+escapeHtml(e.extra):""}</span><b style="font-size:11px;color:var(--sub);">${t}</b></div>`;
+  }).join("");
+  openSheetRaw("App activity log",`<div class="prose">
+    <p class="sub" style="font-size:12px;">In-app activity for company phones: opens, closes, screen time, punches, and blocked copy/screenshot attempts. This records only while the app is open - it cannot track a closed app or phone.</p>
+    <div class="card" style="padding:6px 16px;">${rows||'<p class="sub" style="padding:12px 0;">No activity yet.</p>'}</div>
+  </div>`);
 }
 
 /* ============================================================
@@ -1864,13 +2178,16 @@ async function salaryDetail(empId){
       <div class="bkrow"><span>Paid week-offs</span><b>${c.paidOffs}</b></div>
       <div class="bkrow"><span>Deducted (absent/unpaid)</span><b style="color:var(--red);">${c.absents+c.unpaidLeave}</b></div>
       <div class="bkrow"><span>Lates counted</span><b>${c.lateCount}</b></div>
+      ${c.groomReimb?`<div class="bkrow"><span>Grooming reimbursement</span><b style="color:var(--green2);">+${inr(c.groomReimb)}</b></div>`:""}
+      ${c.dinnerReimb?`<div class="bkrow"><span>Family dinner reward</span><b style="color:var(--green2);">+${inr(c.dinnerReimb)}</b></div>`:""}
       ${c.adj?`<div class="bkrow"><span>Salary adjustment</span><b style="color:${c.adj<0?'var(--red)':'var(--green2)'};">${c.adj>0?'+':''}${inr(c.adj)}</b></div>`:""}
       ${c.bonus?`<div class="bkrow"><span>Perfect-score bonus</span><b style="color:var(--gold);">+${inr(c.bonus)}</b></div>`:""}
       <div class="bkrow amt"><span>Payable now</span><b>${inr(c.earned)}</b></div>
     </div>
     <div class="sectit">Day by day - ${mlabel}</div>
     <div class="card" style="padding:6px 16px;">${days||'<p class="sub" style="padding:12px 0;">No records this month.</p>'}</div>
-    <button class="bigbtn ghost" style="margin-top:16px;" onclick="downloadSlip('${e.id}')">Download salary slip (.txt)</button>`;
+    <button class="bigbtn" style="margin-top:16px;" onclick="downloadSlipPDF('${e.id}')">Issue premium salary slip (PDF)</button>
+    <button class="bigbtn ghost" style="margin-top:10px;" onclick="downloadSlip('${e.id}')">Plain text slip</button>`;
   openSheetRaw(e.name.split(" ")[0]+" - salary",html);
 }
 async function downloadSlip(empId){
@@ -2074,15 +2391,16 @@ function openAddEmp(){
     <input id="ae_name" class="field" placeholder="Full name" style="margin-bottom:10px;">
     <input id="ae_mobile" class="field" placeholder="Mobile (optional)" inputmode="numeric" style="margin-bottom:10px;">
     <input id="ae_salary" class="field num" placeholder="Monthly salary (e.g. 10000)" inputmode="numeric" style="margin-bottom:10px;">
+    <select id="ae_gender" class="field" style="margin-bottom:10px;"><option value="male">Male (grooming reimbursement eligible)</option><option value="female">Female</option></select>
     <p class="msub">They set their own password on first login - or you can set one later from their profile.</p>
     <button class="bigbtn" onclick="addEmp()">Add employee</button>
     <button class="bigbtn ghost" style="margin-top:10px;" onclick="closeModal()">Cancel</button>`);
 }
 async function addEmp(){
   const name=$("ae_name").value.trim();if(!name){toast("Enter a name");return;}
-  const salary=+$("ae_salary").value||0,mobile=$("ae_mobile").value.trim();
+  const salary=+$("ae_salary").value||0,mobile=$("ae_mobile").value.trim(),gender=$("ae_gender").value;
   const id="emp_"+Date.now().toString(36)+Math.random().toString(36).slice(2,5);
-  await putEmployee({id,name,mobile,salary,passHash:null,siteIds:[],baseline:{},salaryAdj:0,createdAt:Date.now()});
+  await putEmployee({id,name,mobile,salary,gender,passHash:null,siteIds:[],baseline:{},salaryAdj:0,createdAt:Date.now()});
   closeModal();toast(name.split(" ")[0]+" added");renderPeople();buildLoginRoster();
 }
 
@@ -2155,6 +2473,8 @@ function renderSetup(){
   $("rkHalfAfter").value=RULES.halfdayAfter;
   $("rkOut").value=RULES.punchoutBenchmark;
   $("rkBreak").value=RULES.breakLimit;
+  $("rkBreakFrom").value=hm2str(RULES.breakFrom||660);
+  $("rkBreakTo").value=hm2str(RULES.breakTo||1020);
   $("rkApprWin").value=RULES.approvalWindow;
   $("rkBonus").value=RULES.perfectBonus;
   $("rkAutoOut").value=RULES.autoOutHour;
@@ -2174,6 +2494,9 @@ async function saveSetup(){
   RULES.halfdayAfter=$("rkHalfAfter").value.trim()||RULES.halfdayAfter;
   RULES.punchoutBenchmark=$("rkOut").value.trim()||RULES.punchoutBenchmark;
   RULES.breakLimit=+$("rkBreak").value||RULES.breakLimit;
+  const str2m=s=>{const m=(s||"").match(/^(\d{1,2}):(\d{2})$/);return m?(+m[1]*60+ +m[2]):null;};
+  RULES.breakFrom=str2m($("rkBreakFrom").value)??RULES.breakFrom;
+  RULES.breakTo=str2m($("rkBreakTo").value)??RULES.breakTo;
   RULES.approvalWindow=+$("rkApprWin").value||RULES.approvalWindow;
   RULES.perfectBonus=+$("rkBonus").value||0;
   RULES.autoOutHour=Math.max(0,Math.min(23,+$("rkAutoOut").value||23));
@@ -2263,33 +2586,87 @@ const SHEETS={
         <div class="bkrow"><span>Full days</span><b>${c.full}</b></div>
         <div class="bkrow"><span>Half days</span><b>${c.half}</b></div>
         <div class="bkrow"><span>Paid week-offs</span><b>${c.paidOffs}</b></div>
+        ${c.reimbItems&&c.reimbItems.length?c.reimbItems.map(it=>`<div class="bkrow"><span>${escapeHtml(it.label)}</span><b style="color:var(--green2);">+${inr(it.amt)}</b></div>`).join(""):""}
         <div class="bkrow"><span>Deducted days</span><b style="color:var(--red);">${c.absents+c.unpaidLeave}</b></div>
         <div class="bkrow amt"><span>Earned so far</span><b>${inr(c.earned)}</b></div>
       </div>
+      <p class="sub" style="font-size:12px;padding:0 2px 8px;">Tap any day below to see exactly why pay was added or cut.</p>
       <div class="sectit" style="margin-left:0;">Recent days - ${mlabel}</div>
       <div class="card" style="padding:6px 16px;">${days||'<p class="sub" style="padding:12px 0;">No records yet.</p>'}</div>
-      <button class="bigbtn ghost" style="margin-top:16px;" onclick="downloadSlip('${me.id}')">Download my slip (.txt)</button>
+      <button class="bigbtn ghost" style="margin-top:16px;" onclick="openSlipRequest()">Request my salary slip (owner approval)</button>
     </div>`;
     return {title:"My salary preview",html,after:()=>{drawDonut("spAtt",c.score.attendance);drawDonut("spDisc",c.score.discipline);}};
   },
   myreqs: async()=>({title:"My request status",html:`<div class="prose">${await renderMyReqsSheet()}</div>`}),
-  mybookings: async()=>({title:"My bookings",html:`<div class="prose">${await renderMyBookingsSheet()}</div>`}),
+  mybookings: async()=>({title:"My Bookings / Incentives",html:`<div class="prose">${await renderMyBookingsSheet()}</div>`}),
+  vacation: async()=>{
+    const days=await computeVacationStreak(me);const v=vacFromDays(days);
+    const road=VAC_MILESTONES.map(m=>{const done=v.months>=m.months;
+      return `<div class="rule"><div class="ic">${done?"\u2705":"\uD83D\uDD12"}</div><div><b>${m.months} months</b> - ${escapeHtml(m.name)}${done?' <span style="color:var(--green2);font-weight:600;">unlocked</span>':""}</div></div>`;}).join("");
+    return {title:"Vacation rewards",html:`<div class="prose">
+      <div class="vacw"><div class="vh">\uD83C\uDFC6 Next reward</div><div class="vname">${escapeHtml(v.next.name)}</div>
+        <div class="vbar"><i style="width:${v.nextPct}%;"></i></div>
+        <div class="vmeta"><b>Streak ${dm(v.days)}</b><span class="vpct">${v.nextPct}%</span></div>
+        <div class="vstrip"><span>Remaining ${dm(v.remDays)}</span><span>${v.nextPct>=90?"Unlocking soon":"Keep going"}</span></div></div>
+      <h3>Reward timeline</h3>${road}
+      <h3>How it works</h3>
+      <p>Keep a clean attendance streak - punch every working day, declare week-offs in time. A surprise leave or unpaid absence breaks the streak and the counter restarts. The longer you stay consistent, the bigger the vacation you unlock, up to a fully sponsored international trip at 18 months.</p>
+      <h3>What the 18-month international vacation includes</h3>
+      <p>Round-trip flights, visa charges, travel insurance, premium hotel stay and airport-hotel transfers, both ways - fully sponsored by the company.</p>
+      <h3>Eligibility & claiming</h3>
+      <p>Rewards are confirmed and scheduled by management once a milestone is reached. Dates are mutually planned so work is not disrupted. Reach out to the owner to claim an unlocked reward.</p>
+    </div>`};
+  },
+  grooming: async()=>{
+    const st=await groomStatusFor(me.id);const cy=groomCycleNow();
+    return {title:"Grooming reimbursement",html:`<div class="prose">
+      <div class="card" style="padding:14px 16px;margin-bottom:14px;">
+        <div class="bkrow"><span>This month approved</span><b style="color:var(--green2);">${inr(st.amount)}</b></div>
+        <div class="bkrow"><span>Cycle 1 (14-16)</span><b>${st.c1?"\u2705 Done":"\u23F3 Pending"}</b></div>
+        <div class="bkrow"><span>Cycle 2 (month-end)</span><b>${st.c2?"\u2705 Done":"\u23F3 Pending"}</b></div>
+        <div class="bkrow"><span>Status</span><b>${escapeHtml(cy.label)}</b></div>
+      </div>
+      <button class="bigbtn" onclick="openGrooming()">Submit grooming (before + after)</button>
+      <h3>Policy</h3>
+      <p>Male employees can claim \u20B9100 per approved haircut, up to \u20B9200 a month (one per cycle). Grooming must be done on the 14th-16th, or the last two days of the month.</p>
+      <div class="rule"><div class="ic">\u2702\uFE0F</div><div>Proper haircut, neat hairstyle, trimmed beard, professional look.</div></div>
+      <div class="rule"><div class="ic">\uD83D\uDCF8</div><div>Upload a clear BEFORE and AFTER selfie - both are mandatory.</div></div>
+      <div class="rule"><div class="ic">\uD83D\uDCB0</div><div>Once the owner approves, \u20B9100 is added automatically to that month's salary.</div></div>
+      <div class="rule"><div class="ic">\uD83D\uDD53</div><div>A weekly off is not required - you can groom after office hours within the approved dates.</div></div>
+    </div>`};
+  },
   rules:{title:"Rules & Regulations",html:`<div class="prose">
     <h3>Punching in and out</h3>
     <p>Punch in and out only from an admin-approved work site, with a clear selfie. Your live location is shared with management while you are punched in.</p>
     <div class="rule"><div class="ic">\u23F0</div><div><b>On time</b> until the set benchmark. After that the day is marked late. Too many lates in a month becomes a half day.</div></div>
-    <div class="rule"><div class="ic">\u2615</div><div><b>Break</b> - one hour is always counted whether you take it or not. Exceed it and you must punch out that much later, else the day becomes a half day.</div></div>
+    <div class="rule"><div class="ic">\u2615</div><div><b>Breaks</b> - up to one hour a day (15 + 15 + 30 min), allowed only between 11:00 and 17:00. Tap the break button to start the timer and tap again to stop. One hour is always counted whether taken or not; exceed it and you must punch out that much later, else the day becomes a half day.</div></div>
     <div class="rule"><div class="ic">\uD83C\uDF34</div><div><b>Week-off</b> must be declared at least one day in advance in the app. Surprise or same-day leave is deducted and also cancels that week's week-off. No week-off on Friday, Saturday or Sunday.</div></div>
     <div class="rule"><div class="ic">\uD83C\uDFC6</div><div><b>Perfect month</b> - a full 100/100 score (with 20+ days) earns an instant bonus and a free off, with zero approvals.</div></div>
+    <div class="rule"><div class="ic">\u2702\uFE0F</div><div><b>Grooming reimbursement</b> - male employees get \u20B9100 per approved haircut (max \u20B9200/month) on the 14-16th or the last two days of the month, with before and after selfies.</div></div>
+    <div class="rule"><div class="ic">\uD83C\uDF7D\uFE0F</div><div><b>Booking reward</b> - after every approved booking the company reimburses a \u20B9500-\u20B91000 family dinner. Upload a proper dated food bill and the owner approves the exact amount, added to your salary.</div></div>
+    <div class="rule"><div class="ic">\uD83D\uDCB8</div><div><b>Incentives</b> - on an approved booking the owner records a tentative incentive. The exact amount is confirmed when the company raises the bill; you can track credited vs pending in My Bookings / Incentives.</div></div>
+    <div class="rule"><div class="ic">\u2708\uFE0F</div><div><b>Vacation rewards</b> - a clean attendance streak unlocks sponsored vacations, up to a fully sponsored international trip at 18 months.</div></div>
     <h3>Approvals</h3>
     <p>Made a genuine mistake? Raise a request from the menu within the approval window, with photo proof. No proof, no request. The admin's decision and note appear in My request status.</p>
     <h3>Auto punch-out</h3>
     <p>If you forget to punch out, the system auto punches you out late at night and marks the day a half day. Always punch out yourself.</p>
     <h3>Live monitoring</h3>
-    <p>While you are signed in and on shift, the app shares your live location, last-seen time and punch selfies with management for verification. This runs only on this device while the app is open and you are logged in. Signing out, force-closing the app, turning the phone off or enabling airplane mode stops location sharing - so leaving your shift early or hiding your location is treated as being off-duty and the day can be marked accordingly. Attendance, salary and conduct are judged on this basis.</p>
+    <p>While you are signed in and on shift, the app shares your live location, last-seen time and punch selfies with management for verification. At each punch your phone's battery level is also recorded - keep your company phone charged so customers can always reach you. Your in-app activity (screens opened, time spent) is logged for the company phone provided to you. This monitoring runs only on this device while the app is open and you are logged in. Signing out, force-closing the app, turning the phone off or enabling airplane mode stops location sharing - so leaving your shift early or hiding your location is treated as being off-duty and the day can be marked accordingly.</p>
+    <h3>Confidential data</h3>
+    <p>Screenshots and copy-paste are not allowed inside the app. Company data is confidential; misuse is treated as a serious breach. Each screen carries your name and timestamp so any leaked image is traceable to you.</p>
   </div>`},
   selfie:{title:"Selfie rules",html:`<div class="prose">
     <p>A clear selfie is required for every punch. It is your proof of presence.</p>
+    <div style="display:flex;gap:10px;margin:6px 0 14px;">
+      <div style="flex:1;text-align:center;">
+        <svg viewBox="0 0 120 150" style="width:100%;border-radius:14px;background:var(--green-bg);"><rect width="120" height="150" rx="12" fill="none"/><rect x="14" y="14" width="92" height="122" rx="10" fill="none" stroke="var(--green2)" stroke-width="2" stroke-dasharray="5 4"/><circle cx="60" cy="50" r="16" fill="var(--green2)" opacity=".85"/><path d="M38 96c0-13 10-22 22-22s22 9 22 22v14H38z" fill="var(--green2)" opacity=".85"/><path d="M22 120h76" stroke="var(--green2)" stroke-width="2"/></svg>
+        <div style="font-size:11px;color:var(--green2);font-weight:600;margin-top:4px;">Right - head to belt, background visible</div>
+      </div>
+      <div style="flex:1;text-align:center;">
+        <svg viewBox="0 0 120 150" style="width:100%;border-radius:14px;background:var(--red-bg);"><rect width="120" height="150" rx="12" fill="none"/><circle cx="60" cy="70" r="46" fill="var(--red2)" opacity=".8"/><path d="M60 124c-2 0-4 0-6-1" stroke="var(--red2)" stroke-width="2"/></svg>
+        <div style="font-size:11px;color:var(--red2);font-weight:600;margin-top:4px;">Wrong - too close, no background</div>
+      </div>
+    </div>
     <div class="rule"><div class="ic">\uD83D\uDCF1</div><div><b>Hold the phone away</b> so your head down to your belt is visible.</div></div>
     <div class="rule"><div class="ic">\uD83C\uDFE2</div><div><b>Background must show</b> - the work site behind you must be clearly visible.</div></div>
     <div class="rule"><div class="ic">\u2600\uFE0F</div><div><b>Good light, real face</b> - no caps over the eyes, no other person, no photo-of-a-photo.</div></div>
@@ -2301,18 +2678,354 @@ const SHEETS={
     <div class="rule"><div class="ic">\uD83D\uDC65</div><div><b>employees</b> - names, salary, password hashes, assigned sites.</div></div>
     <div class="rule"><div class="ic">\uD83D\uDCC5</div><div><b>attendance</b> - every day's punch, selfie, GPS and verdict.</div></div>
     <div class="rule"><div class="ic">\uD83D\uDCDD</div><div><b>requests</b> - approvals and password resets with proof.</div></div>
-    <div class="rule"><div class="ic">\uD83C\uDFE0</div><div><b>bookings</b> - every booked deal and site visit.</div></div>
+    <div class="rule"><div class="ic">\uD83C\uDFE0</div><div><b>bookings</b> - every booked deal, VDNB visit, incentive and reward.</div></div>
+    <div class="rule"><div class="ic">\uD83D\uDCCA</div><div><b>usage</b> - in-app activity log for company phones.</div></div>
     <h3>Reading old data months later</h3>
     <p>Admin can open the salary tab and tap any employee for a full day-by-day history of any month. Export a month as CSV anytime for your records. The raw data also lives in the Firebase console under the project, organised by the collections above.</p>
     <h3>Need help?</h3>
-    <p>Contact PropBillion management at ${CONFIG.ADMIN_PHONE}.</p>
+    <p>For all help and support, email <b>propbillion.support@gmail.com</b>.</p>
   </div>`},
   about:{title:"About PropBillion",html:`<div class="prose">
     <p><b>PropBillion Pulse</b> is the internal attendance, payroll and sales-tracking app for the PropBillion team in Pune.</p>
     <p>Punch in with a selfie at an approved site, track your salary live, submit bookings and raise approvals - all in one place. Built for speed and discipline.</p>
-    <p style="color:var(--sub);font-size:13px;">Version 4 \u00b7 PropBillion, Pune \u00b7 ${CONFIG.ADMIN_EMAIL}</p>
+    <p style="color:var(--sub);font-size:13px;">Version 5 \u00b7 PropBillion, Pune \u00b7 propbillion.support@gmail.com</p>
   </div>`}
 };
+
+/* ============================================================
+   v5 - BATTERY
+   ============================================================ */
+async function getBattery(){
+  try{ if(navigator.getBattery){ const b=await navigator.getBattery(); return {pct:Math.round(b.level*100),charging:!!b.charging}; } }catch(e){}
+  return null;
+}
+
+/* ============================================================
+   v5 - USAGE TRACKING (in-app only; cannot track when app closed)
+   ============================================================ */
+let _sessId=null,_screenTs=Date.now(),_curScreen="login";
+function logUsage(action,extra){
+  if(!me&&!isAdmin)return;
+  const who=isAdmin?"admin":(me?me.id:"?"),name=isAdmin?"Owner":(me?me.name:"?");
+  const ev={id:"u_"+Date.now()+"_"+Math.random().toString(36).slice(2,6),who,name,action,extra:extra||"",sess:_sessId,at:Date.now()};
+  try{const a=JSON.parse(localStorage.getItem("pb_usage_v5")||"[]");a.push(ev);if(a.length>1200)a.splice(0,a.length-1200);localStorage.setItem("pb_usage_v5",JSON.stringify(a));}catch(e){}
+  if(FB_ON&&db){try{db.collection("usage").doc(ev.id).set(ev);}catch(e){}}
+}
+function startUsageSession(){ _sessId="s_"+Date.now(); logUsage("app_open"); _screenTs=Date.now(); }
+function trackScreen(name){
+  const spent=Math.round((Date.now()-_screenTs)/1000);
+  if(_curScreen&&spent>0)logUsage("screen_time",_curScreen+":"+spent+"s");
+  _curScreen=name;_screenTs=Date.now();logUsage("screen_view",name);
+}
+async function getUsage(){
+  if(FB_ON&&db){try{const s=await db.collection("usage").orderBy("at","desc").limit(400).get();return s.docs.map(d=>d.data());}catch(e){}}
+  try{return JSON.parse(localStorage.getItem("pb_usage_v5")||"[]").sort((a,b)=>b.at-a.at);}catch(e){return[];}
+}
+window.addEventListener("beforeunload",()=>{try{logUsage("app_close");}catch(e){}});
+document.addEventListener("visibilitychange",()=>{ if(document.hidden)logUsage("app_background"); else {logUsage("app_foreground");_screenTs=Date.now();} });
+
+/* ============================================================
+   v5 - SECURITY GUARDS (deterrent only - web cannot block OS screenshots)
+   ============================================================ */
+function installGuards(){
+  document.addEventListener("contextmenu",e=>{e.preventDefault();});
+  document.addEventListener("copy",e=>{e.preventDefault();logUsage("copy_blocked");toast("Copy is disabled in this app");});
+  document.addEventListener("cut",e=>{e.preventDefault();});
+  document.addEventListener("dragstart",e=>{e.preventDefault();});
+  document.addEventListener("keydown",e=>{
+    const k=(e.key||"").toLowerCase();
+    if((e.ctrlKey||e.metaKey)&&["c","x","s","u","p"].includes(k)){e.preventDefault();logUsage("copy_blocked");}
+    if(k==="printscreen"){logUsage("printscreen_key");toast("Screenshots are not allowed");}
+  });
+  const css=document.createElement("style");
+  css.textContent='body{-webkit-user-select:none;user-select:none;}input,textarea,select{-webkit-user-select:text;user-select:text;}';
+  document.head.appendChild(css);
+}
+function setWatermark(on){
+  const w=$("wmark");if(!w)return;
+  if(!on){w.classList.remove("on");w.innerHTML="";return;}
+  const label=(isAdmin?"OWNER":(me?me.name:"")).toUpperCase()+" \u00b7 "+new Date().toLocaleString("en-IN",{day:"2-digit",month:"short",hour:"2-digit",minute:"2-digit"});
+  let h="";for(let r=0;r<8;r++)for(let c=0;c<4;c++)h+=`<span class="wm" style="top:${r*13}%;left:${c*30-5}%;">${escapeHtml(label)}</span>`;
+  w.innerHTML=h;w.classList.add("on");
+}
+
+/* ============================================================
+   v5 - THEME MODES
+   ============================================================ */
+const THEMES=[
+  {id:"light",label:"Light",sw:"#F5F5F7"},
+  {id:"dark",label:"Dark",sw:"#000000"},
+  {id:"grey",label:"Grey",sw:"#C9CBD2"},
+  {id:"graphite",label:"Graphite",sw:"#23262E"}
+];
+function setTheme(id){LS.saveTheme(id);applyTheme(id);renderThemeChooser();logUsage("theme",id);}
+function renderThemeChooser(){
+  const box=$("themeChooser");if(!box)return;const cur=LS.theme();
+  box.innerHTML=THEMES.map(t=>`<div class="thchip ${t.id===cur?"on":""}" onclick="setTheme('${t.id}')"><div class="sw" style="background:${t.sw};"></div>${t.label}</div>`).join("");
+}
+
+/* ============================================================
+   v5 - DAILY LUXURY ACCENT (rotates every day, never jarring)
+   ============================================================ */
+const ACCENTS=["#0071E3","#5E5CE6","#AF52DE","#FF375F","#FF9F0A","#30B0C7","#34C759","#C8911B","#BF5AF2","#64D2FF","#FF6482","#0A84FF"];
+function dailyAccent(){return ACCENTS[dayIndex()%ACCENTS.length];}
+function applyDailyAccent(){
+  const c=dailyAccent();
+  const p=$("salesAccentPill");
+  if(p){p.style.background=c+"1f";p.style.color=c;}
+  const m=$("motivQuote");if(m)m.style.borderLeft="";
+}
+
+/* ============================================================
+   v5 - VACATION REWARD ENGINE
+   ============================================================ */
+const VAC_MILESTONES=[
+  {months:3, name:"2 Days / 1 Night Maharashtra Getaway", intl:false},
+  {months:6, name:"Premium 3 Days / 2 Nights Vacation", intl:false},
+  {months:9, name:"Premium 4 Days / 3 Nights Vacation", intl:false},
+  {months:12,name:"Premium India Vacation (5D / 4N)", intl:false},
+  {months:15,name:"Extended India Vacation (6D / 5N)", intl:false},
+  {months:18,name:"International Premium Vacation (7D / 6N)", intl:true}
+];
+/* streak = consecutive clean attendance days up to today (no absent/unpaid/surprise) using attendance records + baseline join date */
+async function computeVacationStreak(emp){
+  // gather all attendance for emp across recent months (current + prior 12)
+  let recs=[];
+  if(FB_ON&&db){try{const s=await db.collection("attendance").where("empId","==",emp.id).get();recs=s.docs.map(d=>d.data());}catch(e){}}
+  if(!recs.length)recs=LS.att().filter(r=>r.empId===emp.id);
+  const map={};recs.forEach(r=>map[r.date]=r);
+  // walk backward from today, count clean days; break on a hard absent
+  let streak=0;const start=new Date();const join=emp.createdAt?new Date(emp.createdAt):null;
+  const baseDays=(emp.baseline&&emp.baseline.streakDays)?emp.baseline.streakDays:0;
+  for(let i=0;i<400;i++){
+    const d=new Date(start.getTime()-i*86400000);const dk=todayKey(d);
+    if(join&&d<new Date(join.getFullYear(),join.getMonth(),join.getDate()))break;
+    const r=map[dk];const dow=d.getDay();
+    if(r&&(r.surpriseLeave||r.weekOffUnpaid)){break;}
+    if(r&&r.inTs){streak++;continue;}
+    if(r&&r.weekOff&&(r.adminPaidOff||r.weekOffDeclaredAt)){streak++;continue;}
+    if(dow===0){continue;} // Sunday neutral
+    if(!r){ if(i===0)continue; break; } // today not yet punched = neutral, older missing = break
+    break;
+  }
+  return streak+baseDays;
+}
+function vacFromDays(days){
+  const months=days/30;
+  let next=VAC_MILESTONES.find(m=>m.months>months)||VAC_MILESTONES[VAC_MILESTONES.length-1];
+  const prevM=VAC_MILESTONES.filter(m=>m.months<=months).slice(-1)[0];
+  const prevMonths=prevM?prevM.months:0;
+  const span=next.months-prevMonths;
+  const into=months-prevMonths;
+  const nextPct=Math.max(0,Math.min(100,Math.round((into/span)*100)));
+  const remDays=Math.max(0,Math.ceil(next.months*30-days));
+  const intlPct=Math.max(0,Math.min(100,Math.round((months/18)*100)));
+  const intlRem=Math.max(0,Math.ceil(18*30-days));
+  const unlocked=VAC_MILESTONES.filter(m=>m.months<=months);
+  return {days,months,next,nextPct,remDays,intlPct,intlRem,unlocked};
+}
+function dm(days){const m=Math.floor(days/30),d=days%30;return (m?m+" Month"+(m>1?"s":"")+" ":"")+d+" Day"+(d!==1?"s":"");}
+async function renderVacationWidgets(){
+  const host=$("vacHost");if(!host||!me)return;
+  const days=await computeVacationStreak(me);const v=vacFromDays(days);
+  host.innerHTML=`
+    <div class="vacw">
+      <div class="vh">\uD83C\uDFC6 Next Reward</div>
+      <div class="vname">${escapeHtml(v.next.name)}</div>
+      <div class="vbar"><i style="width:${v.nextPct}%;"></i></div>
+      <div class="vmeta"><b>Streak ${dm(v.days)}</b><span class="vpct">${v.nextPct}%</span></div>
+      <div class="vstrip"><span>Remaining ${dm(v.remDays)}</span><span>${v.nextPct>=90?"Unlocking soon":"Keep going"}</span></div>
+    </div>
+    <div class="vacw intl">
+      <div class="vh">\uD83C\uDF0D International Premium Vacation</div>
+      <div class="vbar"><i style="width:${v.intlPct}%;"></i></div>
+      <div class="vmeta"><b>Streak ${dm(v.days)}</b><span class="vpct">${v.intlPct}%</span></div>
+      <div class="vstrip"><span>Remaining ${dm(v.intlRem)}</span><span>Getting closer</span></div>
+    </div>`;
+}
+
+/* ============================================================
+   v5 - GROOMING (male employees) - reimbursement cycles
+   ============================================================ */
+function groomCycleNow(d=new Date()){
+  const day=d.getDate();const dim=new Date(d.getFullYear(),d.getMonth()+1,0).getDate();
+  if(day>=14&&day<=16)return {cycle:1,open:true,label:"Cycle 1 (14-16)"};
+  if(day>=dim-1)return {cycle:2,open:true,label:"Cycle 2 (month-end)"};
+  // next window
+  if(day<14)return {cycle:1,open:false,label:"Cycle 1 opens on 14th"};
+  return {cycle:2,open:false,label:"Cycle 2 opens on "+(dim-1)+"th"};
+}
+async function groomStatusFor(empId,mk=monthKey()){
+  const reqs=(await getRequests()).filter(r=>r.kind==="grooming"&&r.empId===empId&&(r.date||"").startsWith(mk)&&r.status==="approved");
+  const c1=reqs.some(r=>r.groomCycle===1),c2=reqs.some(r=>r.groomCycle===2);
+  return {c1,c2,count:reqs.length,amount:reqs.length*100};
+}
+async function renderGroomWidget(){
+  const host=$("groomHost");if(!host||!me)return;
+  if(me.gender==="female"){host.innerHTML="";return;}
+  const st=await groomStatusFor(me.id);const cy=groomCycleNow();
+  host.innerHTML=`<div class="groomw" onclick="openSheet('grooming')">
+    <div class="gi">\u2702\uFE0F</div>
+    <div class="gtxt"><b>Grooming reimbursement</b><span>${cy.label} \u00b7 \u20B9${st.amount} approved this month</span></div>
+    <span class="gcyc ${st.c1?"ok":"pend"}">C1 ${st.c1?"\u2713":"\u2022"}</span>
+    <span class="gcyc ${st.c2?"ok":"pend"}" style="margin-left:5px;">C2 ${st.c2?"\u2713":"\u2022"}</span>
+  </div>`;
+}
+let groomBefore=null,groomAfter=null;
+function openGrooming(){
+  closeDrawer();groomBefore=null;groomAfter=null;
+  const cy=groomCycleNow();
+  openModal(`<div class="grab"></div><h3>Grooming reimbursement</h3>
+    <p class="msub">Male employees - \u20B9100 per approved haircut, max \u20B9200/month. Allowed only on the 14-16th or the last two days of the month. ${cy.open?"<b style='color:var(--green2);'>Window is open today.</b>":"<b style='color:var(--amber2);'>"+escapeHtml(cy.label)+".</b>"}</p>
+    <label class="flabel">Grooming date</label><input id="grDate" class="field" type="date" value="${todayKey()}">
+    <div class="proofpick" id="grBeforeBtn" onclick="pickGroom('before')"><span>Attach BEFORE selfie - required</span></div>
+    <img id="grBeforePrev" class="proofprev" alt="">
+    <div class="proofpick" id="grAfterBtn" onclick="pickGroom('after')"><span>Attach AFTER selfie - required</span></div>
+    <img id="grAfterPrev" class="proofprev" alt="">
+    <button class="bigbtn" onclick="submitGrooming()">Send for approval</button>`);
+}
+function pickGroom(which){
+  const inp=$("proofInput");inp.value="";
+  inp.onchange=()=>{const f=inp.files&&inp.files[0];if(!f||!f.type.startsWith("image/")){toast("Image only");return;}
+    const rd=new FileReader();rd.onload=()=>{const img=new Image();img.onload=()=>{
+      const max=820,sc=Math.min(1,max/Math.max(img.width,img.height));const c=document.createElement("canvas");
+      c.width=img.width*sc;c.height=img.height*sc;c.getContext("2d").drawImage(img,0,0,c.width,c.height);
+      const data=c.toDataURL("image/jpeg",0.5);
+      if(which==="before"){groomBefore=data;const b=$("grBeforeBtn");b.classList.add("has");b.innerHTML="<span>\u2713 Before attached - tap to change</span>";$("grBeforePrev").src=data;$("grBeforePrev").style.display="block";}
+      else{groomAfter=data;const b=$("grAfterBtn");b.classList.add("has");b.innerHTML="<span>\u2713 After attached - tap to change</span>";$("grAfterPrev").src=data;$("grAfterPrev").style.display="block";}
+    };img.src=rd.result;};rd.readAsDataURL(f);};
+  inp.click();
+}
+async function submitGrooming(){
+  const date=$("grDate").value;
+  if(!groomBefore||!groomAfter){toast("Both before and after selfies are required");return;}
+  const d=new Date(date);const day=d.getDate();const dim=new Date(d.getFullYear(),d.getMonth()+1,0).getDate();
+  const cycle=(day>=14&&day<=16)?1:(day>=dim-1?2:0);
+  if(!cycle){toast("Grooming date must be 14-16th or the last two days of the month");return;}
+  const st=await groomStatusFor(me.id,date.slice(0,7));
+  if((cycle===1&&st.c1)||(cycle===2&&st.c2)){toast("This cycle is already submitted this month");return;}
+  const req={id:"req_"+Date.now()+"_"+Math.random().toString(36).slice(2,6),
+    empId:me.id,empName:me.name,kind:"grooming",groomCycle:cycle,date,
+    beforeImg:groomBefore,afterImg:groomAfter,msg:"Grooming "+date+" (cycle "+cycle+")",
+    status:"pending",createdAt:Date.now()};
+  await putRequest(req);closeModal();toast("Grooming sent for approval");
+}
+
+/* ============================================================
+   v5 - INCENTIVE TOTALS (from approved bookings)
+   ============================================================ */
+async function incentiveTotals(empId){
+  const reqs=(await getRequests()).filter(r=>r.kind==="booking"&&r.empId===empId&&r.status==="approved");
+  let got=0,due=0,count=0;
+  for(const r of reqs){const amt=+(r.incentiveAmt||0);if(!amt)continue;count++;if(r.credited)got+=amt;else due+=amt;}
+  return {got,due,total:got+due,count};
+}
+
+/* ============================================================
+   v5 - VDNB VISIT COUNTS (week + month)
+   ============================================================ */
+function isoWeek(d){const x=new Date(Date.UTC(d.getFullYear(),d.getMonth(),d.getDate()));const day=x.getUTCDay()||7;x.setUTCDate(x.getUTCDate()+4-day);const ys=new Date(Date.UTC(x.getUTCFullYear(),0,1));return Math.ceil((((x-ys)/86400000)+1)/7)+"-"+x.getUTCFullYear();}
+async function visitCounts(empId){
+  const reqs=(await getRequests()).filter(r=>r.kind==="booking"&&r.empId===empId);
+  const mk=monthKey();const wk=isoWeek(new Date());
+  let mWeek=0,mMonth=0,hot=0,warm=0,cold=0;
+  for(const r of reqs){
+    const dk=r.date||todayKey(new Date(r.createdAt));
+    if(dk.startsWith(mk))mMonth++;
+    if(isoWeek(new Date(dk))===wk)mWeek++;
+    const t=(r.booking&&r.booking.temp)||"";
+    if(t==="hot")hot++;else if(t==="warm")warm++;else if(t==="cold")cold++;
+  }
+  return {week:mWeek,month:mMonth,hot,warm,cold};
+}
+async function renderVisitRow(){
+  const host=$("visitHost");if(!host||!me)return;
+  const v=await visitCounts(me.id);
+  host.innerHTML=`<div class="visitc"><div class="vn num">${v.week}</div><div class="vl">Visits this week</div></div>
+    <div class="visitc"><div class="vn num">${v.month}</div><div class="vl">Visits this month</div></div>
+    <div class="visitc hot"><div class="vn num">${v.hot}</div><div class="vl">\u25CF Hot leads</div></div>`;
+}
+
+/* ============================================================
+   v5 - SALARY SLIP / DATA REQUEST (request -> approve -> download)
+   ============================================================ */
+function openSlipRequest(){
+  closeDrawer();
+  const mk=monthKey();
+  openModal(`<div class="grab"></div><h3>Request salary slip</h3>
+    <p class="msub">Salary slips are issued only on owner approval. Choose the period and give a clear reason.</p>
+    <label class="flabel">From month</label><input id="slFrom" class="field" type="month" value="${mk}">
+    <label class="flabel">To month</label><input id="slTo" class="field" type="month" value="${mk}">
+    <textarea id="slReason" class="field" rows="3" placeholder="Reason (e.g. bank loan, rent agreement) - be specific"></textarea>
+    <button class="bigbtn" onclick="submitSlipRequest()">Send for approval</button>`);
+}
+async function submitSlipRequest(){
+  const from=$("slFrom").value,to=$("slTo").value,reason=$("slReason").value.trim();
+  if(!reason||reason.length<8){toast("Give a proper reason");return;}
+  const req={id:"req_"+Date.now()+"_"+Math.random().toString(36).slice(2,6),
+    empId:me.id,empName:me.name,kind:"slip_request",from,to,msg:reason,date:todayKey(),
+    status:"pending",createdAt:Date.now()};
+  await putRequest(req);closeModal();toast("Salary slip request sent");
+}
+function openDataRequest(){
+  closeDrawer();
+  openModal(`<div class="grab"></div><h3>Request data export</h3>
+    <p class="msub">Data exports need owner approval. Choose the range and reason.</p>
+    <label class="flabel">From date</label><input id="dxFrom" class="field" type="date" value="${monthKey()}-01">
+    <label class="flabel">To date</label><input id="dxTo" class="field" type="date" value="${todayKey()}">
+    <textarea id="dxReason" class="field" rows="3" placeholder="Reason - be specific"></textarea>
+    <button class="bigbtn" onclick="submitDataRequest()">Send for approval</button>`);
+}
+async function submitDataRequest(){
+  const from=$("dxFrom").value,to=$("dxTo").value,reason=$("dxReason").value.trim();
+  if(!reason||reason.length<8){toast("Give a proper reason");return;}
+  const req={id:"req_"+Date.now()+"_"+Math.random().toString(36).slice(2,6),
+    empId:me.id,empName:me.name,kind:"data_request",from,to,msg:reason,date:todayKey(),
+    status:"pending",createdAt:Date.now()};
+  await putRequest(req);closeModal();toast("Data export request sent");
+}
+/* premium PDF salary slip (jsPDF) */
+async function ensureJsPDF(){
+  if(window.jspdf&&window.jspdf.jsPDF)return true;
+  try{await loadScript("https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js");return !!(window.jspdf&&window.jspdf.jsPDF);}catch(e){return false;}
+}
+async function downloadSlipPDF(empId,mk){
+  mk=mk||monthKey();
+  const ok=await ensureJsPDF();
+  const emps=await getEmployees();const e=emps.find(x=>x.id===empId);if(!e)return;
+  const c=await computeMonth(e,mk);
+  const mlabel=new Date(mk+"-01").toLocaleDateString("en-IN",{month:"long",year:"numeric"});
+  if(!ok){ // fallback to text
+    let t=`PROPBILLION PULSE - SALARY SLIP\n${mlabel}\nEmployee: ${e.name}\nPayable: ${inr(c.earned)}\n`;
+    dl(`${e.name.replace(/\s+/g,"_")}_${mk}_slip.txt`,t,"text/plain");return;
+  }
+  const {jsPDF}=window.jspdf;const doc=new jsPDF({unit:"pt",format:"a4"});
+  const W=595;let y=64;
+  doc.setFillColor(0,113,227);doc.rect(0,0,W,8,"F");
+  doc.setFont("helvetica","bold");doc.setFontSize(22);doc.setTextColor(29,29,31);
+  doc.text("PropBillion",48,y);doc.setTextColor(0,113,227);doc.setFontSize(11);doc.text("PULSE",172,y-1);
+  doc.setFont("helvetica","normal");doc.setFontSize(10);doc.setTextColor(134,134,139);
+  doc.text("Salary Slip",48,y+18);doc.text(mlabel,W-48,y+18,{align:"right"});
+  y+=46;doc.setDrawColor(232,232,237);doc.line(48,y,W-48,y);y+=26;
+  doc.setTextColor(29,29,31);doc.setFontSize(13);doc.setFont("helvetica","bold");doc.text(e.name,48,y);
+  doc.setFont("helvetica","normal");doc.setFontSize(10);doc.setTextColor(134,134,139);
+  doc.text("Employee ID: "+e.id,48,y+16);y+=44;
+  const row=(k,v,bold,col)=>{doc.setFont("helvetica",bold?"bold":"normal");doc.setFontSize(bold?12:11);
+    doc.setTextColor(...(col||[66,66,69]));doc.text(k,48,y);doc.text(String(v),W-48,y,{align:"right"});y+=22;};
+  row("Monthly salary",inr(c.salary));row("Per-day rate",inr(c.dailyRate));
+  doc.setDrawColor(240,240,243);doc.line(48,y-8,W-48,y-8);
+  row("Full days",c.full);row("Half days",c.half);row("Paid week-offs",c.paidOffs);
+  row("Deducted days",c.absents+c.unpaidLeave,false,[199,42,32]);row("Lates counted",c.lateCount);
+  if(c.adj)row("Adjustment",(c.adj>0?"+":"")+inr(c.adj));
+  if(c.bonus)row("Perfect-score bonus","+"+inr(c.bonus),false,[36,138,61]);
+  y+=6;doc.setFillColor(245,245,247);doc.roundedRect(40,y-6,W-80,40,8,8,"F");
+  row("PAYABLE NOW",inr(c.earned),true,[29,29,31]);y+=10;
+  doc.setFontSize(9);doc.setTextColor(160,160,167);
+  doc.text("Attendance "+c.score.attendance+"/100   Discipline "+c.score.discipline+"/100",48,y);y+=14;
+  doc.text("Generated "+new Date().toLocaleString("en-IN")+"  -  PropBillion, Pune",48,y);
+  doc.setFontSize(8);doc.text("This is a system-generated slip. For queries: propbillion.support@gmail.com",48,800);
+  doc.save(`${e.name.replace(/\s+/g,"_")}_${mk}_PropBillion_slip.pdf`);
+}
 
 /* ============================================================
    BOOT
