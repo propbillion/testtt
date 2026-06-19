@@ -7,6 +7,7 @@
 <title>PropBillion Pulse</title>
 <link rel="manifest" href="manifest.json">
 <link rel="icon" href="icon-192.png">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 48'%3E%3Crect width='48' height='48' rx='11' fill='%231a1a1c'/%3E%3Cpath d='M6 24h6l4-12 6 24 5-16 3 8h12' fill='none' stroke='%23fff' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
 <style>
 :root{
   --bg:#F5F5F7; --bg2:#FFFFFF; --card:#FFFFFF; --ink:#1D1D1F; --ink2:#424245; --sub:#86868B;
@@ -77,8 +78,8 @@ input,select,textarea{font-family:inherit;font-size:16px;}
   backdrop-filter:saturate(180%) blur(24px);-webkit-backdrop-filter:saturate(180%) blur(24px);
   border-bottom:.5px solid var(--line);padding:calc(var(--safe-top) + 11px) 18px 11px;
   display:flex;align-items:center;gap:11px;}
-.logo-mark{width:32px;height:32px;border-radius:9px;background:linear-gradient(135deg,var(--brand),var(--brand2));
-  display:grid;place-items:center;flex:none;box-shadow:0 4px 14px color-mix(in srgb,var(--brand) 40%,transparent);}
+.logo-mark{width:32px;height:32px;border-radius:9px;background:linear-gradient(160deg,#2B2B2E,#0E0E10);
+  display:grid;place-items:center;flex:none;box-shadow:0 4px 14px rgba(0,0,0,.32);}
 .logo-mark svg{width:20px;height:20px;}
 .brand{font-weight:680;font-size:17px;letter-spacing:-.022em;}
 .brand small{font-weight:600;color:var(--brand);font-size:9px;letter-spacing:.16em;margin-left:6px;vertical-align:middle;}
@@ -128,7 +129,7 @@ textarea.field{resize:vertical;min-height:84px;line-height:1.5;}
 
 /* ---------- login ---------- */
 .login-hero{text-align:center;padding:42px 0 6px;}
-.login-hero .logo-mark{width:74px;height:74px;border-radius:22px;margin:0 auto 20px;box-shadow:0 16px 40px color-mix(in srgb,var(--brand) 38%,transparent);}
+.login-hero .logo-mark{width:74px;height:74px;border-radius:22px;margin:0 auto 20px;box-shadow:0 16px 40px rgba(0,0,0,.32);}
 .login-hero .logo-mark svg{width:44px;height:44px;}
 .login-hero h1{font-size:27px;font-weight:680;letter-spacing:-.035em;margin:0 0 7px;}
 .login-hero p{color:var(--sub);font-size:14.5px;margin:0;padding:0 26px;line-height:1.5;letter-spacing:-.008em;}
@@ -177,19 +178,28 @@ textarea.field{resize:vertical;min-height:84px;line-height:1.5;}
 .mon{border-radius:var(--r);padding:18px;margin-top:14px;position:relative;overflow:hidden;
   background:linear-gradient(160deg,#0B1437 0%,#16235C 100%);color:#fff;box-shadow:0 12px 34px rgba(11,20,55,.32);}
 html[data-theme="dark"] .mon{background:linear-gradient(160deg,#10182E 0%,#1B2A55 100%);}
-.mon h3{margin:0;font-size:13.5px;font-weight:680;letter-spacing:.01em;display:flex;align-items:center;gap:12px;color:#fff;}
-.mon .liveled{position:relative;width:13px;height:13px;flex:none;}
-.mon .liveled .core{position:absolute;inset:0;border-radius:99px;background:#30F58A;box-shadow:0 0 14px #30F58A,0 0 4px #fff;animation:livecore .9s ease-in-out infinite;}
-.mon .liveled .ring1,.mon .liveled .ring2{position:absolute;inset:0;border-radius:99px;border:2px solid #30F58A;animation:livering 1.5s ease-out infinite;}
-.mon .liveled .ring2{animation-delay:.75s;}
-@keyframes livecore{0%,100%{transform:scale(1);opacity:1;}50%{transform:scale(.55);opacity:.6;}}
-@keyframes livering{0%{transform:scale(1);opacity:.95;}100%{transform:scale(3.6);opacity:0;}}
+.mon h3{margin:0;font-size:13.5px;font-weight:680;letter-spacing:.01em;display:flex;align-items:center;gap:11px;color:#fff;}
+.mon .liveled{position:relative;width:9px;height:9px;flex:none;}
+.mon .liveled .core{position:absolute;inset:0;border-radius:99px;background:#30F58A;box-shadow:0 0 10px #30F58A,0 0 3px #fff;animation:livecore .9s ease-in-out infinite;}
+.mon .liveled .ring1,.mon .liveled .ring2{position:absolute;inset:0;border-radius:99px;border:1.5px solid #30F58A;animation:livering 1.6s ease-out infinite;}
+.mon .liveled .ring2{animation-delay:.8s;}
+@keyframes livecore{0%,100%{transform:scale(1);opacity:1;}50%{transform:scale(.5);opacity:.55;}}
+@keyframes livering{0%{transform:scale(1);opacity:.85;}100%{transform:scale(1.9);opacity:0;}}
 .mon .lt{display:flex;align-items:center;gap:8px;background:linear-gradient(90deg,#30F58A,#7CFFC4,#30F58A);background-size:200% auto;-webkit-background-clip:text;background-clip:text;color:transparent;animation:shimmer 2.4s linear infinite;font-weight:740;}
 @keyframes shimmer{to{background-position:200% center;}}
 .mon .rec{margin-left:auto;font-size:10px;font-weight:680;letter-spacing:.12em;color:#FF6B6B;display:flex;align-items:center;gap:5px;}
 .mon .rec .rd{width:8px;height:8px;border-radius:99px;background:#FF4D4D;animation:recblink 1s steps(1) infinite;box-shadow:0 0 10px #FF4D4D;}
 @keyframes recblink{0%,49%{opacity:1;}50%,100%{opacity:.2;}}
-.mon .foot{margin-top:14px;font-size:12px;color:#9FB0E0;text-align:center;letter-spacing:-.01em;}
+.mon .foot{margin-top:13px;font-size:12px;color:#9FB0E0;text-align:center;letter-spacing:-.01em;}
+/* idle (not punched in) - no blink, muted */
+.mon.idle{background:linear-gradient(160deg,#2A2E38 0%,#3A3F4C 100%);box-shadow:0 8px 24px rgba(0,0,0,.18);}
+html[data-theme="dark"] .mon.idle{background:linear-gradient(160deg,#1A1C22 0%,#26282F 100%);}
+.mon.idle .liveled .core{background:#8A8F99;box-shadow:none;animation:none;transform:scale(.85);}
+.mon.idle .liveled .ring1,.mon.idle .liveled .ring2{display:none;}
+.mon.idle .lt{-webkit-text-fill-color:#AEB3BD;color:#AEB3BD;background:none;animation:none;}
+.mon.idle .rec{display:none;}
+.mon.idle .foot{color:#9298A4;}
+.mon.idle .youcontrol{color:#9298A4;}
 
 /* ---------- drawer ---------- */
 .scrim{position:fixed;inset:0;background:rgba(0,0,0,.4);z-index:60;opacity:0;pointer-events:none;transition:var(--t);}
@@ -420,12 +430,12 @@ html[data-theme="dark"] .mon{background:linear-gradient(160deg,#10182E 0%,#1B2A5
 <!-- ============ LOGIN ============ -->
 <div id="loginScreen" class="wrap">
   <div id="empHero" class="login-hero">
-    <div class="logo-mark"><svg viewBox="0 0 48 48" fill="none"><path d="M4 24h7l4-13 6 26 5-17 3 8h15" stroke="#fff" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+    <div class="logo-mark"><svg viewBox="0 0 48 48" fill="none"><path d="M6 24h10l3-10 3 16 3-6h13" stroke="#fff" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
     <h1>PropBillion Pulse</h1>
     <p>Sign in to punch in. Your account is private to you.</p>
   </div>
   <div id="adminHero" class="login-hero admin-hero hide">
-    <div class="logo-mark"><svg viewBox="0 0 48 48" fill="none"><path d="M4 24h7l4-13 6 26 5-17 3 8h15" stroke="#fff" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+    <div class="logo-mark"><svg viewBox="0 0 48 48" fill="none"><path d="M6 24h10l3-10 3 16 3-6h13" stroke="#fff" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
     <h1>Owner Console</h1>
     <p>Admin access only. All rights reserved.</p>
   </div>
@@ -464,7 +474,7 @@ html[data-theme="dark"] .mon{background:linear-gradient(160deg,#10182E 0%,#1B2A5
 <!-- ============ FIRST-TIME PASSWORD SET ============ -->
 <div id="setupScreen" class="wrap hide">
   <div class="login-hero">
-    <div class="logo-mark"><svg viewBox="0 0 48 48" fill="none"><path d="M4 24h7l4-13 6 26 5-17 3 8h15" stroke="#fff" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+    <div class="logo-mark"><svg viewBox="0 0 48 48" fill="none"><path d="M6 24h10l3-10 3 16 3-6h13" stroke="#fff" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
     <h1>Set your password</h1>
     <p id="setupWho">Create a private password for your account.</p>
   </div>
@@ -484,7 +494,7 @@ html[data-theme="dark"] .mon{background:linear-gradient(160deg,#10182E 0%,#1B2A5
 <!-- ============ EMPLOYEE APP ============ -->
 <div id="empApp" class="hide">
   <div class="topbar">
-    <div class="logo-mark"><svg viewBox="0 0 48 48" fill="none"><path d="M4 24h7l4-13 6 26 5-17 3 8h15" stroke="#fff" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+    <div class="logo-mark"><svg viewBox="0 0 48 48" fill="none"><path d="M6 24h10l3-10 3 16 3-6h13" stroke="#fff" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
     <div class="brand">PropBillion <small>PULSE</small></div>
     <div class="who" id="empWho">Hi</div>
     <button class="hamb" onclick="openDrawer()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 6h18M3 12h18M3 18h18"/></svg></button>
@@ -536,14 +546,14 @@ html[data-theme="dark"] .mon{background:linear-gradient(160deg,#10182E 0%,#1B2A5
       <div class="row"><span class="k">Punch out</span><span class="v num" id="rOut">-</span></div>
     </div>
 
-    <div class="mon">
+    <div class="mon idle" id="monBox">
       <h3>
         <span class="liveled"><span class="ring1"></span><span class="ring2"></span><span class="core"></span></span>
-        <span class="lt">LIVE MONITORING ACTIVE</span>
+        <span class="lt" id="monLabel">LIVE MONITORING NOT ACTIVE</span>
         <span class="rec"><span class="rd"></span>REC</span>
       </h3>
-      <div class="youcontrol" id="youControl">You are in control</div>
-      <div class="foot">Location is recorded during your shift. Read Rules &amp; Regulations for the full monitoring policy.</div>
+      <div class="youcontrol" id="youControl">Punch in to go live</div>
+      <div class="foot" id="monFoot">Monitoring starts when you punch in and stops when you punch out.</div>
     </div>
   </div>
 </div>
@@ -551,7 +561,7 @@ html[data-theme="dark"] .mon{background:linear-gradient(160deg,#10182E 0%,#1B2A5
 <!-- ============ ADMIN APP ============ -->
 <div id="adminApp" class="hide">
   <div class="topbar">
-    <div class="logo-mark" style="background:linear-gradient(135deg,#1D1D1F,#3A3A3C);"><svg viewBox="0 0 48 48" fill="none"><path d="M4 24h7l4-13 6 26 5-17 3 8h15" stroke="#fff" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+    <div class="logo-mark" style="background:linear-gradient(135deg,#1D1D1F,#3A3A3C);"><svg viewBox="0 0 48 48" fill="none"><path d="M6 24h10l3-10 3 16 3-6h13" stroke="#fff" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
     <div class="brand">PropBillion <small>OWNER</small></div>
     <button class="hamb" onclick="openDrawer()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 6h18M3 12h18M3 18h18"/></svg></button>
   </div>
@@ -643,7 +653,7 @@ html[data-theme="dark"] .mon{background:linear-gradient(160deg,#10182E 0%,#1B2A5
 <div id="scrim" class="scrim" onclick="closeDrawer()"></div>
 <div id="drawer" class="drawer">
   <div class="dh">
-    <div class="logo-mark"><svg viewBox="0 0 48 48" fill="none"><path d="M4 24h7l4-13 6 26 5-17 3 8h15" stroke="#fff" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+    <div class="logo-mark"><svg viewBox="0 0 48 48" fill="none"><path d="M6 24h10l3-10 3 16 3-6h13" stroke="#fff" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
     <h2 id="drawerName">PropBillion Pulse</h2>
     <p id="drawerRole">Attendance &amp; payroll</p>
   </div>
@@ -750,7 +760,7 @@ html[data-theme="dark"] .mon{background:linear-gradient(160deg,#10182E 0%,#1B2A5
 </div>
 
 <div id="scan" class="scan">
-  <div class="radar"><div class="core"><svg viewBox="0 0 48 48" fill="none"><path d="M4 24h7l4-13 6 26 5-17 3 8h15" stroke="var(--brand)" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"/></svg></div></div>
+  <div class="radar"><div class="core"><svg viewBox="0 0 48 48" fill="none"><path d="M6 24h10l3-10 3 16 3-6h13" stroke="var(--brand)" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"/></svg></div></div>
   <h3 id="scanTitle">Verifying</h3>
   <div class="steps">
     <div class="st" id="sc1"><span class="ck">&#10003;</span> Selfie captured</div>
@@ -770,7 +780,6 @@ html[data-theme="dark"] .mon{background:linear-gradient(160deg,#10182E 0%,#1B2A5
 
 <canvas id="snapCanvas" class="hide"></canvas>
 <input id="proofInput" type="file" accept="image/*" class="hide">
-<div id="wmark"></div>
 <div id="toast" class="toast"></div>
 
 <script>
@@ -1274,7 +1283,7 @@ async function enterEmpApp(){
   await autoPunchoutCheck();
   await renderEmp();
   startLivePing();
-  startUsageSession();installGuards();setWatermark(true);renderThemeChooser();applyDailyAccent();trackScreen("employee_home");
+  startUsageSession();installGuards();renderThemeChooser();applyDailyAccent();trackScreen("employee_home");
   window.scrollTo(0,0);
 }
 async function enterAdminApp(){
@@ -1284,7 +1293,7 @@ async function enterAdminApp(){
   $("drawer").classList.add("admin-dh");
   hideEl("drawerEmpItems");show("ditemHelp");
   adminTab("today");refreshApprDot();
-  startUsageSession();installGuards();renderThemeChooser();setWatermark(false);
+  startUsageSession();installGuards();renderThemeChooser();
   window.scrollTo(0,0);
 }
 
@@ -1380,7 +1389,20 @@ async function renderEmp(){
   drawDonut("discDonut",c.score.discipline);
   setRing(undefined,getRingColor());
   // v5 widgets
-  const yc=$("youControl");if(yc&&me)yc.textContent=me.name.split(" ")[0]+", you are in control";
+  const onShift=!!(today&&today.inTs&&!today.outTs);
+  const mon=$("monBox"),ml=$("monLabel"),yc=$("youControl"),mf=$("monFoot");
+  if(mon){
+    mon.classList.toggle("idle",!onShift);
+    if(onShift){
+      ml.textContent="LIVE MONITORING ACTIVE";
+      yc.textContent=(me?me.name.split(" ")[0]+", ":"")+"you are in control";
+      mf.textContent="Your location is being recorded during your shift.";
+    }else{
+      ml.textContent="LIVE MONITORING NOT ACTIVE";
+      yc.textContent=today&&today.outTs?"Shift done - monitoring off":"Punch in to go live";
+      mf.textContent="Monitoring starts when you punch in and stops when you punch out.";
+    }
+  }
   renderVisitRow();renderVacationWidgets();renderGroomWidget();applyDailyAccent();
 }
 
@@ -1418,7 +1440,7 @@ function siteCheck(emp,lat,lng){
 /* ============================================================
    CAMERA + SELFIE
    ============================================================ */
-let camStream=null,camMode=null;
+let camStream=null,camMode=null,selfieCb=null;
 function onPunch(){
   if(today&&today.inTs&&!today.outTs)startCam("out");
   else if(!today||!today.inTs)startCam("in");
@@ -1433,7 +1455,7 @@ async function startCam(mode){
     $("camVideo").srcObject=camStream;
   }catch(e){cancelCam();toast("Camera access is required to punch. Allow camera and try again.");}
 }
-function cancelCam(){if(camStream){camStream.getTracks().forEach(t=>t.stop());camStream=null;}hideEl("cam");}
+function cancelCam(){if(camStream){camStream.getTracks().forEach(t=>t.stop());camStream=null;}hideEl("cam");selfieCb=null;}
 async function snap(){
   const v=$("camVideo"),c=$("snapCanvas");
   if(!v.videoWidth){toast("Camera is getting ready, one moment");return;}
@@ -1441,8 +1463,17 @@ async function snap(){
   c.width=w;c.height=h;const ctx=c.getContext("2d");
   ctx.save();ctx.scale(-1,1);ctx.drawImage(v,-w,0,w,h);ctx.restore();
   const selfie=c.toDataURL("image/jpeg",0.5);
+  if(selfieCb){const cb=selfieCb;cancelCam();cb(selfie);return;}
   cancelCam();
   await doPunch(camMode,selfie);
+}
+/* generic FRONT-camera-only selfie capture (no gallery, no back cam) */
+async function startSelfie(title,hint,cb){
+  selfieCb=cb;camMode=null;
+  $("camTitle").textContent=title;$("camHint").textContent=hint||"Hold the phone away - head to waist and background must show";
+  show("cam");
+  try{ camStream=await navigator.mediaDevices.getUserMedia({video:{facingMode:"user"},audio:false}); $("camVideo").srcObject=camStream; }
+  catch(e){cancelCam();toast("Camera access is required. Allow the camera and try again.");}
 }
 
 /* ============================================================
@@ -1669,14 +1700,12 @@ function openBooking(){
     </select>
     <input id="bkCust" class="field" type="text" placeholder="Client name">
     <input id="bkMobile" class="field" type="tel" inputmode="numeric" maxlength="10" placeholder="Contact (10 digit)">
-    <label class="flabel">Configuration</label>
-    <select id="bkConfig" class="field">
-      <option value="">Select BHK</option><option>1 BHK</option><option>2 BHK</option><option>3 BHK</option><option>4 BHK</option><option>Shop / Commercial</option>
-    </select>
+    <label class="flabel">BHK / Type</label>
+    <input id="bkConfig" class="field" type="text" placeholder="e.g. 2.5 BHK, 4 BHK, 6 BHK, Shop, Office">
     <input id="bkProject" class="field" type="text" placeholder="Tagged project(s) e.g. Tayal, Shubhveda">
     <label class="flabel">Lead source</label>
     <select id="bkSource" class="field">
-      <option value="">Select source</option><option>Google</option><option>Meta / Facebook</option><option>Reference</option><option>Walk-in</option><option>Channel partner</option><option>Old client</option><option>Other</option>
+      <option value="">Select source</option><option>Live Lead</option><option>Google</option><option>Meta / Facebook</option><option>Reference</option><option>Old client</option><option>Other</option>
     </select>
     <label class="flabel">Booking stage</label>
     <select id="bkStage" class="field">
@@ -1688,8 +1717,8 @@ function openBooking(){
       <input id="bkAgrDate" class="field" type="date" value="${todayKey()}">
       <input id="bkAmount" class="field" type="number" inputmode="numeric" placeholder="Initial transaction amount (\u20B9)">
     </div>
-    <label class="flabel">Customer profile (min 4 lines)</label>
-    <textarea id="bkNote" class="field" rows="5" placeholder="Line 1: Client home location&#10;Line 2: Kids school&#10;Line 3: Husband working location&#10;Line 4: Wife working location&#10;Line 5: Budget, intent, next step"></textarea>
+    <label class="flabel">Customer profile + complete information about the visit (min 4 lines)</label>
+    <textarea id="bkNote" class="field" rows="6" placeholder="Line 1: Client home location&#10;Line 2: Kids school&#10;Line 3: Husband working location&#10;Line 4: Wife working location&#10;Line 5: Budget, intent, next step&#10;Line 6: Every single detail about the visit and the customer"></textarea>
     <div id="bkBookedProof">
       <div class="proofpick" id="bkFelicBtn" onclick="pickBookingImg('felic')"><span>Felicitation photo with client - required for a booking</span></div>
       <img id="bkFelicPrev" class="proofprev" alt="">
@@ -2623,12 +2652,12 @@ const SHEETS={
       <div class="card" style="padding:14px 16px;margin-bottom:14px;">
         <div class="bkrow"><span>This month approved</span><b style="color:var(--green2);">${inr(st.amount)}</b></div>
         <div class="bkrow"><span>Cycle 1 (14-16)</span><b>${st.c1?"\u2705 Done":"\u23F3 Pending"}</b></div>
-        <div class="bkrow"><span>Cycle 2 (month-end)</span><b>${st.c2?"\u2705 Done":"\u23F3 Pending"}</b></div>
+        <div class="bkrow"><span>Cycle 2 (29th-1st)</span><b>${st.c2?"\u2705 Done":"\u23F3 Pending"}</b></div>
         <div class="bkrow"><span>Status</span><b>${escapeHtml(cy.label)}</b></div>
       </div>
       <button class="bigbtn" onclick="openGrooming()">Submit grooming (before + after)</button>
       <h3>Policy</h3>
-      <p>Male employees can claim \u20B9100 per approved haircut, up to \u20B9200 a month (one per cycle). Grooming must be done on the 14th-16th, or the last two days of the month.</p>
+      <p>Male employees can claim \u20B9100 per approved haircut, up to \u20B9200 a month (one per cycle). Grooming must be done on the 14th-16th, or from the 29th until the 1st.</p>
       <div class="rule"><div class="ic">\u2702\uFE0F</div><div>Proper haircut, neat hairstyle, trimmed beard, professional look.</div></div>
       <div class="rule"><div class="ic">\uD83D\uDCF8</div><div>Upload a clear BEFORE and AFTER selfie - both are mandatory.</div></div>
       <div class="rule"><div class="ic">\uD83D\uDCB0</div><div>Once the owner approves, \u20B9100 is added automatically to that month's salary.</div></div>
@@ -2642,7 +2671,7 @@ const SHEETS={
     <div class="rule"><div class="ic">\u2615</div><div><b>Breaks</b> - up to one hour a day (15 + 15 + 30 min), allowed only between 11:00 and 17:00. Tap the break button to start the timer and tap again to stop. One hour is always counted whether taken or not; exceed it and you must punch out that much later, else the day becomes a half day.</div></div>
     <div class="rule"><div class="ic">\uD83C\uDF34</div><div><b>Week-off</b> must be declared at least one day in advance in the app. Surprise or same-day leave is deducted and also cancels that week's week-off. No week-off on Friday, Saturday or Sunday.</div></div>
     <div class="rule"><div class="ic">\uD83C\uDFC6</div><div><b>Perfect month</b> - a full 100/100 score (with 20+ days) earns an instant bonus and a free off, with zero approvals.</div></div>
-    <div class="rule"><div class="ic">\u2702\uFE0F</div><div><b>Grooming reimbursement</b> - male employees get \u20B9100 per approved haircut (max \u20B9200/month) on the 14-16th or the last two days of the month, with before and after selfies.</div></div>
+    <div class="rule"><div class="ic">\u2702\uFE0F</div><div><b>Grooming reimbursement</b> - male employees get \u20B9100 per approved haircut (max \u20B9200/month) on the 14th-16th or from the 29th until the 1st, with before and after selfies.</div></div>
     <div class="rule"><div class="ic">\uD83C\uDF7D\uFE0F</div><div><b>Booking reward</b> - after every approved booking the company reimburses a \u20B9500-\u20B91000 family dinner. Upload a proper dated food bill and the owner approves the exact amount, added to your salary.</div></div>
     <div class="rule"><div class="ic">\uD83D\uDCB8</div><div><b>Incentives</b> - on an approved booking the owner records a tentative incentive. The exact amount is confirmed when the company raises the bill; you can track credited vs pending in My Bookings / Incentives.</div></div>
     <div class="rule"><div class="ic">\u2708\uFE0F</div><div><b>Vacation rewards</b> - a clean attendance streak unlocks sponsored vacations, up to a fully sponsored international trip at 18 months.</div></div>
@@ -2653,21 +2682,29 @@ const SHEETS={
     <h3>Live monitoring</h3>
     <p>While you are signed in and on shift, the app shares your live location, last-seen time and punch selfies with management for verification. At each punch your phone's battery level is also recorded - keep your company phone charged so customers can always reach you. Your in-app activity (screens opened, time spent) is logged for the company phone provided to you. This monitoring runs only on this device while the app is open and you are logged in. Signing out, force-closing the app, turning the phone off or enabling airplane mode stops location sharing - so leaving your shift early or hiding your location is treated as being off-duty and the day can be marked accordingly.</p>
     <h3>Confidential data</h3>
-    <p>Screenshots and copy-paste are not allowed inside the app. Company data is confidential; misuse is treated as a serious breach. Each screen carries your name and timestamp so any leaked image is traceable to you.</p>
+    <p>Screenshots and copy-paste are discouraged inside the app and copy is blocked. Company data is confidential; misuse is treated as a serious breach.</p>
   </div>`},
   selfie:{title:"Selfie rules",html:`<div class="prose">
     <p>A clear selfie is required for every punch. It is your proof of presence.</p>
     <div style="display:flex;gap:10px;margin:6px 0 14px;">
       <div style="flex:1;text-align:center;">
-        <svg viewBox="0 0 120 150" style="width:100%;border-radius:14px;background:var(--green-bg);"><rect width="120" height="150" rx="12" fill="none"/><rect x="14" y="14" width="92" height="122" rx="10" fill="none" stroke="var(--green2)" stroke-width="2" stroke-dasharray="5 4"/><circle cx="60" cy="50" r="16" fill="var(--green2)" opacity=".85"/><path d="M38 96c0-13 10-22 22-22s22 9 22 22v14H38z" fill="var(--green2)" opacity=".85"/><path d="M22 120h76" stroke="var(--green2)" stroke-width="2"/></svg>
-        <div style="font-size:11px;color:var(--green2);font-weight:600;margin-top:4px;">Right - head to belt, background visible</div>
+        <svg viewBox="0 0 120 150" style="width:100%;border-radius:14px;background:var(--green-bg);">
+          <rect x="8" y="8" width="104" height="134" rx="11" fill="none" stroke="var(--green2)" stroke-width="2" stroke-dasharray="6 5"/>
+          <line x1="26" y1="20" x2="26" y2="130" stroke="var(--green2)" stroke-width="1" opacity=".25"/>
+          <line x1="94" y1="20" x2="94" y2="130" stroke="var(--green2)" stroke-width="1" opacity=".25"/>
+          <circle cx="60" cy="48" r="12" fill="var(--green2)" opacity=".9"/>
+          <path d="M44 112c0-18 5-30 16-30s16 12 16 30z" fill="var(--green2)" opacity=".9"/>
+          <line x1="20" y1="14" x2="100" y2="14" stroke="var(--green2)" stroke-width="3" stroke-linecap="round" opacity=".5"/>
+          <text x="60" y="136" text-anchor="middle" font-size="9" fill="var(--green2)">background visible</text>
+        </svg>
+        <div style="font-size:11px;color:var(--green2);font-weight:600;margin-top:4px;">Right - waist to head, space all around</div>
       </div>
       <div style="flex:1;text-align:center;">
         <svg viewBox="0 0 120 150" style="width:100%;border-radius:14px;background:var(--red-bg);"><rect width="120" height="150" rx="12" fill="none"/><circle cx="60" cy="70" r="46" fill="var(--red2)" opacity=".8"/><path d="M60 124c-2 0-4 0-6-1" stroke="var(--red2)" stroke-width="2"/></svg>
         <div style="font-size:11px;color:var(--red2);font-weight:600;margin-top:4px;">Wrong - too close, no background</div>
       </div>
     </div>
-    <div class="rule"><div class="ic">\uD83D\uDCF1</div><div><b>Hold the phone away</b> so your head down to your belt is visible.</div></div>
+    <div class="rule"><div class="ic">\uD83D\uDCF1</div><div><b>Hold the phone far</b> - your waist up to your head must be visible, with empty space above your head and on both sides of your shoulders.</div></div>
     <div class="rule"><div class="ic">\uD83C\uDFE2</div><div><b>Background must show</b> - the work site behind you must be clearly visible.</div></div>
     <div class="rule"><div class="ic">\u2600\uFE0F</div><div><b>Good light, real face</b> - no caps over the eyes, no other person, no photo-of-a-photo.</div></div>
     <div class="rule"><div class="ic">\uD83D\uDC54</div><div><b>Be presentable</b> - formal attire, groomed. The admin can view all punch selfies.</div></div>
@@ -2741,13 +2778,7 @@ function installGuards(){
   css.textContent='body{-webkit-user-select:none;user-select:none;}input,textarea,select{-webkit-user-select:text;user-select:text;}';
   document.head.appendChild(css);
 }
-function setWatermark(on){
-  const w=$("wmark");if(!w)return;
-  if(!on){w.classList.remove("on");w.innerHTML="";return;}
-  const label=(isAdmin?"OWNER":(me?me.name:"")).toUpperCase()+" \u00b7 "+new Date().toLocaleString("en-IN",{day:"2-digit",month:"short",hour:"2-digit",minute:"2-digit"});
-  let h="";for(let r=0;r<8;r++)for(let c=0;c<4;c++)h+=`<span class="wm" style="top:${r*13}%;left:${c*30-5}%;">${escapeHtml(label)}</span>`;
-  w.innerHTML=h;w.classList.add("on");
-}
+function setWatermark(on){ /* watermark overlay removed - was cluttering the screen */ }
 
 /* ============================================================
    v5 - THEME MODES
@@ -2848,12 +2879,18 @@ async function renderVacationWidgets(){
    v5 - GROOMING (male employees) - reimbursement cycles
    ============================================================ */
 function groomCycleNow(d=new Date()){
-  const day=d.getDate();const dim=new Date(d.getFullYear(),d.getMonth()+1,0).getDate();
-  if(day>=14&&day<=16)return {cycle:1,open:true,label:"Cycle 1 (14-16)"};
-  if(day>=dim-1)return {cycle:2,open:true,label:"Cycle 2 (month-end)"};
-  // next window
-  if(day<14)return {cycle:1,open:false,label:"Cycle 1 opens on 14th"};
-  return {cycle:2,open:false,label:"Cycle 2 opens on "+(dim-1)+"th"};
+  const day=d.getDate();
+  if(day>=14&&day<=16)return {cycle:1,open:true,label:"Cycle 1 open (14-16)"};
+  if(day>=29)return {cycle:2,open:true,label:"Cycle 2 open (29th - 1st)"};
+  if(day<14)return {cycle:1,open:false,label:"Cycle 1 opens on the 14th"};
+  if(day>16&&day<29)return {cycle:2,open:false,label:"Cycle 2 opens on the 29th"};
+  return {cycle:1,open:false,label:"Window closed"};
+}
+function groomCycleFor(dateStr){
+  const day=new Date(dateStr).getDate();
+  if(day>=14&&day<=16)return 1;
+  if(day>=29)return 2;
+  return 0;
 }
 async function groomStatusFor(empId,mk=monthKey()){
   const reqs=(await getRequests()).filter(r=>r.kind==="grooming"&&r.empId===empId&&(r.date||"").startsWith(mk)&&r.status==="approved");
@@ -2876,32 +2913,25 @@ function openGrooming(){
   closeDrawer();groomBefore=null;groomAfter=null;
   const cy=groomCycleNow();
   openModal(`<div class="grab"></div><h3>Grooming reimbursement</h3>
-    <p class="msub">Male employees - \u20B9100 per approved haircut, max \u20B9200/month. Allowed only on the 14-16th or the last two days of the month. ${cy.open?"<b style='color:var(--green2);'>Window is open today.</b>":"<b style='color:var(--amber2);'>"+escapeHtml(cy.label)+".</b>"}</p>
+    <p class="msub">Male employees - \u20B9100 per approved haircut, max \u20B9200/month. Cycle 1 is open the 14th-16th, Cycle 2 from the 29th until the 1st. ${cy.open?"<b style='color:var(--green2);'>"+escapeHtml(cy.label)+".</b>":"<b style='color:var(--amber2);'>"+escapeHtml(cy.label)+".</b>"}</p>
     <label class="flabel">Grooming date</label><input id="grDate" class="field" type="date" value="${todayKey()}">
-    <div class="proofpick" id="grBeforeBtn" onclick="pickGroom('before')"><span>Attach BEFORE selfie - required</span></div>
+    <div class="proofpick" id="grBeforeBtn" onclick="pickGroom('before')"><span>Take BEFORE selfie (camera) - required</span></div>
     <img id="grBeforePrev" class="proofprev" alt="">
-    <div class="proofpick" id="grAfterBtn" onclick="pickGroom('after')"><span>Attach AFTER selfie - required</span></div>
+    <div class="proofpick" id="grAfterBtn" onclick="pickGroom('after')"><span>Take AFTER selfie (camera) - required</span></div>
     <img id="grAfterPrev" class="proofprev" alt="">
     <button class="bigbtn" onclick="submitGrooming()">Send for approval</button>`);
 }
 function pickGroom(which){
-  const inp=$("proofInput");inp.value="";
-  inp.onchange=()=>{const f=inp.files&&inp.files[0];if(!f||!f.type.startsWith("image/")){toast("Image only");return;}
-    const rd=new FileReader();rd.onload=()=>{const img=new Image();img.onload=()=>{
-      const max=820,sc=Math.min(1,max/Math.max(img.width,img.height));const c=document.createElement("canvas");
-      c.width=img.width*sc;c.height=img.height*sc;c.getContext("2d").drawImage(img,0,0,c.width,c.height);
-      const data=c.toDataURL("image/jpeg",0.5);
-      if(which==="before"){groomBefore=data;const b=$("grBeforeBtn");b.classList.add("has");b.innerHTML="<span>\u2713 Before attached - tap to change</span>";$("grBeforePrev").src=data;$("grBeforePrev").style.display="block";}
-      else{groomAfter=data;const b=$("grAfterBtn");b.classList.add("has");b.innerHTML="<span>\u2713 After attached - tap to change</span>";$("grAfterPrev").src=data;$("grAfterPrev").style.display="block";}
-    };img.src=rd.result;};rd.readAsDataURL(f);};
-  inp.click();
+  startSelfie(which==="before"?"Before-grooming selfie":"After-grooming selfie","Front camera only - show your face and hair clearly",(data)=>{
+    if(which==="before"){groomBefore=data;const b=$("grBeforeBtn");if(b){b.classList.add("has");b.innerHTML="<span>\u2713 Before captured - tap to retake</span>";}const p=$("grBeforePrev");if(p){p.src=data;p.style.display="block";}}
+    else{groomAfter=data;const b=$("grAfterBtn");if(b){b.classList.add("has");b.innerHTML="<span>\u2713 After captured - tap to retake</span>";}const p=$("grAfterPrev");if(p){p.src=data;p.style.display="block";}}
+  });
 }
 async function submitGrooming(){
   const date=$("grDate").value;
   if(!groomBefore||!groomAfter){toast("Both before and after selfies are required");return;}
-  const d=new Date(date);const day=d.getDate();const dim=new Date(d.getFullYear(),d.getMonth()+1,0).getDate();
-  const cycle=(day>=14&&day<=16)?1:(day>=dim-1?2:0);
-  if(!cycle){toast("Grooming date must be 14-16th or the last two days of the month");return;}
+  const cycle=groomCycleFor(date);
+  if(!cycle){toast("Grooming date must be the 14th-16th or the 29th to the 1st");return;}
   const st=await groomStatusFor(me.id,date.slice(0,7));
   if((cycle===1&&st.c1)||(cycle===2&&st.c2)){toast("This cycle is already submitted this month");return;}
   const req={id:"req_"+Date.now()+"_"+Math.random().toString(36).slice(2,6),
@@ -2970,17 +3000,32 @@ async function submitSlipRequest(){
 function openDataRequest(){
   closeDrawer();
   openModal(`<div class="grab"></div><h3>Request data export</h3>
-    <p class="msub">Data exports need owner approval. Choose the range and reason.</p>
+    <p class="msub">Data exports need owner approval. Pick what data you need, the range and a clear reason.</p>
+    <label class="flabel">Type of data</label>
+    <select id="dxType" class="field">
+      <option value="">Select data type</option>
+      <option value="punch">My punch-in / punch-out data</option>
+      <option value="weekoff">My week-off data</option>
+      <option value="attendance">My full attendance &amp; status</option>
+      <option value="vdnb">My VDNB / visit data</option>
+      <option value="bookings">My bookings &amp; incentives</option>
+      <option value="salary">My salary &amp; deductions</option>
+      <option value="grooming">My grooming reimbursements</option>
+      <option value="all">All my data</option>
+    </select>
     <label class="flabel">From date</label><input id="dxFrom" class="field" type="date" value="${monthKey()}-01">
     <label class="flabel">To date</label><input id="dxTo" class="field" type="date" value="${todayKey()}">
     <textarea id="dxReason" class="field" rows="3" placeholder="Reason - be specific"></textarea>
     <button class="bigbtn" onclick="submitDataRequest()">Send for approval</button>`);
 }
 async function submitDataRequest(){
-  const from=$("dxFrom").value,to=$("dxTo").value,reason=$("dxReason").value.trim();
+  const type=$("dxType").value,from=$("dxFrom").value,to=$("dxTo").value,reason=$("dxReason").value.trim();
+  if(!type){toast("Choose which data you need");return;}
   if(!reason||reason.length<8){toast("Give a proper reason");return;}
+  const TLABEL={punch:"Punch data",weekoff:"Week-off data",attendance:"Attendance",vdnb:"VDNB / visits",bookings:"Bookings & incentives",salary:"Salary & deductions",grooming:"Grooming",all:"All data"};
   const req={id:"req_"+Date.now()+"_"+Math.random().toString(36).slice(2,6),
-    empId:me.id,empName:me.name,kind:"data_request",from,to,msg:reason,date:todayKey(),
+    empId:me.id,empName:me.name,kind:"data_request",dataType:type,dataTypeLabel:TLABEL[type]||type,from,to,
+    msg:(TLABEL[type]||type)+" - "+reason,date:todayKey(),
     status:"pending",createdAt:Date.now()};
   await putRequest(req);closeModal();toast("Data export request sent");
 }
