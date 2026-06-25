@@ -1453,7 +1453,7 @@ async function startCam(mode){
   try{
     camStream=await navigator.mediaDevices.getUserMedia({video:{facingMode:"user"},audio:false});
     $("camVideo").srcObject=camStream;
-  }catch(e){cancelCam();toast("Camera access is required to punch. Allow camera and try again.");}
+}catch(e){cancelCam();alert("Camera nahi khula: "+e.name+". WhatsApp/Instagram ke andar mat kholo - Chrome ya Safari use karo, aur camera Allow karo.");}
 }
 function cancelCam(){if(camStream){camStream.getTracks().forEach(t=>t.stop());camStream=null;}hideEl("cam");selfieCb=null;}
 async function snap(){
